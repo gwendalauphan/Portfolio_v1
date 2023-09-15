@@ -1,23 +1,28 @@
-import React, { Suspense } from "react";
+import React, { Suspense, useState } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { OrbitControls, Preload, useGLTF } from "@react-three/drei";
 
 import CanvasLoader from "../Loader/Loader"
 
-const Earth = ({ controlsRef }) => {
+const Earth = ({ controlsRef, setAngles }) => {
   const earth = useGLTF("./earth/scene.gltf");
+  
 
-  useFrame((state) => {
+
+  useFrame(() => {
     if (controlsRef.current) {
       const azimuthalAngle = controlsRef.current.getAzimuthalAngle();
       const polarAngle = controlsRef.current.getPolarAngle();
   
-      console.log('Azimuthal Angle:', azimuthalAngle);
-      console.log('Polar Angle:', polarAngle);
+      setAngles({
+        azimuthal: azimuthalAngle,
+        polar: polarAngle
+      });
     }
   });
 
   return (
+    <>
     <mesh>
       <spotLight
         position={[-20, 50, 10]}
@@ -31,6 +36,7 @@ const Earth = ({ controlsRef }) => {
       <pointLight intensity={10} />
         <primitive object={earth.scene} scale={2} position-y={0} rotation-y={0}/>
     </mesh>
+    </>
   );
 };
 

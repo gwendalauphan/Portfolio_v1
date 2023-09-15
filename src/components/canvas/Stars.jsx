@@ -34,9 +34,15 @@ const Stars = (props) => {
 
 const StarsCanvas = () => {
   const controlsRef = useRef();
+  const [angles, setAngles] = useState({ azimuthal: 0, polar: 0 });
 
   return (
     <div className='w-full h-auto absolute inset-0 z-[-1]'>
+      <div className="absolute top-10 left-10 z-10 p-2 rounded">
+        <p>Azimuthal Angle: {angles.azimuthal.toFixed(2)}</p>
+        <p>Polar Angle: {angles.polar.toFixed(2)}</p>
+      </div>
+
       <Canvas 
       dpr={[1, 2]}
       gl={{ preserveDrawingBuffer: true }}
@@ -56,7 +62,7 @@ const StarsCanvas = () => {
           minPolarAngle={0}
         />
           <Stars />
-          <Earth controlsRef={controlsRef}/>
+          <Earth controlsRef={controlsRef} setAngles={setAngles} />
           
         </Suspense>
 
