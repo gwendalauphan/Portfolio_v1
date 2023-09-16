@@ -11,8 +11,8 @@ const Stars = (props) => {
 
   
   useFrame((state, delta) => {
-    ref.current.rotation.x -= delta / 10;
-    ref.current.rotation.y -= delta / 15;
+    ref.current.rotation.x -= delta / 1500;
+    ref.current.rotation.y -= delta / 2000;
   });
 
   return (
@@ -50,13 +50,14 @@ const StarsCanvas = () => {
         fov: 45,
         near: 0.1,
         far: 200,
-        position: [0, 0, 6],
-      }}>
+        position: [0, 0, 7],
+      }}
+      >
         <Suspense fallback={null}>
         <OrbitControls
           ref={controlsRef}
           autoRotate
-          autoRotateSpeed={1}
+          autoRotateSpeed={0.3}
           enableZoom={true}
           maxPolarAngle={Math.PI}
           minPolarAngle={0}

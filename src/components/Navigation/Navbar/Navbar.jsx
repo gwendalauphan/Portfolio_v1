@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import feather from 'feather-icons';
 import './Navbar.scss';
 import { logo, menu, close } from '../../../assets';
-import { styles } from '../../../../styles';
+import { styles } from '../../../styles';
 //import { navLinks } from '../../../constants';
 
 const navLinks = [

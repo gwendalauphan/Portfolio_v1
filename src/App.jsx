@@ -6,6 +6,9 @@ import {
   Link
 } from 'react-router-dom';
 
+import { AnimatePresence } from "framer-motion";
+
+
 import Navbar from './components/Navigation/Navbar/Navbar';
 import { StarsCanvas, EarthCanvas } from './components/canvas';
 
@@ -32,15 +35,17 @@ function App() {
           <Navbar />
           
         </div>
-        
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/world1" element={<World1Page />} />
-          <Route path="/world2" element={<World2Page />} />
-          <Route path="/world3" element={<World3Page />} />
-          <Route path="/world4" element={<World4Page />} />
-          <Route path="*" element={<NoMatch />} />
-        </Routes>
+        <AnimatePresence mode="wait">
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/about" element={<World1Page />} />
+            <Route path="/world1" element={<World1Page />} />
+            <Route path="/world2" element={<World2Page />} />
+            <Route path="/world3" element={<World3Page />} />
+            <Route path="/world4" element={<World4Page />} />
+            <Route path="*" element={<NoMatch />} />
+          </Routes>
+        </AnimatePresence>
 
         <div className='fixed top-0 left-0 w-full h-full z-[-1] bg-primary'>
           

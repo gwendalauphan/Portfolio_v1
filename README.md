@@ -1,5 +1,6 @@
 # new_site epic/POR-1
-
+npm install react-transition-group --save
+npm install gsap
 # React + Vite feat/POR-13
 
 
