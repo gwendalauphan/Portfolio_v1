@@ -1,9 +1,11 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useState, useCallback} from 'react';
 import { Link } from 'react-router-dom';
 import feather from 'feather-icons';
+import { motion, useAnimation } from 'framer-motion';
 import './Navbar.scss';
 import { logo, menu, close } from '../../../assets';
 import { styles } from '../../../styles';
+import LogoSVG from "../../../assets/boussole.svg";  
 //import { navLinks } from '../../../constants';
 
 const navLinks = [
@@ -18,6 +20,14 @@ const navLinks = [
 
 
 function Navbar() {
+
+    const controls = useAnimation();
+    const [rotation, setRotation] = useState(0);
+
+    const handleRotate = () => {
+        setRotation(rotation + 720);
+        controls.start({ rotate: rotation + 720 });
+    };
 
     const [active, setActive] = useState("");
     const [toggle, setToggle] = useState(false);
@@ -44,8 +54,16 @@ function Navbar() {
 
     return (
         <div className="header flex items-center justify-between ">
-            <div className="header__logo">
-                <strong className="text-lg sm:text-xl lg:text-2xl">LOGO</strong>
+            <div className="header__logo" onClick={handleRotate}>
+            <motion.img 
+                src={LogoSVG}
+                alt="Logo"
+                className="w-25 h-20 filter invert brightness-200"
+                initial={{ rotate: 0 }}
+                animate={controls}
+                transition={{ duration: 0.5, ease: "linear" }}
+                
+            />
             </div>
 
             <nav className={`navbar ${scrolled ? "bg-primary" : "bg-transparent"} flex items-center`}>

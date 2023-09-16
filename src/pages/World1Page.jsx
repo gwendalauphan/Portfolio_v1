@@ -4,6 +4,9 @@ import { motion } from "framer-motion";
 import useScrollNavigation from '../components/Navigation/Scroll/Scroll';
 import { useLocation } from 'react-router-dom';
 
+import SectionWrapper from '../hoc/SectionWrapper';
+import About from '../components/Intro/About/About';
+
 const pageVariants = {
   initial: { scale: 0.9, y: "-50%", opacity: 0 },
   in: { scale: 1, y: "0%", opacity: 1 },
@@ -34,9 +37,10 @@ const World1Page = () => {
 
       <h2>Monde 1</h2>
       <p>Vous êtes maintenant dans le Monde 1. Explorez et découvrez ses merveilles !</p>
+      <About />
     </div>
     </motion.div>
   );
 }
 
-export default World1Page;
+export default SectionWrapper(World1Page, "");

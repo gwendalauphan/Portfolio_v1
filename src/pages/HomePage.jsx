@@ -1,10 +1,16 @@
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import About from '../components/Intro/About/About';
+import HomeSection from '../components/Intro/Home/Home2';
+
+import { styles } from '../styles';
+import "../index.css"
 
 import { motion } from "framer-motion";
 import useScrollNavigation from '../components/Navigation/Scroll/Scroll';
 import { useLocation } from 'react-router-dom';
+
+import SectionWrapper from '../hoc/SectionWrapper';
 
 
 const pageVariants = {
@@ -33,11 +39,27 @@ const HomePage = () => {
       transition={pageTransition}
      
     >
-      <div className='page-container'>
-        <h2>Page d'Accueil</h2>
-        <p>Bienvenue sur la page d'accueil ! Naviguez vers les mondes pour explorer davantage.</p>
-        <About />
-      </div>
+      <div className='page-container mt-10 '>
+        <div className={`${styles.paddingX}  ml-40 mx-auto flex flex-row items-start gap-5`}>
+          <div className='flex flex-col justify-center items-center mt-5'>
+            <div className='w-5 h-5 rounded-full bg-[#915EFF]' />
+            <div className='w-1 sm:h-80 h-40 violet-gradient' />
+          </div>
+
+          <div>
+            <h1 className={`${styles.heroHeadText} text-white`}>
+              Hi, I'm <span className='text-[#915EFF]'>Gwendal</span>
+            </h1>
+          </div>
+          
+        </div>
+        <div className="home-section-parent">
+          <HomeSection />
+        </div>
+
+        </div>
+        
+      
     </motion.div>
   );
 }

@@ -114,6 +114,15 @@
   -webkit-text-fill-color: transparent;
 }
 
+
+.home-section-parent > * {
+  margin-top: -250px;
+  overflow: hidden;
+}
+
+
+
+
 /* canvas- styles */
 .canvas-loader {
   font-size: 10px;
