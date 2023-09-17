@@ -20,7 +20,7 @@ const pageTransition = {
 };
 
 
-const World1Page = ({ isEnabled }) => {
+const World0Page = ({ isEnabled }) => {
   const location = useLocation();
 
   useScrollNavigation(location.pathname);
@@ -35,11 +35,12 @@ const World1Page = ({ isEnabled }) => {
     >
     <div className={`page-container ${!isEnabled ? '' : 'masque'}`}>
 
-      <h2>Monde 1</h2>
-      <p>Vous êtes maintenant dans le Monde 1. Explorez et découvrez ses merveilles !</p>
+      <h2>Monde 0</h2>
+      <p>Vous êtes maintenant dans le Monde 0</p>
+      <About />
     </div>
     </motion.div>
   );
 }
 
-export default SectionWrapper(World1Page, "");
+export default SectionWrapper(World0Page, "");

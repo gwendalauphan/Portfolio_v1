@@ -120,6 +120,16 @@
   overflow: hidden;
 }
 
+.toggle-switch {
+  position: 'relative';
+  right: '20px'; 
+  opacity: 0.8;
+  display: flex;
+}
+
+.masque {
+  display: none;
+}
 
 
 

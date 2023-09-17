@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import About from '../components/Intro/About/About';
 import HomeSection from '../components/Intro/Home/Home2';
 
+
 import { styles } from '../styles';
 import "../index.css"
 
@@ -25,7 +26,7 @@ const pageTransition = {
   duration: 1
 };
 
-const HomePage = () => {
+const HomePage = ({ isEnabled }) => {
   const location = useLocation();
 
   useScrollNavigation(location.pathname);
@@ -39,7 +40,7 @@ const HomePage = () => {
       transition={pageTransition}
      
     >
-      <div className='page-container mt-10 '>
+      <div className={`page-container mt-10 ${!isEnabled ? '' : 'masque'}`}>
         <div className={`${styles.paddingX}  ml-40 mx-auto flex flex-row items-start gap-5`}>
           <div className='flex flex-col justify-center items-center mt-5'>
             <div className='w-5 h-5 rounded-full bg-[#915EFF]' />

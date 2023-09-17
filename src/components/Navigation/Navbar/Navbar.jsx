@@ -1,5 +1,5 @@
 import React, {useEffect, useState, useCallback} from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import feather from 'feather-icons';
 import { motion, useAnimation } from 'framer-motion';
 import './Navbar.scss';
@@ -9,8 +9,8 @@ import LogoSVG from "../../../assets/boussole.svg";
 //import { navLinks } from '../../../constants';
 
 const navLinks = [
-    { id: 'home', title: 'Accueil', path: '/' },
-    { id: 'user', title: 'About', path: '/world1' },
+    //{ id: 'home', title: 'Accueil', path: '/' },
+    { id: 'user', title: 'About', path: '/about' },
     { id: 'briefcase', title: 'Work', path: '/world1' },
     { id: 'cpu', title: 'Projects', path: '/world2' },
     { id: 'phone', title: 'Contact', path: '/world3' },
@@ -23,11 +23,29 @@ function Navbar() {
 
     const controls = useAnimation();
     const [rotation, setRotation] = useState(0);
+    const navigate = useNavigate();
+
 
     const handleRotate = () => {
         setRotation(rotation + 720);
         controls.start({ rotate: rotation + 720 });
+        setTimeout(() => {
+            navigate('/');
+        }, 100); // attendez que l'animation se termine
     };
+
+
+    //-----------------------------------
+
+    const location = useLocation();
+
+    useEffect(() => {
+        setActive(location.pathname);
+    }, [location.pathname]);
+
+
+
+    //-----------------------------------
 
     const [active, setActive] = useState("");
     const [toggle, setToggle] = useState(false);
@@ -54,7 +72,7 @@ function Navbar() {
 
     return (
         <div className="header flex items-center justify-between ">
-            <div className="header__logo" onClick={handleRotate}>
+            <div className="header__logo" onClick={handleRotate} style={{ cursor: 'pointer' }}>
             <motion.img 
                 src={LogoSVG}
                 alt="Logo"
@@ -71,11 +89,11 @@ function Navbar() {
 
             <ul className='navbar__menu flex space-x-4 sm:space-x-6 lg:space-x-8 list-none hidden sm:flex flex-row '>
                 {navLinks.map((nav) => (
-                    <li key={nav.id} className={`navbar__item`} onClick={() => setActive(nav.title)}>
+                    <li key={nav.id} className={`navbar__item`} style={{ marginLeft: 0, paddingLeft: 15, paddingRight: 15  }} onClick={() => setActive(nav.path)}>
                         <Link 
                             to={nav.path} 
                             className={`navbar__link text-[18px] sm:text-lg lg:text-xl font-medium cursor-pointer 
-                                ${active === nav.title ? "text-white" : "text-secondary"} hover:text-white`}
+                                ${active === nav.path ? "text-white" : "text-secondary"} hover:text-white`}
                         >
                             <i data-feather={nav.id}></i>
                             {nav.title}

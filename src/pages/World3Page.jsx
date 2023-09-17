@@ -1,12 +1,12 @@
 import React from 'react';
 import useScrollNavigation from '../components/Navigation/Scroll/Scroll';
 import { useLocation } from 'react-router-dom';
-const World3Page = () => {
+const World3Page = ({ isEnabled }) => {
   const location = useLocation();
 
   useScrollNavigation(location.pathname);
   return (
-    <div className='page-container'>
+    <div className={`page-container ${!isEnabled ? '' : 'masque'}`}>
       <h2>Monde 3</h2>
       <p>Le Monde 3 est mystérieux. Que découvrirez-vous ?</p>
     </div>
