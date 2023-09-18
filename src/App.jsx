@@ -12,13 +12,14 @@ import { AnimatePresence } from "framer-motion";
 import Navbar from './components/Navigation/Navbar/Navbar';
 import { StarsCanvas, EarthCanvas } from './components/canvas';
 import ToggleSwitch from './components/Switch/Switch2';
+import ProgressBar from './components/Navigation/Lateralbar/Lateralbar';
 
 import HomePage from './pages/HomePage';
-import World0Page from './pages/World0Page';
-import World1Page from './pages/World1Page';
-import World2Page from './pages/World2Page';
-import World3Page from './pages/World3Page';
-import World4Page from './pages/World4Page';
+import AboutPage from './pages/AboutPage';
+import WorkPage from './pages/WorkPage';
+import ProjectsPage from './pages/ProjectsPage';
+import ContactPage from './pages/ContactPage';
+import MorePage from './pages/MorePage';
 
 function NoMatch() {
   return (
@@ -45,15 +46,16 @@ function App() {
           <ToggleSwitch isEnabled={isEnabled} onToggleChange={handleToggleChange} />
         </div>
 
+        <ProgressBar />
         
         <AnimatePresence mode="wait">
           <Routes>
             <Route path="/" element={<HomePage isEnabled={isEnabled}/>} />
-            <Route path="/about" element={<World0Page isEnabled={isEnabled}/>} />
-            <Route path="/world1" element={<World1Page isEnabled={isEnabled}/>} />
-            <Route path="/world2" element={<World2Page isEnabled={isEnabled}/>} />
-            <Route path="/world3" element={<World3Page isEnabled={isEnabled}/>} />
-            <Route path="/world4" element={<World4Page isEnabled={isEnabled}/>} />
+            <Route path="/about" element={<AboutPage isEnabled={isEnabled}/>} />
+            <Route path="/work" element={<WorkPage isEnabled={isEnabled}/>} />
+            <Route path="/projects" element={<ProjectsPage isEnabled={isEnabled}/>} />
+            <Route path="/contact" element={<ContactPage isEnabled={isEnabled}/>} />
+            <Route path="/more" element={<MorePage isEnabled={isEnabled}/>} />
             <Route path="*" element={<NoMatch />} />
           </Routes>
         </AnimatePresence>

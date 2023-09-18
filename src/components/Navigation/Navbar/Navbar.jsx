@@ -11,10 +11,10 @@ import LogoSVG from "../../../assets/boussole.svg";
 const navLinks = [
     //{ id: 'home', title: 'Accueil', path: '/' },
     { id: 'user', title: 'About', path: '/about' },
-    { id: 'briefcase', title: 'Work', path: '/world1' },
-    { id: 'cpu', title: 'Projects', path: '/world2' },
-    { id: 'phone', title: 'Contact', path: '/world3' },
-    { id: 'book-open', title: 'Future', path: '/world4' },
+    { id: 'briefcase', title: 'Work', path: '/work' },
+    { id: 'cpu', title: 'Projects', path: '/projects' },
+    { id: 'phone', title: 'Contact', path: '/contact' },
+    { id: 'book-open', title: 'More', path: '/more' },
 ];
 
 

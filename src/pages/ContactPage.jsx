@@ -1,7 +1,8 @@
 import React from 'react';
 import useScrollNavigation from '../components/Navigation/Scroll/Scroll';
 import { useLocation } from 'react-router-dom';
-const World3Page = ({ isEnabled }) => {
+
+const ContactPage = ({ isEnabled }) => {
   const location = useLocation();
 
   useScrollNavigation(location.pathname);
@@ -13,4 +14,4 @@ const World3Page = ({ isEnabled }) => {
   );
 }
 
-export default World3Page;
+export default ContactPage;

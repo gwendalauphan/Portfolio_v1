@@ -2,7 +2,7 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import { useEffect, useRef } from 'react';
 import './Scroll.css'
 
-const routesOrder = ['/', '/about', '/world1', '/world2', '/world3', '/world4'];
+const routesOrder = ['/', '/about', '/work', '/projects', '/contact', '/more'];
 
 
 const useScrollNavigation = (currentRoute) => {

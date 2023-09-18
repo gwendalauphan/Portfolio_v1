@@ -1,6 +1,3 @@
-import { useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import About from '../components/Intro/About/About';
 import HomeSection from '../components/Intro/Home/Home2';
 
 
