@@ -9,6 +9,9 @@ import {
 import { AnimatePresence } from "framer-motion";
 
 
+import { ProgressContext } from './components/Context/ProgressContext';
+
+
 import Navbar from './components/Navigation/Navbar/Navbar';
 import { StarsCanvas, EarthCanvas } from './components/canvas';
 import ToggleSwitch from './components/Switch/Switch2';
@@ -38,14 +41,17 @@ function App() {
     setIsEnabled(value);
   };
 
+  const [scrollPercentage, setScrollPercentage] = useState(0);
+
   return (
+    <ProgressContext.Provider value={{ scrollPercentage, setScrollPercentage }}>
     <Router>
       <div className="relative z-0">
         <div className="flex bg-hero-pattern bg-no-repeat bg-center bg-opacity-40 bg-black rounded-[25px] max-w-5xl mx-auto justify-center lg:text-base sm:text-sm xs:text-xs ">
           <Navbar />
           <ToggleSwitch isEnabled={isEnabled} onToggleChange={handleToggleChange} />
         </div>
-
+        
         <ProgressBar />
         
         <AnimatePresence mode="wait">
@@ -68,6 +74,7 @@ function App() {
         </div>
       </div>
     </Router>
+    </ProgressContext.Provider>
   );
 }
 

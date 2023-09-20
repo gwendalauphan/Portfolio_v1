@@ -13,6 +13,26 @@
   color-scheme: dark;
 }
 
+/* Cacher la barre de défilement pour Chrome, Safari et Opera */
+body::-webkit-scrollbar {
+  width: 0;  /* pour cacher la barre verticale */
+  height: 0; /* pour cacher la barre horizontale */
+}
+
+/* Cacher la barre de défilement pour IE, Edge et Firefox */
+body {
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+}
+
+/* Pour cacher la barre de défilement et éviter tout espace inutilisé sur Firefox */
+html {
+  overflow: scroll;
+  scrollbar-width: none;
+}
+
+
+
 .hash-span {
   margin-top: -100px;
   padding-bottom: 100px;
