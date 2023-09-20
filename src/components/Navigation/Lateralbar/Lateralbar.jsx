@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect, useContext, useRef } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { ProgressContext } from '../../Context/ProgressContext';
 
@@ -110,8 +110,6 @@ function ProgressBar() {
   };
   
   
-  
-  
   useEffect(() => {
     const percentage = location.state?.scrollTo;
     
@@ -128,17 +126,75 @@ function ProgressBar() {
       }
     }
   }, [location]);
-  
+
+
   return (
-    <div onClick={handleClick} style={{ position: 'fixed', top: 0, right: 0, width: '15px', height: '100%', backgroundColor: '#E5E5E5', zIndex: 9999 }}>
-      <div style={{
-        width: '100%',
-        height: `${scrollPercentage}%`,
-        backgroundColor: '#915EFF',
-        transition: 'height 0.3s ease',
-        boxShadow: '0 2px 4px rgba(145, 94, 255, 0.4)'
-      }} />
+    // Styles pour la barre entière
+    
+    <div onClick={handleClick} style={{ 
+      position: 'fixed', 
+      top: 0, 
+      right: 0, 
+      width: '8px',  // ajustez la largeur ici
+      height: '100%', 
+      backgroundColor: 'rgba(229, 229, 229, 0.3)',  // réduction de l'opacité
+      borderRadius: '4px',  // arrondissement des bords
+      backdropFilter: 'blur(2px)',  // flou
+      boxShadow: '0 0 15px rgba(255, 255, 255, 0.3)',  // ombre magique
+      zIndex: 9999 
+    }}>
+
+      
+      <div style={{  // Styles pour la barre de progression colorée
+        width: '100%', 
+        height: `${scrollPercentage}%`, 
+        backgroundColor: '#915EFF', 
+         
+        borderRadius: '4px',  // arrondissement des bords
+        boxShadow: '0 2px 4px rgba(145, 94, 255, 0.4)'  // ombre
+      }} /> 
+      
+
+  
+      {paths.map((path, index) => (
+        scrollPercentage > (100 / totalSections) * (index + 0.5) && (
+          <div
+            key={index}
+            style={{
+              position: 'absolute',
+              top: `${(100 / totalSections) * (index + 0.5) - 1}%`,
+              left: '50%',
+              transform: 'translateX(-50%)',
+              width: '10px',
+              height: '10px',
+              borderRadius: '50%',
+              backgroundColor: '#915EFF',
+              cursor: 'pointer',
+              transition: 'background-color 0.3s ease, opacity 0.3s ease'
+
+            }}
+          />
+        )
+      ))}
+
+  
+      {/* Gros rond à la fin de la barre */}
+      <div
+        style={{
+          position: 'absolute',
+          bottom: `calc(100% - ${scrollPercentage +1}%)`,
+          left: '50%',
+          transform: 'translateX(-50%)',
+          width: '14px',
+          height: '14px',
+          borderRadius: '50%',
+          backgroundColor: '#915EFF',
+          cursor: 'pointer',
+        }}
+      />
+      
     </div>
+    
   );
 }
 

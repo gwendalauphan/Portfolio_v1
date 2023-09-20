@@ -151,6 +151,15 @@ html {
   display: none;
 }
 
+.no-select {
+  user-select: none;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+}
+
+
+
 
 
 /* canvas- styles */
