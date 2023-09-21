@@ -1,9 +1,13 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import useScrollNavigation from '../components/Navigation/Scroll/Scroll';
 import { useLocation } from 'react-router-dom';
 
-const ProjectsPage = ({ isEnabled }) => {
+import { ToggleContext } from '../components/Context/ToggleContext';
+
+const ProjectsPage = () => {
   const location = useLocation();
+
+  const { isEnabled } = useContext(ToggleContext);
 
   useScrollNavigation(location.pathname);
   return (

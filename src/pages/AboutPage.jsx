@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { motion } from "framer-motion";
 
 import useScrollNavigation from '../components/Navigation/Scroll/Scroll';
@@ -6,6 +6,10 @@ import { useLocation } from 'react-router-dom';
 
 import SectionWrapper from '../hoc/SectionWrapper';
 import About from '../components/Intro/About/About';
+
+import { ToggleContext } from '../components/Context/ToggleContext';
+
+
 
 const pageVariants = {
   initial: { scale: 0.9, y: "-50%", opacity: 0 },
@@ -20,8 +24,10 @@ const pageTransition = {
 };
 
 
-const AboutPage = ({ isEnabled }) => {
+const AboutPage = () => {
   const location = useLocation();
+
+  const { isEnabled } = useContext(ToggleContext);
 
   useScrollNavigation(location.pathname);
   return (

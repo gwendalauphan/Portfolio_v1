@@ -131,47 +131,23 @@ function ProgressBar() {
   return (
     // Styles pour la barre entière
     
-    <div onClick={handleClick} style={{ 
-      position: 'fixed', 
-      top: 0, 
-      right: 0, 
-      width: '8px',  // ajustez la largeur ici
-      height: '100%', 
-      backgroundColor: 'rgba(229, 229, 229, 0.3)',  // réduction de l'opacité
-      borderRadius: '4px',  // arrondissement des bords
-      backdropFilter: 'blur(2px)',  // flou
-      boxShadow: '0 0 15px rgba(255, 255, 255, 0.3)',  // ombre magique
-      zIndex: 9999 
-    }}>
+    <div onClick={handleClick} className="progressBarContainer">
+      <div className="colorBar" style={{ height: `${scrollPercentage + 1}%` }} />
+        <div 
+          className="unfilledBar" 
+          style={{ 
+              top: `${scrollPercentage + 1}%`,
+              height: `${100 - scrollPercentage - 1}%`
+          }}
+          ></div>
 
       
-      <div style={{  // Styles pour la barre de progression colorée
-        width: '100%', 
-        height: `${scrollPercentage}%`, 
-        backgroundColor: '#915EFF', 
-         
-        borderRadius: '4px',  // arrondissement des bords
-        boxShadow: '0 2px 4px rgba(145, 94, 255, 0.4)'  // ombre
-      }} /> 
-      
-
-  
       {paths.map((path, index) => (
         scrollPercentage > (100 / totalSections) * (index + 0.5) && (
-          <div
+          <div className="progressBar-smallButton"
             key={index}
             style={{
-              position: 'absolute',
               top: `${(100 / totalSections) * (index + 0.5) - 1}%`,
-              left: '50%',
-              transform: 'translateX(-50%)',
-              width: '10px',
-              height: '10px',
-              borderRadius: '50%',
-              backgroundColor: '#915EFF',
-              cursor: 'pointer',
-              transition: 'background-color 0.3s ease, opacity 0.3s ease'
-
             }}
           />
         )
@@ -179,19 +155,12 @@ function ProgressBar() {
 
   
       {/* Gros rond à la fin de la barre */}
-      <div
+      <div className="progressBar-bigButton"
         style={{
-          position: 'absolute',
-          bottom: `calc(100% - ${scrollPercentage +1}%)`,
-          left: '50%',
-          transform: 'translateX(-50%)',
-          width: '14px',
-          height: '14px',
-          borderRadius: '50%',
-          backgroundColor: '#915EFF',
-          cursor: 'pointer',
+          bottom: `calc(100% - ${scrollPercentage + 1.2}%)`,
         }}
       />
+
       
     </div>
     

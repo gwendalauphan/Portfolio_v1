@@ -9,7 +9,8 @@ import {
 import { AnimatePresence } from "framer-motion";
 
 
-import { ProgressContext } from './components/Context/ProgressContext';
+import { ProgressProvider } from './components/Context/ProgressContext';
+import { ToggleProvider } from './components/Context/ToggleContext';
 
 
 import Navbar from './components/Navigation/Navbar/Navbar';
@@ -44,7 +45,8 @@ function App() {
   const [scrollPercentage, setScrollPercentage] = useState(0);
 
   return (
-    <ProgressContext.Provider value={{ scrollPercentage, setScrollPercentage }}>
+    <ToggleProvider value={{ isEnabled, setIsEnabled }}>
+    <ProgressProvider value={{ scrollPercentage, setScrollPercentage }}>
     <Router>
       <div className="relative z-0">
         <div className="flex bg-hero-pattern bg-no-repeat bg-center bg-opacity-40 bg-black rounded-[25px] max-w-5xl mx-auto justify-center lg:text-base sm:text-sm xs:text-xs ">
@@ -56,12 +58,12 @@ function App() {
         
         <AnimatePresence mode="wait">
           <Routes>
-            <Route path="/" element={<HomePage isEnabled={isEnabled}/>} />
-            <Route path="/about" element={<AboutPage isEnabled={isEnabled}/>} />
-            <Route path="/work" element={<WorkPage isEnabled={isEnabled}/>} />
-            <Route path="/projects" element={<ProjectsPage isEnabled={isEnabled}/>} />
-            <Route path="/contact" element={<ContactPage isEnabled={isEnabled}/>} />
-            <Route path="/more" element={<MorePage isEnabled={isEnabled}/>} />
+            <Route path="/" element={<HomePage />} />
+            <Route path="/about" element={<AboutPage />} />
+            <Route path="/work" element={<WorkPage />} />
+            <Route path="/projects" element={<ProjectsPage />} />
+            <Route path="/contact" element={<ContactPage />} />
+            <Route path="/more" element={<MorePage />} />
             <Route path="*" element={<NoMatch />} />
           </Routes>
         </AnimatePresence>
@@ -74,7 +76,8 @@ function App() {
         </div>
       </div>
     </Router>
-    </ProgressContext.Provider>
+    </ProgressProvider>
+    </ToggleProvider>
   );
 }
 

@@ -151,11 +151,92 @@ html {
   display: none;
 }
 
-.no-select {
-  user-select: none;
-  -moz-user-select: none;
-  -webkit-user-select: none;
-  -ms-user-select: none;
+
+
+.progressBarContainer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 10px;
+  height: 100%;
+  background-color: rgba(30, 8, 54, 0.055);
+  border-radius: 4px;
+  box-shadow: 0 0 13px rgba(255, 255, 255, 0.3);
+  z-index: 9999;
+}
+
+.unfilledBar {
+  content: '';
+  display: block;
+  position: absolute;
+  right: 0;
+  width: 10px;
+  background: linear-gradient(rgba(159, 116, 252, 0.5),transparent);
+  pointer-events: none; /* Pour éviter d'interférer avec les clics */
+}
+
+.colorBar {
+  width: 100%;
+  background-color: rgba(145,94,255, 0.95);
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(145, 94, 255, 0.4);
+}
+
+.progressBar-smallButton {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background-color: #915EFF;
+  cursor: pointer;
+  transition: background-color 0.3s ease, opacity 0.3s ease;
+  box-shadow: inset 0 0 4px rgba(0, 0, 0, 0.6);
+  border: 2px solid rgba(255, 255, 255, 0.6);
+  z-index: 1;
+}
+
+.progressBar-smallButton::before {
+  content: "";
+  position: absolute;
+  top: -5px;
+  left: -5px;
+  right: -5px;
+  bottom: -5px;
+  border-radius: 50%;
+  background-color: rgba(244, 128, 255, 0.3);
+  filter: blur(4px);
+  z-index: -1;
+}
+
+
+.progressBar-bigButton {
+  position: absolute;
+  bottom: 0; /* Vous ajusterez cette valeur dans votre composant React */
+  left: 50%;
+  transform: translateX(-50%);
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background-color: #915EFF;
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.6);
+  border: 2px solid rgba(255, 255, 255, 0.6);
+  cursor: pointer;
+  z-index: 1;
+}
+
+.progressBar-bigButton::before {
+  content: '';
+  position: absolute;
+  top: -5px;
+  left: -5px;
+  right: -5px;
+  bottom: -5px;
+  border-radius: 50%;
+  background-color: rgba(244, 128, 255, 0.3);
+  filter: blur(4px);
+  z-index: -1;
 }
 
 

@@ -1,5 +1,6 @@
-import HomeSection from '../components/Intro/Home/Home2';
+import React, { useContext } from 'react';
 
+import HomeSection from '../components/Intro/Home/Home2';
 
 import { styles } from '../styles';
 import "../index.css"
@@ -9,6 +10,8 @@ import useScrollNavigation from '../components/Navigation/Scroll/Scroll';
 import { useLocation } from 'react-router-dom';
 
 import SectionWrapper from '../hoc/SectionWrapper';
+
+import { ToggleContext } from '../components/Context/ToggleContext';
 
 
 const pageVariants = {
@@ -23,8 +26,10 @@ const pageTransition = {
   duration: 1
 };
 
-const HomePage = ({ isEnabled }) => {
+const HomePage = () => {
   const location = useLocation();
+
+  const { isEnabled } = useContext(ToggleContext);
 
   useScrollNavigation(location.pathname);
 
