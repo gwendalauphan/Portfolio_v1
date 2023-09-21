@@ -17,6 +17,7 @@ import Navbar from './components/Navigation/Navbar/Navbar';
 import { StarsCanvas, EarthCanvas } from './components/canvas';
 import ToggleSwitch from './components/Switch/Switch2';
 import ProgressBar from './components/Navigation/Lateralbar/Lateralbar';
+import Sidebar from './components/Contact/Social/Sidebar';
 
 import HomePage from './pages/HomePage';
 import AboutPage from './pages/AboutPage';
@@ -55,6 +56,7 @@ function App() {
         </div>
         
         <ProgressBar />
+        <Sidebar />
         
         <AnimatePresence mode="wait">
           <Routes>

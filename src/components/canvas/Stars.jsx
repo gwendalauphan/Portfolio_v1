@@ -70,6 +70,9 @@ const StarsCanvas = () => {
 
             maxPolarAngle={Math.PI}
             minPolarAngle={0}
+
+            minDistance={1}   // Ajuste selon tes besoins
+            maxDistance={9}  // Ajuste selon tes besoins
           />
 
           <Stars />

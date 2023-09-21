@@ -5,7 +5,7 @@ import './Scroll.css'
 const routesOrder = ['/', '/about', '/work', '/projects', '/contact', '/more'];
 
 
-const useScrollNavigation = (currentRoute) => {
+const useScrollNavigation = (currentRoute, isEnabled) => {
     const navigate = useNavigate();
     const currentIndex = routesOrder.indexOf(currentRoute);
   
@@ -49,12 +49,14 @@ const useScrollNavigation = (currentRoute) => {
     };
   
     useEffect(() => {
-      window.addEventListener('wheel', handleScroll);
-      return () => window.removeEventListener('wheel', handleScroll);
-    }, [currentRoute]);
+        if (!isEnabled) {
+            window.addEventListener('wheel', handleScroll);
+        }
+
+        return () => window.removeEventListener('wheel', handleScroll);
+    }, [currentRoute, isEnabled]); // J'ai ajouté isEnabled à la liste des dépendances
   
     return handleScroll;
-  };
-  
+};
 
 export default useScrollNavigation;

@@ -9,7 +9,8 @@ const ContactPage = () => {
 
   const { isEnabled } = useContext(ToggleContext);
 
-  useScrollNavigation(location.pathname);
+  useScrollNavigation(location.pathname, isEnabled);
+  
   return (
     <div className={`page-container ${!isEnabled ? '' : 'masque'}`}>
       <h2>Monde 3</h2>

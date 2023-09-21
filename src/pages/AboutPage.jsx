@@ -29,7 +29,8 @@ const AboutPage = () => {
 
   const { isEnabled } = useContext(ToggleContext);
 
-  useScrollNavigation(location.pathname);
+  useScrollNavigation(location.pathname, isEnabled);
+  
   return (
     <motion.div
       initial="initial"

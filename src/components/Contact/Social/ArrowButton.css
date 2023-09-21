@@ -1,0 +1,52 @@
+body {
+    background-color: #322B2B;
+}
+
+.arrow {
+    position: relative;
+    background: none;
+    border: none;
+    left: -5%;
+    transform: translate(-50%, -50%);
+    transform: rotate(90deg);
+    cursor: pointer;
+    padding: 20px 20px;
+}
+
+.arrow span {
+    display: block;
+    opacity: 0.7;
+    width: 1vw;            /* était auparavant à 1.5vw */
+    height: 1vw;           /* était auparavant à 1.5vw */
+    border-bottom: 4px solid white;  /* était auparavant à 5px */
+    border-right: 4px solid white;   /* était auparavant à 5px */
+    margin: -8px;          /* ajustez cette valeur selon vos besoins */
+    transform: rotate(45deg);
+}
+
+.arrow:hover span {
+    animation: animate 1.5s infinite;
+}
+
+.arrow span:nth-child(2) {
+    animation-delay: -0.2s;
+}
+
+.arrow.rotated {
+  transform: rotate(-90deg);
+}
+
+
+@keyframes animate {
+    0% {
+        opacity: 0;
+        transform: rotate(45deg) translate(-10px, -10px);
+    }
+    50% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+        transform: rotate(45deg) translate(10px, 10px);
+    }
+}

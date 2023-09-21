@@ -9,7 +9,8 @@ const ProjectsPage = () => {
 
   const { isEnabled } = useContext(ToggleContext);
 
-  useScrollNavigation(location.pathname);
+  useScrollNavigation(location.pathname, isEnabled);
+  
   return (
     <div className={`page-container ${!isEnabled ? '' : 'masque'}`}>
       <h2>Monde 2</h2>
