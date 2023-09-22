@@ -1,8 +1,10 @@
-import { useState, useRef, Suspense } from "react";
+import { useState, useRef, Suspense, useContext } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { OrbitControls, Points, PointMaterial, Preload } from "@react-three/drei";
 import * as random from "maath/random/dist/maath-random.esm";
 import Earth from "./Earth";
+
+import { ToggleContext } from "../Context/ToggleContext";
 
 const Stars = (props) => {
   const ref = useRef();
@@ -11,8 +13,8 @@ const Stars = (props) => {
 
   
   useFrame((state, delta) => {
-    ref.current.rotation.x -= delta / 10;
-    ref.current.rotation.y -= delta / 15;
+    ref.current.rotation.x -= delta / 1500;
+    ref.current.rotation.y -= delta / 2000;
   });
 
   return (
@@ -36,6 +38,8 @@ const StarsCanvas = () => {
   const controlsRef = useRef();
   const [angles, setAngles] = useState({ azimuthal: 0, polar: 0 });
 
+  const { isEnabled } = useContext(ToggleContext);
+
   return (
     <div className='w-full h-auto absolute inset-0 z-[-1]'>
       <div className="absolute top-10 left-10 z-10 p-2 rounded">
@@ -50,17 +54,27 @@ const StarsCanvas = () => {
         fov: 45,
         near: 0.1,
         far: 200,
-        position: [0, 0, 6],
-      }}>
+        position: [0, 0, 7],
+      }}
+      >
         <Suspense fallback={null}>
-        <OrbitControls
-          ref={controlsRef}
-          autoRotate
-          autoRotateSpeed={1}
-          enableZoom={true}
-          maxPolarAngle={Math.PI}
-          minPolarAngle={0}
-        />
+          <OrbitControls
+            enabled={true} 
+            enableRotate={isEnabled}
+            enableZoom={isEnabled}
+            enablePan={isEnabled}
+
+            ref={controlsRef}
+            autoRotate
+            autoRotateSpeed={0.3}
+
+            maxPolarAngle={Math.PI}
+            minPolarAngle={0}
+
+            minDistance={1}   // Ajuste selon tes besoins
+            maxDistance={9}  // Ajuste selon tes besoins
+          />
+
           <Stars />
           <Earth controlsRef={controlsRef} setAngles={setAngles} />
           
