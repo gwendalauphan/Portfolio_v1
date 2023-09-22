@@ -1,0 +1,22 @@
+import React, { useContext } from 'react';
+import useScrollNavigation from '../components/Navigation/Scroll/Scroll';
+import { useLocation } from 'react-router-dom';
+
+import { ToggleContext } from '../components/Context/ToggleContext';
+
+const ProjectsPage = () => {
+  const location = useLocation();
+
+  const { isEnabled } = useContext(ToggleContext);
+
+  useScrollNavigation(location.pathname, isEnabled);
+  
+  return (
+    <div className={`page-container ${!isEnabled ? '' : 'masque'}`}>
+      <h2>Monde 2</h2>
+      <p>Bienvenue dans le Monde 2. Quelles aventures vous attendent ici ?</p>
+    </div>
+  );
+}
+
+export default ProjectsPage;

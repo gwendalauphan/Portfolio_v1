@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   BrowserRouter as Router,
   Routes,
@@ -6,14 +6,25 @@ import {
   Link
 } from 'react-router-dom';
 
+import { AnimatePresence } from "framer-motion";
+
+
+import { ProgressProvider } from './components/Context/ProgressContext';
+import { ToggleProvider } from './components/Context/ToggleContext';
+
+
 import Navbar from './components/Navigation/Navbar/Navbar';
 import { StarsCanvas, EarthCanvas } from './components/canvas';
+import ToggleSwitch from './components/Switch/Switch2';
+import ProgressBar from './components/Navigation/Lateralbar/Lateralbar';
+import Sidebar from './components/Contact/Social/Sidebar';
 
 import HomePage from './pages/HomePage';
-import World1Page from './pages/World1Page';
-import World2Page from './pages/World2Page';
-import World3Page from './pages/World3Page';
-import World4Page from './pages/World4Page';
+import AboutPage from './pages/AboutPage';
+import WorkPage from './pages/WorkPage';
+import ProjectsPage from './pages/ProjectsPage';
+import ContactPage from './pages/ContactPage';
+import MorePage from './pages/MorePage';
 
 function NoMatch() {
   return (
@@ -25,22 +36,39 @@ function NoMatch() {
 }
 
 function App() {
+
+  const [isEnabled, setIsEnabled] = useState(false);
+
+  const handleToggleChange = (value) => {
+    setIsEnabled(value);
+  };
+
+  const [scrollPercentage, setScrollPercentage] = useState(0);
+
   return (
+    <ToggleProvider value={{ isEnabled, setIsEnabled }}>
+    <ProgressProvider value={{ scrollPercentage, setScrollPercentage }}>
     <Router>
       <div className="relative z-0">
         <div className="flex bg-hero-pattern bg-no-repeat bg-center bg-opacity-40 bg-black rounded-[25px] max-w-5xl mx-auto justify-center lg:text-base sm:text-sm xs:text-xs ">
           <Navbar />
-          
+          <ToggleSwitch isEnabled={isEnabled} onToggleChange={handleToggleChange} />
         </div>
         
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/world1" element={<World1Page />} />
-          <Route path="/world2" element={<World2Page />} />
-          <Route path="/world3" element={<World3Page />} />
-          <Route path="/world4" element={<World4Page />} />
-          <Route path="*" element={<NoMatch />} />
-        </Routes>
+        <ProgressBar />
+        <Sidebar />
+        
+        <AnimatePresence mode="wait">
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/about" element={<AboutPage />} />
+            <Route path="/work" element={<WorkPage />} />
+            <Route path="/projects" element={<ProjectsPage />} />
+            <Route path="/contact" element={<ContactPage />} />
+            <Route path="/more" element={<MorePage />} />
+            <Route path="*" element={<NoMatch />} />
+          </Routes>
+        </AnimatePresence>
 
         <div className='fixed top-0 left-0 w-full h-full z-[-1] bg-primary'>
           
@@ -50,6 +78,8 @@ function App() {
         </div>
       </div>
     </Router>
+    </ProgressProvider>
+    </ToggleProvider>
   );
 }
 

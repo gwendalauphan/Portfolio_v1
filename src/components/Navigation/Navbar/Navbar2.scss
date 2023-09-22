@@ -28,6 +28,7 @@ $linkWidth: 10rem;
     height: 100%;
     margin: 0 auto;
     overflow: hidden;
+    
   &__menu{
     position: relative;
     display:flex;
@@ -69,7 +70,7 @@ $linkWidth: 10rem;
         content: '';
         position: absolute;
         left: -8rem;
-        margin-left: math.div($linkWidth, 2);
+        //margin-left: math.div($linkWidth, 2);
         bottom: -1.25rem;
         height: 0.5rem;
         width: 2px;
