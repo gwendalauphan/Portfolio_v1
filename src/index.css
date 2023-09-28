@@ -140,6 +140,18 @@ html {
   overflow: hidden;
 }
 
+.shadow-custom {
+  box-shadow: 0 4px 8px rgba(145,94,255, 0.6);
+}
+
+.border-color-custom {
+  border: 5px solid rgba(53,207,169, 0.9);
+}
+
+.color-custom {
+  background-color: rgba(53,207,169, 0.8); /* Vous pouvez remplacer ceci par la couleur de votre choix */
+}
+
 .toggle-switch {
   position: 'relative';
   right: '20px'; 
@@ -239,7 +251,104 @@ html {
   z-index: -1;
 }
 
+.Home-pageContainer {
+  width: 100%;
+  height: auto;
+  padding: 15px 15px;
+  background-color: rgba(0, 0, 0, 0.8); /* noir avec 80% d'opacité */
+  border-radius: 15px;
+  border: 3px solid rgba(130,84,229, 0.2); /* Bordure subtile */
+  box-shadow: 0 4px 8px rgba(130,84,229, 0.1); /* Effet fondu clair */
+}
 
+.Home-contentSection {
+  padding: 20px 10px;
+}
+
+.Home-sectionHeadText {
+  font-size: 36px; /* Taille de police pour un titre accrocheur */
+  font-weight: 700; /* Bold pour un impact visuel */
+  color: #FFFFFF; /* Couleur blanche pour un contraste élevé */
+  margin-bottom: 10px; /* Espacement entre le titre et le contenu/texte suivant */
+
+}
+
+.Home-sectionSubText {
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 1.7; /* Aération verticale */
+  letter-spacing: 0px; /* Espacement entre les lettres */
+  text-align: justify; /* Alignement justifié pour une lecture fluide */
+  color: #FFFFFF; /* Couleur de base blanche pour le contraste */
+  margin-bottom: 20px;
+}
+
+.keyword-blue {
+  color: #35cfa9;
+  font-weight: 700; /* Bold pour l'accentuation */
+}
+
+.keyword-purple {
+  color: #915EFF;
+  font-weight: 700; /* Bold pour l'accentuation */
+}
+
+
+
+.code-snippet {
+  background-color: rgba(255,255,255,0.1);
+  padding: 10px;
+  border-radius: 8px;
+  font-size: 16px;
+  color: #35cfa9;
+  margin-bottom: 20px; /* Ajustement pour l'espacement */
+}
+
+.bash-function {
+  margin-left: 10px; /* Ajustement pour l'indentation */
+}
+
+.bash-function-header,
+.bash-function-footer {
+  font-size: 18px;
+  color: #915EFF;
+}
+
+.hash-symbol {
+  font-size: 36px;
+  color: #915EFF;
+}
+
+.prompt {
+  color: #915EFF;
+}
+
+.command {
+  color: #FFFFFF;
+}
+
+.func-keyword {
+  color: #c9b4f7;
+}
+
+.func-name {
+  color: #35cfa9;
+}
+
+.bracket-open,
+.bracket-close {
+  color: #e6cc3a;
+}
+
+
+.Home-Title-text-shadow {
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+}
+
+
+.image_wrapper {
+  margin: 0px 20px;
+}
 
 
 

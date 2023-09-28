@@ -6,6 +6,7 @@ import { useLocation } from 'react-router-dom';
 
 import SectionWrapper from '../hoc/SectionWrapper';
 import About from '../components/Intro/About/About';
+import Tech from '../components/Experiences/Tech/Tech';
 
 import { ToggleContext } from '../components/Context/ToggleContext';
 
@@ -42,9 +43,8 @@ const AboutPage = () => {
     >
     <div className={`page-container ${!isEnabled ? '' : 'masque'}`}>
 
-      <h2>Monde 0</h2>
-      <p>Vous êtes maintenant dans le Monde 0</p>
       <About />
+      <Tech />
     </div>
     </motion.div>
   );
