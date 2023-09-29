@@ -11,16 +11,16 @@ const HomeSection = () => {
         <div className="Home-pageContainer">
             <div className="Home-contentSection">
                 <pre className="code-snippet">
-                    <span className="prompt">gwendal@portfolio:~$</span> <span className="command">uname -a</span>
+                    <span className="prompt">gwendal@portfolio:~$</span> <span className="command">cd ~</span>
                 </pre>
                 <div className="bash-function">
 
                 <p className="Home-sectionSubText">
-                As a <span className="keyword-purple">full-stack developer</span>, 
-                I specialize in <span className="keyword-blue"> automation, DevOps, and infrastructure deployment. </span> 
-                My expertise spans from data science and web development to incorporating agile methodologies and AI-driven solutions.
-                <br></br> Excited for <span className="keyword-purple">new projects</span>
-                , I’m always poised to tackle <span className="keyword-blue">fresh challenges.</span>
+                As a <span className="keyword-purple">full-stack developer</span>,
+                each new project is an invitation to <span className="keyword-blue"> creation </span> and <span className="keyword-blue">innovation</span>.
+                <br /><br />
+                My enthusiasm for fresh challenges pairs with a continuous exploration of <span className="keyword-purple">philosophy</span> and <span className="keyword-purple">personal development. </span>
+                Always ready for <span className="keyword-blue">new enriching adventures.</span>
                 </p>
                 <br></br>
 
@@ -30,12 +30,13 @@ const HomeSection = () => {
                     <p className="Home-sectionSubText" style={{ marginLeft: '15px', marginBottom: 0 }}>
                     You've landed in a space-themed universe, enjoy your voyage as you explore my world of code and creativity.
                     </p>
-                    <p className="bash-function-footer" style={{ marginBottom: "20px" }}>
+                    <p className="bash-function-footer" style={{ marginBottom: "0px" }}>
                         <span className="bracket-close">{`}`}</span>
                     </p>
+                    <br />
                     
                 </div>
-                <h2 className="Home-sectionHeadText"><span className="hash-symbol">#</span> Happy exploring !</h2>
+                <h2 className="Home-sectionHeadText"><span className="hash-symbol">#</span> echo "Happy exploring !"</h2>
             </div>
         </div>
     );

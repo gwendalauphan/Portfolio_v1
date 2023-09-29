@@ -22,6 +22,7 @@ import {
     carrent,
     jobit,
     tripguide,
+    avatar,
   } from "../assets";
   
   export const pageRotations = {
@@ -32,7 +33,9 @@ import {
     Future: { x: -0.2, y: -0.2 },
 };
 
-  
+const memoji = {
+  image: [avatar],
+};
   
   const navLinks = [
     {
@@ -275,4 +278,4 @@ import {
     },
   ];
   
-  export { services, technologies, experiences, testimonials, projects };
+  export { services, technologies, experiences, testimonials, projects, memoji };
