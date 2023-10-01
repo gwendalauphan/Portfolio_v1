@@ -58,6 +58,7 @@ function App() {
         <ProgressBar />
         <Sidebar />
         
+        
         <AnimatePresence mode="wait">
           <Routes>
             <Route path="/" element={<HomePage />} />

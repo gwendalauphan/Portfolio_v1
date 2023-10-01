@@ -8,6 +8,8 @@ import SectionWrapper from '../hoc/SectionWrapper';
 
 import { ToggleContext } from '../components/Context/ToggleContext';
 
+import Experience from '../components/Experiences/Missions/Missions';
+
 const pageVariants = {
   initial: { scale: 0.9, y: "-50%", opacity: 0 },
   in: { scale: 1, y: "0%", opacity: 1 },
@@ -29,21 +31,14 @@ const WorkPage = () => {
   useScrollNavigation(location.pathname, isEnabled);
   
   return (
-    <motion.div
-      initial="initial"
-      animate="in"
-      exit="out"
-      variants={pageVariants}
-      transition={pageTransition}
-      
-    >
+    
     <div className={`page-container ${!isEnabled ? '' : 'masque'}`}>
 
-      <h2>Monde 1</h2>
-      <p>Vous êtes maintenant dans le Monde 1. Explorez et découvrez ses merveilles !</p>
+      <Experience />
+      
     </div>
-    </motion.div>
+    
   );
 }
 
-export default SectionWrapper(WorkPage, "");
+export default SectionWrapper(WorkPage, "work");

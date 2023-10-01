@@ -1,14 +1,16 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { fadeIn, textVariant } from "../../../utils/motion";
-import { styles } from "./Home"
+
+import { styles2 } from "./Home"
+import { styles } from "../../../styles";
 import SectionWrapper from "../../../hoc/SectionWrapper";
 
 const HomeSection = () => {
     return (
-        <div className={`${styles.pageContainer}`}>
-            <div className={`${styles.contentSection}`}>
-                <h1 className={styles.sectionHeadText}>Bienvenue !</h1>
+        <div className={`${styles2.pageContainer}`}>
+            <div className={`${styles2.contentSection}`}>
+                <h1 className={styles.sectionHeadText}>Welcome !</h1>
                 <p className={styles.sectionSubText}>
                 Salut, je suis Gwendal. Passionné de technologies, je développe des scripts et je maintiens des serveurs Linux.
                 </p>

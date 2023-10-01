@@ -44,7 +44,6 @@ function Navbar() {
     }, [location.pathname]);
 
 
-
     //-----------------------------------
 
     const [active, setActive] = useState("");

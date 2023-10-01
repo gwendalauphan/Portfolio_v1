@@ -4,11 +4,11 @@ import './Sidebar.css';
 import './ArrowButton.css';
 
 const socialMediaHandlesLinks = [
-  { name: 'gitlab', url: 'https://gitlab.com/gwendalauphan' },
+  { name: 'gitlab', url: 'https://gitlab.com/gwendalauphan', bgColor: "#D2691E" },
   { name: 'github', url: 'https://github.com/gwendal95' },
   { name: 'discord', url: 'https://discord.com/users/422845843431882752' },
   { name: 'linkedin', url: 'https://www.linkedin.com/in/gwendal-auphan-5519a3214/' },
-  { name: 'email', url: 'mailto:gwendalauphan@proton.me', bgColor: "Red", fgColor: "AliceBlue" },
+  { name: 'email', url: 'mailto:gwendalauphan@proton.me', bgColor: "brown", fgColor: "AliceBlue" },
 ];
 
 class Sidebar extends Component {

@@ -6,6 +6,10 @@ import { useLocation } from 'react-router-dom';
 
 import SectionWrapper from '../hoc/SectionWrapper';
 import About from '../components/Intro/About/About';
+import Tech from '../components/Experiences/Tech/Tech';
+
+import { memoji } from '../constants';
+import ImageSlider from '../components/Intro/About/ImageSlider';
 
 import { ToggleContext } from '../components/Context/ToggleContext';
 
@@ -32,22 +36,13 @@ const AboutPage = () => {
   useScrollNavigation(location.pathname, isEnabled);
   
   return (
-    <motion.div
-      initial="initial"
-      animate="in"
-      exit="out"
-      variants={pageVariants}
-      transition={pageTransition}
-      
-    >
     <div className={`page-container ${!isEnabled ? '' : 'masque'}`}>
 
-      <h2>Monde 0</h2>
-      <p>Vous êtes maintenant dans le Monde 0</p>
       <About />
+
+      <Tech />
     </div>
-    </motion.div>
   );
 }
 
-export default SectionWrapper(AboutPage, "");
+export default AboutPage;
