@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
-
-import HomeSection from '../components/Intro/Home/Home2';
+import { Link } from 'react-router-dom';
+import HomeSection from '../components/Intro/Home/Home3';
 
 import { styles } from '../styles';
 import "../index.css"
@@ -50,8 +50,11 @@ const HomePage = () => {
           </div>
 
           <div>
-            <h1 className={`${styles.heroHeadText} text-white`}>
-              Hi, I'm <span className='text-[#915EFF]'>Gwendal</span>
+            <h1 className={`${styles.heroHeadText} text-white Home-Title-text-shadow`}>
+              Hi, I'm <span className='text-[#915EFF]'>Gwendal Auphan</span>
+            </h1>
+            <h1 className={`${styles.heroSubHeadText} text-white Home-Title-text-shadow`}>
+              Passionate by <span className='text-[#35CFA9]'>coding</span> and <span className='text-[#35CFA9]'>adventure</span>
             </h1>
           </div>
           
@@ -59,8 +62,30 @@ const HomePage = () => {
         <div className="home-section-parent">
           <HomeSection />
         </div>
+        
+        
+      
+        <div className='absolute w-full flex justify-center items-center'>
+        <Link to='/about'>
+          <div className='w-[40px] h-[70px] rounded-3xl border-4 border-secondary flex justify-center items-start p-2 shadow-custom border-color-custom'>
+          <motion.div
+              animate={{
+                y: [0, 24, 0],
+              }}
+              transition={{
+                duration: 1.75,
+                repeat: Infinity,
+                repeatType: "loop",
+              }}
+              className='w-3 h-3.5 rounded-full bg-secondary mb-2 shadow-custom color-custom'
+            />
+          </div>
 
-        </div>
+        </Link>
+      </div>
+      </div>
+
+      
         
       
     </motion.div>

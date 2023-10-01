@@ -1,0 +1,11 @@
+Model Information:
+* title:	Little-astronaut
+* source:	https://sketchfab.com/3d-models/little-astronaut-2898a4b265d943919ca830e7d746ac13
+* author:	Shadow (https://sketchfab.com/jaydenelizondo7)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Little-astronaut" (https://sketchfab.com/3d-models/little-astronaut-2898a4b265d943919ca830e7d746ac13) by Shadow (https://sketchfab.com/jaydenelizondo7) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)

@@ -19,16 +19,27 @@ import reactjs from "./tech/reactjs.png";
 import redux from "./tech/redux.png";
 import tailwind from "./tech/tailwind.png";
 import typescript from "./tech/typescript.png";
-import threejs from "./tech/threejs.svg";
 
 import meta from "./company/meta.png";
 import shopify from "./company/shopify.png";
 import starbucks from "./company/starbucks.png";
 import tesla from "./company/tesla.png";
 
-import carrent from "./carrent.png";
+
 import jobit from "./jobit.png";
 import tripguide from "./tripguide.png";
+
+import avatar from "./avatar/avatar.png";
+
+import carrent from "./projects/carrent.png";
+import carrentVideo from "./projects/carrentVideo.mp4";
+
+
+//For skills (About Page)
+import code from "./skills/code.svg"
+import agile from "./skills/agile.svg"
+import processing from "./skills/processing.svg"
+import server from "./skills/server.svg"
 
 export {
   logo,
@@ -51,7 +62,6 @@ export {
   redux,
   tailwind,
   typescript,
-  threejs,
   meta,
   shopify,
   starbucks,
@@ -59,4 +69,10 @@ export {
   carrent,
   jobit,
   tripguide,
+  avatar,
+  code,
+  agile,
+  processing,
+  server,
+  carrentVideo,
 };
