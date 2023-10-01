@@ -106,8 +106,11 @@ const About = () => {
                 </div>
           </div>
           </div>
-          <motion.div className="mt-20 flex items-center justify-center" variants={textVariant()}>
-            <p className={`${styles.heroSubHeadText} `}>My Expertise</p>
+
+          <div className="separator-bar" ></div>
+
+          <motion.div className="flex items-center justify-center" variants={textVariant()}>
+            <p className={`${styles.heroSubHeadText} animatedText`}>My Expertise</p>
           </motion.div>
       
       

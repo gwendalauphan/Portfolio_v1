@@ -382,6 +382,39 @@ html {
   }
 }
 
+
+
+@keyframes colorWave {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.separator-bar {
+  height: 4px; /* Tu peux ajuster la hauteur comme tu le souhaites */
+  width: 50%; /* Pour centrer la barre, on utilise 50% ici */
+  margin: 7% auto 5%; /* Centrage horizontal et un peu d'espacement vertical */
+  background: linear-gradient(90deg, #f12bff 30%, #43ffd0 70%);
+  background-size: 200% 100%;
+  animation: colorWave 4s infinite; /* 3 secondes pour un aller-retour */
+}
+
+.animatedText {
+  background: linear-gradient(90deg, #43ffd0 25%, #f12bff 75%);
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-size: 200% 100%;
+  animation: colorWave 8s infinite;
+}
+
+
+
 /* canvas- styles */
 .canvas-loader {
   font-size: 10px;

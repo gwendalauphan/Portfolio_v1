@@ -28,7 +28,8 @@
     "react-social-icons": "^6.3.0",
     "react-styled-toggle": "^1.1.0",
     "react-transition-group": "^4.4.5",
-    "react-vertical-timeline-component": "^3.6.0"
+    "react-vertical-timeline-component": "^3.6.0",
+    "shader-doodle": "^0.0.5"
   },
   "devDependencies": {
     "@types/react": "^18.2.15",
