@@ -63,7 +63,7 @@ const ServiceCard = ({ index, title, description, icon }) => {
 
       <div className='px-7'>
 
-      <p className='text-white text-[15px] mt-2' style={{textAlign: "justify",fontWeight: 450}}>
+      <p className='text-white text-[15px] mt-2 ' style={{textAlign: "justify",fontWeight: 450}}>
         {description}
       </p>
       </div>
@@ -75,6 +75,7 @@ const ServiceCard = ({ index, title, description, icon }) => {
     </div>
   )
 }
+
 
 const About = () => {
   return (
@@ -118,8 +119,8 @@ const About = () => {
 
           <div className="separator-bar" ></div>
 
-          <motion.div className="flex items-center justify-center" variants={textVariant()}>
-            <p className={`${styles.heroSubHeadText} animatedText`}>My Expertise</p>
+          <motion.div className="flex items-center justify-center Experise-Title-text-shadow" variants={textVariant()}>
+            <p className={`${styles.heroSubHeadText} animatedText `}>My Expertise</p>
           </motion.div>
       
       
