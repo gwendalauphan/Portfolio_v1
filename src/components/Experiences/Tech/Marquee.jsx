@@ -7,8 +7,8 @@ const MarqueeCards = ({children, direction}) => {
     <Marquee
       direction={direction}
       gradient={true}
-      gradientWidth={"100px"}
-      gradientColor="rgba(244, 128, 255, 0.5)"
+      gradientWidth={"250px"}
+      gradientColor="rgba(5, 8, 22, 1)"
       
       speed={30}
       pauseOnHover={true}

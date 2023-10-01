@@ -402,11 +402,11 @@ html {
   margin: 7% auto 5%; /* Centrage horizontal et un peu d'espacement vertical */
   background: linear-gradient(90deg, #f12bff 30%, #43ffd0 70%);
   background-size: 200% 100%;
-  animation: colorWave 4s infinite; /* 3 secondes pour un aller-retour */
+  animation: colorWave 8s infinite; /* 3 secondes pour un aller-retour */
 }
 
 .animatedText {
-  background: linear-gradient(90deg, #43ffd0 25%, #f12bff 75%);
+  background: linear-gradient(90deg, #43ffd0 30%, #f12bff 70%);
   background-clip: text;
   -webkit-text-fill-color: transparent;
   background-size: 200% 100%;

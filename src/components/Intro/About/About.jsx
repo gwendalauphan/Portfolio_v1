@@ -15,7 +15,7 @@ import ImageSlider from "./ImageSlider";
 
 import { useInView } from 'react-intersection-observer';
 
-const ServiceCard = ({ index, title, icon }) => {
+const ServiceCard = ({ index, title, description, icon }) => {
 
   const { ref, inView } = useInView({
     triggerOnce: true,
@@ -32,37 +32,46 @@ const ServiceCard = ({ index, title, icon }) => {
 
   return (
     <div ref={ref}>
-    <Tilt className='xs:w-[250px] w-full'>
-      <motion.div
-        initial="hidden"
-        animate="show"
-        variants={animationVariants}
-        className='w-full green-pink-gradient p-[1px] rounded-[20px] shadow-card'
-      >
-        <div
-          options={{
-            max: 45,
-            scale: 1,
-            speed: 450,
-          }}
-          className='bg-tertiary rounded-[20px] py-5 px-12 min-h-[280px] flex justify-evenly items-center flex-col'
-        >
-          <img
-          src={icon}
-          alt='web-development'
-          className='w-16 h-16 object-contain'
-          />
-
-        <h3 className='text-white text-[20px] font-bold text-center'>
-          {title}
-        </h3>
-
-
-        </div>
+<Tilt className='xs:w-[250px] w-full'>
+  <motion.div
+    initial="hidden"
+    animate="show"
+    variants={animationVariants}
+    className='w-full green-pink-gradient p-[1px] rounded-[20px] shadow-card'
+  >
+    <div
+      options={{
+        max: 45,
+        scale: 1,
+        speed: 450,
+      }}
+      className='rounded-[20px] py-4  min-h-[280px] flex justify-evenly items-center flex-col'
+      style={{ backgroundColor: 'rgba(0, 0, 0, 0.95)' }}  //{/* Adjust RGBA values as needed */}
+    >
       
-      
-      </motion.div>
-    </Tilt>
+      <div className='flex flex-row items-center justify-between w-full px-2'> {/* Conteneur flex pour l'icône et le titre */}
+    <img
+      src={icon}
+      alt='web-development'
+      className='w-16 h-16 object-contain mr-4'  //{/* Adjust size as needed */}
+    />
+    
+    <h3 className='text-white text-[20px] font-bold' >
+      {title}
+    </h3>
+</div>
+
+      <div className='px-7'>
+
+      <p className='text-white text-[15px] mt-2' style={{textAlign: "justify",fontWeight: 450}}>
+        {description}
+      </p>
+      </div>
+
+    </div>
+  </motion.div>
+</Tilt>
+
     </div>
   )
 }

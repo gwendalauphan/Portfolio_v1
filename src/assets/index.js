@@ -31,6 +31,13 @@ import tripguide from "./tripguide.png";
 
 import avatar from "./avatar/avatar.png";
 
+
+//For skills (About Page)
+import code from "./skills/code.svg"
+import agile from "./skills/agile.svg"
+import processing from "./skills/processing.svg"
+import server from "./skills/server.svg"
+
 export {
   logo,
   backend,
@@ -60,4 +67,8 @@ export {
   jobit,
   tripguide,
   avatar,
+  code,
+  agile,
+  processing,
+  server,
 };
