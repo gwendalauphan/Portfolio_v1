@@ -22,7 +22,12 @@ import {
     carrent,
     jobit,
     tripguide,
-    threejs,
+    avatar,
+    code,
+    agile,
+    processing,
+    server,
+    carrentVideo,
   } from "../assets";
   
   export const pageRotations = {
@@ -33,7 +38,9 @@ import {
     Future: { x: -0.2, y: -0.2 },
 };
 
-  
+const memoji = {
+  image: [avatar],
+};
   
   const navLinks = [
     {
@@ -60,20 +67,24 @@ import {
   
   const services = [
     {
-      title: "Web Developer",
-      icon: web,
+      title: "Diverse Development",
+      icon: code,
+      description: "Proficiency in Bash, Python, C, and web development, as well as in data science with Pandas and Scala.",
     },
     {
-      title: "React Native Developer",
-      icon: mobile,
+      title: "Continuous Integration",
+      icon: processing,
+      description: "Expertise in CI-CD via GitLab CI, Jenkins, enriched by the use of SonarQube and Nexus for quality assurance.",
     },
     {
-      title: "Backend Developer",
-      icon: backend,
+      title: "Deployment Automation",
+      icon: server,
+      description: "Experienced in automated deployment with Docker, Ansible, and Terraform, with OpenStack as a provider.",
     },
     {
-      title: "Content Creator",
-      icon: creator,
+      title: "Agile Methodologies",
+      icon: agile,
+      description: "Aptitude in agile methodologies like Scrum, effective management of sprints and user stories via Jira.",
     },
   ];
   
@@ -214,6 +225,32 @@ import {
     {
       name: "Car Rent",
       description:
+          "Web-based platform that allows users to search, book, and manage.",
+      tags: {
+          technos: [
+              { name: 'React', color: '#61DAFB' },
+              { name: 'Node.js', color: '#8CC84B' },
+              { name: 'Express', color: '#000000' }
+          ],
+          thèmes: [
+              { name: 'Transportation', color: '#F46036' },
+              { name: 'Car Rental', color: '#3DCCC7' },
+              { name: 'Web Platform', color: '#FFD700' }
+          ]
+        },
+      media: {
+        image: carrent,
+        video: carrentVideo,
+      },
+      source_code_link: "https://github.com/",
+    }
+  ]
+
+
+  const projects2 = [
+    {
+      name: "Car Rent",
+      description:
         "Web-based platform that allows users to search, book, and manage car rentals from various providers, providing a convenient and efficient solution for transportation needs.",
       tags: [
         {
@@ -276,4 +313,4 @@ import {
     },
   ];
   
-  export { services, technologies, experiences, testimonials, projects };
+  export { services, technologies, experiences, testimonials, projects, memoji };

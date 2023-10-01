@@ -4,8 +4,36 @@ npm install gsap
 
 react-styled-toggle
 react-social-icons
+react-vertical-timeline-component
+react-parallax-tilt
+react-fast-marquee
 # React + Vite feat/POR-13
 
+
+"""
+      <spotLight
+        position={[0, 10, 1]}  // Modifiez ces valeurs pour positionner la lumière
+        angle={0.5}
+        penumbra={1}
+        intensity={500}
+        castShadow
+        shadow-mapSize={1024}
+      />
+      <hemisphereLight intensity={0}/>
+      <pointLight position={[0.5, 6, 0.5]} intensity={0} />
+
+          <EffectComposer>
+            <Bloom
+              strength={1}
+              
+              luminanceThreshold={0.9}
+              luminanceSmoothing={0.9}
+              intensity={0.1}
+              width={50}
+              height={100}
+            />
+          </EffectComposer>
+"""
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
