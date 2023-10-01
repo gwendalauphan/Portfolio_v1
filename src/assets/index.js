@@ -25,11 +25,14 @@ import shopify from "./company/shopify.png";
 import starbucks from "./company/starbucks.png";
 import tesla from "./company/tesla.png";
 
-import carrent from "./carrent.png";
+
 import jobit from "./jobit.png";
 import tripguide from "./tripguide.png";
 
 import avatar from "./avatar/avatar.png";
+
+import carrent from "./projects/carrent.png";
+import carrentVideo from "./projects/carrentVideo.mp4";
 
 
 //For skills (About Page)
@@ -71,4 +74,5 @@ export {
   agile,
   processing,
   server,
+  carrentVideo,
 };

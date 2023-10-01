@@ -1,38 +1,40 @@
 import React, { useState } from 'react';
 import ProjectCard from './ProjectCard';
-
+import { projects } from "../../../constants";
+import { motion } from "framer-motion";
+import { styles } from "../../../styles";
 import SectionWrapper from "../../../hoc/SectionWrapper";
 
-const projectsData = [
-  { id: 1, category: 'Web Development', title: 'Projet 1', description: 'Description du projet 1' },
-  { id: 2, category: 'Graphic Design', title: 'Projet 2', description: 'Description du projet 2' },
-  { id: 3, category: 'Graphic Design', title: 'Projet 2', description: 'Description du projet 2' },
-  { id: 4, category: 'Graphic Design', title: 'Projet 2', description: 'Description du projet 2' },
-  // ... plus de projets
-];
+import { textVariant } from "../../../utils/motion";
+
 
 function Projects() {
-  const [filter, setFilter] = useState('All');
 
-  const filteredProjects = filter === 'All'
-    ? projectsData
-    : projectsData.filter(project => project.category === filter);
 
   return (
-    <div className="projects-page">
-      <div className="filter-buttons">
-        <button onClick={() => setFilter('All')}>Tous</button>
-        <button onClick={() => setFilter('Web Development')}>Développement Web</button>
-        <button onClick={() => setFilter('Graphic Design')}>Design Graphique</button>
-        {/* Ajoutez d'autres boutons de filtre selon vos catégories */}
-      </div>
+    <>
 
-      <div className="mt-20 flex flex-wrap gap-7">
-        {filteredProjects.map((project,index) => (
-          <ProjectCard key={project.id} index={index} project={project} />
-        ))}
-      </div>
+    <motion.div className="mb-4" variants={textVariant()}>
+    <p className={`${styles.sectionSubText} keyword-blue`}>My Opus</p>
+    <h2 className={`${styles.heroHeadText} text-white Home-Title-text-shadow`}><span className="keyword-purple">Projects.</span></h2>
+    </motion.div>
+    <div className="inner-div" style={{flex: 1}}>
+    <pre className="code-snippet mt-6 " style={{ backgroundColor: 'rgba(0, 0, 0, 0.9)', marginBottom: "24px"}}>
+            <span className="prompt">gwendal@portfolio:~$</span> <span className="command">${'ls  ~/projects  -al'}</span>
+        </pre>
     </div>
+
+    <div className='mt-20 flex flex-wrap gap-7'>
+      {projects.map((project, index) => (
+        <ProjectCard 
+        key={`project-${index}`} 
+        index={index} 
+        {...project} />
+      ))}
+
+    </div>
+
+    </>
   );
 }
 

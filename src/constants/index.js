@@ -27,6 +27,7 @@ import {
     agile,
     processing,
     server,
+    carrentVideo,
   } from "../assets";
   
   export const pageRotations = {
@@ -221,6 +222,32 @@ const memoji = {
   ];
   
   const projects = [
+    {
+      name: "Car Rent",
+      description:
+          "Web-based platform that allows users to search, book, and manage.",
+      tags: {
+          technos: [
+              { name: 'React', color: '#61DAFB' },
+              { name: 'Node.js', color: '#8CC84B' },
+              { name: 'Express', color: '#000000' }
+          ],
+          thèmes: [
+              { name: 'Transportation', color: '#F46036' },
+              { name: 'Car Rental', color: '#3DCCC7' },
+              { name: 'Web Platform', color: '#FFD700' }
+          ]
+        },
+      media: {
+        image: carrent,
+        video: carrentVideo,
+      },
+      source_code_link: "https://github.com/",
+    }
+  ]
+
+
+  const projects2 = [
     {
       name: "Car Rent",
       description:

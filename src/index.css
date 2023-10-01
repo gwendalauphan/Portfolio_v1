@@ -445,6 +445,14 @@ html {
   filter: drop-shadow(2px 2px 0 #43ffd0) drop-shadow(-2px -2px 0 #915EFF);
 }
 
+.text-shadow-card-project {
+  text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.8),
+               -2px -2px 3px rgba(0, 0, 0, 0.8),
+               2px -2px 3px rgba(0, 0, 0, 0.8),
+               -2px 2px 3px rgba(0, 0, 0, 0.8);
+}
+
+
 
 /* canvas- styles */
 .canvas-loader {

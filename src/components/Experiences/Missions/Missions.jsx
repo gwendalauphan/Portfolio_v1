@@ -66,9 +66,6 @@ const Experience = () => {
         <h2 className={`${styles.heroHeadText} text-white Home-Title-text-shadow`}>Work <span className="keyword-purple">Experience.</span></h2>
       </motion.div>
 
-
-
-
       <div className='mt-6 flex flex-col pb-4 your-div-class' style={{ backgroundColor: 'rgba(0, 0, 0, 0.2)', borderRadius: '24px' }} >
       <div className="inner-div" style={{flex: 1}}>
 
