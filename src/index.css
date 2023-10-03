@@ -438,11 +438,19 @@ html {
 
 
 .your-div-class {
-  filter: drop-shadow(0px 0px 0 #43ffd0) drop-shadow(-0px -0px 0 #915EFF);
+  filter: drop-shadow(0px 0px 0 #43ffd005) drop-shadow(-0px -0px 0 #915eff05);
 }
 
 .inner-div {
   filter: drop-shadow(2px 2px 0 #43ffd0) drop-shadow(-2px -2px 0 #915EFF);
+}
+
+
+.shadow-card-project {
+  box-shadow: 6px 6px 12px rgba(0, 0, 0, 0.3),
+              -6px -6px 12px rgba(0, 0, 0, 0.3),
+              6px -6px 12px rgba(0, 0, 0, 0.3),
+              -6px 6px 12px rgba(0, 0, 0, 0.3);
 }
 
 .text-shadow-card-project {
