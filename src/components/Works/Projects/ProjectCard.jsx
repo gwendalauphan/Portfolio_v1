@@ -17,7 +17,10 @@ const ProjectCard = ({
   const [isHoveredCard, setIsHoveredCard] = useState(false);
 
   return (
-    <div className="inner-div " style={{ opacity: isHoveredCard ? 1 : 0.95 }}>
+    <div
+      className="inner-div pb-2"
+      style={{ opacity: isHoveredCard ? 1 : 0.95 }}
+    >
       <motion.div
         animate={{
           scale: isHoveredCard ? 1.05 : 1,
@@ -26,7 +29,7 @@ const ProjectCard = ({
         className={`card-container-project relative rounded-xl ${
           isHoveredCard ? "shadow-card-project" : ""
         }`}
-        variants={fadeIn("up", "spring", index * 0.75, 1)}
+        variants={fadeIn("up", "spring", index * 0.5, 1)}
         onMouseEnter={() => setIsHoveredCard(true)}
         onMouseLeave={() => setIsHoveredCard(false)}
       >
