@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { motion } from "framer-motion";
 
 import useScrollNavigation from "../components/Navigation/Scroll/Scroll";
@@ -26,6 +26,14 @@ const ProjectsPage = () => {
   const { isEnabled } = useContext(ToggleContext);
 
   useScrollNavigation(location.pathname, isEnabled);
+
+  useEffect(() => {
+    if (isEnabled) {
+      document.body.classList.add("no-select");
+    } else {
+      document.body.classList.remove("no-select");
+    }
+  }, [isEnabled]);
 
   return (
     <div className={`page-container ${!isEnabled ? "" : "masque"}`}>
