@@ -4,6 +4,8 @@ import { useLocation } from 'react-router-dom';
 
 import { ToggleContext } from '../components/Context/ToggleContext';
 
+import Form from '../components/Contact/Form/Form';
+
 const ContactPage = () => {
   const location = useLocation();
 
@@ -13,8 +15,8 @@ const ContactPage = () => {
   
   return (
     <div className={`page-container ${!isEnabled ? '' : 'masque'}`}>
-      <h2>Monde 3</h2>
-      <p>Le Monde 3 est mystérieux. Que découvrirez-vous ?</p>
+
+      <Form />
     </div>
   );
 }

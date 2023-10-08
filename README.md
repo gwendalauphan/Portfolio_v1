@@ -7,6 +7,7 @@ react-social-icons
 react-vertical-timeline-component
 react-parallax-tilt
 react-fast-marquee
+@emailjs/browser
 # React + Vite feat/POR-13
 
 

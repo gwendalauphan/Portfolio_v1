@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from 'react';
 import { motion } from "framer-motion";
 import Tilt from "react-parallax-tilt";
 import { fadeIn, textVariant } from "../../../utils/motion";
@@ -15,6 +15,25 @@ const ProjectCard = ({
 }) => {
   const [isHoveredImage, setIsHoveredImage] = useState(false);
   const [isHoveredCard, setIsHoveredCard] = useState(false);
+  const [shouldLoadVideo, setShouldLoadVideo] = useState(false);
+
+  const handleMouseEnterVideo = () => {
+    setIsHoveredImage(true);
+    setShouldLoadVideo(true);
+};
+
+const handleMouseLeaveVideo = () => {
+  setIsHoveredImage(false);
+  const videoElement = videoRef.current;
+  if (videoElement) {
+      videoElement.pause();
+      videoElement.currentTime = 0; // reset to start
+  }
+  setShouldLoadVideo(false);
+};
+
+const videoRef = useRef(null);
+
 
   return (
     <div
@@ -29,7 +48,7 @@ const ProjectCard = ({
         className={`card-container-project relative rounded-xl ${
           isHoveredCard ? "shadow-card-project" : ""
         }`}
-        variants={fadeIn("up", "spring", index * 0.5, 1)}
+        variants={fadeIn("up", "spring", index * 0.25, 4)}
         onMouseEnter={() => setIsHoveredCard(true)}
         onMouseLeave={() => setIsHoveredCard(false)}
       >
@@ -44,13 +63,15 @@ const ProjectCard = ({
               animate={{ opacity: isHoveredCard ? 1 : 0.75 }} // rend plus clair lors du survol
               transition={{ duration: 0.2 }}
               className="media-container relative w-full cursor-pointer"
-              onMouseEnter={() => setIsHoveredImage(true)}
-              onMouseLeave={() => setIsHoveredImage(false)}
+              
+              onMouseEnter={handleMouseEnterVideo}
+              onMouseLeave={handleMouseLeaveVideo}
               onClick={() => console.log("Show project clicked")}
             >
               <motion.video
+                ref={videoRef}
                 preload="none"
-                src={media.video}
+                src={shouldLoadVideo ? media.video : undefined}
                 autoPlay
                 loop
                 muted
