@@ -57,12 +57,11 @@ const Cosmonaute = ({
 
       <EffectComposer>
         <Bloom
-          strength={1}
-          luminanceThreshold={0.9}
-          luminanceSmoothing={0.9}
+          luminanceThreshold={0.5}
+          luminanceSmoothing={0.5}
           intensity={0.1}
-          width={50}
-          height={100}
+          width={300}
+          height={600}
         />
       </EffectComposer>
 

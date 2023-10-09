@@ -59,7 +59,9 @@ const ContactPage = () => {
   return (
     <div className={`page-container ${!isEnabled ? "" : "masque"}`}>
       <ContactHeader />
-      <div className={`xl:mt-12 flex xl:flex-row flex-col-reverse gap-20`}>
+      <div
+        className={`xl:mt-12 flex xl:flex-row flex-col-reverse gap-20 overflow-hidden`}
+      >
         <Form />
         <Annimation
           isRotating={isRotating}

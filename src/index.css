@@ -135,6 +135,15 @@ html {
 }
 
 
+
+.navbar-container {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  /* Assurez-vous que la barre de navigation est au-dessus des autres éléments */
+}
+
+
 .home-section-parent > * {
   margin-top: -250px;
   overflow: hidden;
