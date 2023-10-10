@@ -485,7 +485,17 @@ html {
   /* Non-prefixed version, currently supported by Chrome, Opera and Firefox */
 }
 
+.card-container {
+  position: relative;
+  display: inline-block;
+  /* ou flex, selon tes besoins */
+}
 
+.tooltip-content {
+  top: -10%;
+  left: 50%;
+  transform: translate(-50%, 0);
+}
 
 
 /* canvas- styles */

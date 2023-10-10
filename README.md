@@ -1,5 +1,9 @@
 # new_site epic/POR-1
 
+https://logodix.com/
+https://www.vectorlogo.zone/
+https://worldvectorlogo.com/
+
 npm install react-transition-group --save
 npm install gsap
 
