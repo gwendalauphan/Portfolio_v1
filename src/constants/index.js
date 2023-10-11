@@ -115,145 +115,145 @@ const technologies = [
     name: "Ansible",
     icon: ansible,
     description: "Outil d'automatisation pour l'administration système.",
-    lien: "https://www.ansible.com/",
+    link: "https://www.ansible.com/",
   },
   {
     name: "Terraform",
     icon: terraform,
     description: "Gestionnaire d'infrastructure sous forme de code (IaC).",
-    lien: "https://www.terraform.io/",
+    link: "https://www.terraform.io/",
   },
   {
     name: "Docker",
     icon: docker,
     description:
       "Plateforme pour développer et exécuter des applications dans des conteneurs.",
-    lien: "https://www.docker.com/",
+    link: "https://www.docker.com/",
   },
   {
     name: "Openstack",
     icon: openstack,
     description: "Plateforme cloud open-source pour clouds privés et publics.",
-    lien: "https://www.openstack.org/",
+    link: "https://www.openstack.org/",
   },
   {
     name: "Haproxy",
     icon: haproxy,
     description: "Équilibreur de charge et proxy pour applications TCP/HTTP.",
-    lien: "http://www.haproxy.org/",
+    link: "http://www.haproxy.org/",
   },
   {
     name: "Nginx",
     icon: nginx,
     description: "Serveur web, reverse proxy et équilibreur de charge.",
-    lien: "https://www.nginx.com/",
+    link: "https://www.nginx.com/",
   },
   {
     name: "Python",
     icon: python,
     description:
       "Langage polyvalent, puissant pour développement web et data science.",
-    lien: "https://www.python.org/",
+    link: "https://www.python.org/",
   },
   {
     name: "Javascript",
     icon: javascript,
     description:
       "Langage de script pour ajouter de l'interactivité aux sites web.",
-    lien: "https://developer.mozilla.org/fr/docs/Web/JavaScript",
+    link: "https://developer.mozilla.org/fr/docs/Web/JavaScript",
   },
   {
     name: "ReactJs",
     icon: reactjs,
     description:
       "Bibliothèque JavaScript pour interfaces utilisateur dynamiques.",
-    lien: "https://reactjs.org/",
+    link: "https://reactjs.org/",
   },
   {
     name: "ThreeJs",
     icon: threejs,
     description:
       "Bibliothèque JavaScript pour graphiques 3D dans un navigateur web.",
-    lien: "https://threejs.org/",
+    link: "https://threejs.org/",
   },
   {
     name: "CSS",
     icon: css,
     description:
       "Langage de feuille de style pour contrôler la présentation des documents.",
-    lien: "https://www.w3.org/Style/CSS/",
+    link: "https://www.w3.org/Style/CSS/",
   },
   {
     name: "SQLite",
     icon: sqlite,
     description: "Base de données relationnelle légère et autonome.",
-    lien: "https://www.sqlite.org/",
+    link: "https://www.sqlite.org/",
   },
   {
     name: "Spark",
     icon: spark,
     description: "Framework de traitement rapide pour le big data.",
-    lien: "https://spark.apache.org/",
+    link: "https://spark.apache.org/",
   },
   {
     name: "Hadoop HDFS",
     icon: hadoophdfs,
     description:
       "Système de fichiers distribué pour stocker de grandes quantités de données.",
-    lien: "https://hadoop.apache.org/",
+    link: "https://hadoop.apache.org/",
   },
   {
     name: "Redis",
     icon: redis,
     description:
       "Base de données en mémoire pour stockage de structures de données.",
-    lien: "https://redis.io/",
+    link: "https://redis.io/",
   },
   {
     name: "Cassandra",
     icon: cassandra,
     description:
       "Base de données NoSQL distribuée pour gestion de grandes quantités de données.",
-    lien: "https://cassandra.apache.org/",
+    link: "https://cassandra.apache.org/",
   },
   {
     name: "MongoDB",
     icon: mongodb,
     description: "Base de données NoSQL orientée documents.",
-    lien: "https://www.mongodb.com/",
+    link: "https://www.mongodb.com/",
   },
   {
     name: "Scala",
     icon: scala,
     description:
       "Langage de programmation multi-paradigme, pour systèmes et applications modernes.",
-    lien: "https://www.scala-lang.org/",
+    link: "https://www.scala-lang.org/",
   },
   {
     name: "Pandas",
     icon: pandas,
     description:
       "Bibliothèque Python pour structures de données pour analyse des données.",
-    lien: "https://pandas.pydata.org/",
+    link: "https://pandas.pydata.org/",
   },
   {
     name: "Numpy",
     icon: numpy,
     description:
       "Bibliothèque Python pour tableaux multidimensionnels et fonctions mathématiques.",
-    lien: "https://numpy.org/",
+    link: "https://numpy.org/",
   },
   {
     name: "Matplotlib",
     icon: matplotlib,
     description: "Bibliothèque Python pour création de visualisations.",
-    lien: "https://matplotlib.org/",
+    link: "https://matplotlib.org/",
   },
   {
     name: "TensorFlow",
     icon: tensorflow,
     description: "Plateforme open-source pour le machine learning.",
-    lien: "https://www.tensorflow.org/",
+    link: "https://www.tensorflow.org/",
   },
 ];
 
@@ -262,82 +262,82 @@ const tools = [
     name: "GitLab CI",
     icon: gitlabci,
     description: "Intégration et déploiement continus intégrés à GitLab.",
-    lien: "https://docs.gitlab.com/ee/ci/",
+    link: "https://docs.gitlab.com/ee/ci/",
   },
   {
     name: "Jenkins",
     icon: jenkins,
     description: "Outil d'intégration continue et de livraison continue.",
-    lien: "https://www.jenkins.io/",
+    link: "https://www.jenkins.io/",
   },
   {
     name: "Git",
     icon: git,
     description:
       "Système de contrôle de version pour suivre les changements de code.",
-    lien: "https://git-scm.com/",
+    link: "https://git-scm.com/",
   },
   {
     name: "SonarQube",
     icon: sonarqube,
     description: "Analyse de code pour la qualité et la sécurité.",
-    lien: "https://www.sonarqube.org/",
+    link: "https://www.sonarqube.org/",
   },
   {
     name: "Nexus",
     icon: nexus,
     description: "Gestionnaire de dépôts pour artefacts binaires et builds.",
-    lien: "https://www.sonatype.com/nexus/repository-oss",
+    link: "https://www.sonatype.com/nexus/repository-oss",
   },
   {
     name: "VPS",
     icon: vps,
     description: "Serveur virtuel utilisé comme serveur dédié.",
-    lien: "https://en.wikipedia.org/wiki/Virtual_private_server",
+    link: "https://en.wikipedia.org/wiki/Virtual_private_server",
   },
   {
     name: "SSH",
     icon: ssh,
     description: "Protocole sécurisé pour les services de réseau.",
-    lien: "https://www.openssh.com/",
+    link: "https://www.openssh.com/",
   },
   {
     name: "Jira",
     icon: jira,
     description: "Suivi de bugs et gestion de projet agile de Atlassian.",
-    lien: "https://www.atlassian.com/software/jira",
+    link: "https://www.atlassian.com/software/jira",
   },
   {
     name: "Confluence",
     icon: confluence,
     description: "Collaboration d'équipe pour documentation et partage.",
-    lien: "https://www.atlassian.com/software/confluence",
+    link: "https://www.atlassian.com/software/confluence",
   },
   {
     name: "Trello",
     icon: trello,
     description: "Gestion de projet basé sur des cartes pour organiser tâches.",
-    lien: "https://trello.com/",
+    link: "https://trello.com/",
   },
   {
     name: "Whimsical",
     icon: whimsical,
     description:
       "Visualisation pour diagrammes, wireframes et flux de travail.",
-    lien: "https://whimsical.com/",
+    link: "https://whimsical.com/",
   },
   {
     name: "Slack",
     icon: slack,
     description:
       "Communication d'équipe basée sur des chaînes et conversations.",
-    lien: "https://slack.com/",
+    link: "https://slack.com/",
   },
   {
     name: "Microsoft Teams",
     icon: microsoftteams,
     description: "Collaboration avec chat, réunions vidéo et stockage.",
-    lien: "https://www.microsoft.com/en-us/microsoft-teams/",
+    link: "https://www.microsoft.com/en-us/microsoft-teams/",
   },
 ];
 

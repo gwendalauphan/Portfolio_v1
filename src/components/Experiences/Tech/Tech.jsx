@@ -5,64 +5,57 @@ import React, { useState, useEffect, useRef } from "react";
 
 // Card.jsx
 
-const Card = ({ icon, name, description, link }) => {
+const Card = ({ onHoverChange, icon, name, description, link }) => {
   const [isHovered, setIsHovered] = useState(false);
-  const [position, setPosition] = useState({ top: 0, left: 0 });
   const hoverTimeoutRef = useRef(null);
-  const cardRef = useRef(null); // Référence pour l'élément de carte
+  const cardRef = useRef(null); // 1. Ajoute cette référence
 
-  const handleMouseEnter = (e) => {
-    const rect = cardRef.current.getBoundingClientRect();
-    setPosition({ top: rect.top, left: rect.left + rect.width / 2 });
+  const handleMouseEnter = () => {
+    const rect = cardRef.current.getBoundingClientRect(); // 2. Capture la position et les dimensions
 
     hoverTimeoutRef.current = setTimeout(() => {
       setIsHovered(true);
+      if (onHoverChange) {
+        onHoverChange({
+          isHovered: true,
+          name: name,
+          description: description,
+          link: link,
+          top: rect.top,
+          left: rect.left,
+          width: rect.width,
+          height: rect.height,
+        });
+      }
     }, 500); // Set timeout of 1 second
   };
 
   const handleMouseLeave = () => {
-    clearTimeout(hoverTimeoutRef.current);
+    clearTimeout(hoverTimeoutRef.current); // Clear the timeout if mouse leaves before 1 second
     setIsHovered(false);
   };
 
   useEffect(() => {
-    return () => {
-      clearTimeout(hoverTimeoutRef.current);
-    };
-  }, []);
+    if (onHoverChange && !isHovered) {
+      onHoverChange({
+        isHovered: false,
+      });
+    }
+  }, [isHovered]);
 
   return (
     <div
-      ref={cardRef}
-      className="w-20 h-20 image_wrapper relative"
+      className="p-1 w-20 h-20 image_wrapper relative"
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
+      ref={cardRef}
     >
       <img src={icon} alt="" className="w-full h-full" />
-      {isHovered && (
-        <div
-          className="fixed bg-white text-black p-2"
-          style={{
-            top: `${position.top}px`,
-            left: `${position.left}px`,
-            transform: "translate(-50%, -100%)",
-            zIndex: 1000,
-          }}
-        >
-          <div className="text-center font-bold">{name}</div>
-          {description}
-          <div className="text-center">
-            <a href={link} target="_blank" rel="noopener noreferrer">
-              Learn More
-            </a>
-          </div>
-        </div>
-      )}
     </div>
   );
 };
 
-const Tech = () => {
+const Tech = ({ onCardHoverChange }) => {
   return (
     <div
       className="w-full flex justify-center mt-20 mx-auto"
@@ -73,6 +66,7 @@ const Tech = () => {
           <MarqueeCards direction="left">
             {technologies.map((technology) => (
               <Card
+                onHoverChange={onCardHoverChange}
                 icon={technology.icon}
                 name={technology.name}
                 description={technology.description}
@@ -86,6 +80,7 @@ const Tech = () => {
           <MarqueeCards direction="right">
             {tools.map((tool) => (
               <Card
+                onHoverChange={onCardHoverChange}
                 icon={tool.icon}
                 name={tool.name}
                 description={tool.description}
