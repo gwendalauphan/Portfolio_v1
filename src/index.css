@@ -497,6 +497,45 @@ html {
   transform: translate(-50%, 0);
 }
 
+.indication-container {
+  position: absolute;
+  top: 10%;/* centré verticalement */
+  left: 100%;/* à droite du bouton bascule */
+  transform: translateY(-50%);/* ajustement pour un centrage parfait */
+  background-color: rgba(0, 0, 0, 0.8);
+  min-width: 100px;
+  padding: 10px;
+  border-radius: 5px;
+  z-index: 1000;
+  margin-left: 10px;/* espace entre l'indication et le bouton bascule */
+  animation: bounce 2s infinite;
+}
+
+@keyframes bounce {
+
+  0%,
+  20%,
+  50%,
+  80%,
+  100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-10px);
+  }
+  60% {
+    transform: translateY(-5px);
+  }
+}
+
+.indication-container button {
+  background-color: transparent;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: white;
+  margin-left: 10px;
+}
 
 /* canvas- styles */
 .canvas-loader {

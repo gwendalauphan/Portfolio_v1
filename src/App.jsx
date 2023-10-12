@@ -9,6 +9,7 @@ import { ToggleProvider } from "./components/Context/ToggleContext";
 import Navbar from "./components/Navigation/Navbar/Navbar";
 import { StarsCanvas, EarthCanvas } from "./components/canvas";
 import ToggleSwitch from "./components/Switch/Switch2";
+import Indication from "./components/Switch/Indication";
 import ProgressBar from "./components/Navigation/Lateralbar/Lateralbar";
 import Sidebar from "./components/Contact/Social/Sidebar";
 
@@ -30,11 +31,14 @@ function NoMatch() {
 
 function App() {
   const [isEnabled, setIsEnabled] = useState(false);
+  const [showIndication, setShowIndication] = useState(true);
 
   const handleToggleChange = (value) => {
     setIsEnabled(value);
+    if (value) {
+      setShowIndication(false);
+    }
   };
-
   const [scrollPercentage, setScrollPercentage] = useState(0);
 
   const [scrolled, setScrolled] = useState(false);
@@ -67,12 +71,15 @@ function App() {
               }}
               className={` ${scrolled ? "bg-primary" : "bg-transparent"}`}
             >
-              <div className="flex bg-opacity-40 bg-black rounded-[25px] max-w-5xl mx-auto justify-center lg:text-base sm:text-sm xs:text-xs ">
+              <div className="relative flex bg-opacity-40 bg-black rounded-[25px] max-w-5xl mx-auto justify-center lg:text-base sm:text-sm xs:text-xs ">
                 <Navbar />
                 <ToggleSwitch
                   isEnabled={isEnabled}
                   onToggleChange={handleToggleChange}
                 />
+                {showIndication && (
+                  <Indication onClose={() => setShowIndication(false)} />
+                )}
               </div>
             </div>
 
