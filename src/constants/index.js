@@ -43,8 +43,6 @@ import {
 
   //
   avatar,
-  carrent,
-  carrentVideo,
   //For Skills (About Page)
   code,
   agile,
@@ -54,6 +52,29 @@ import {
   //For company logos (Work Page)
   dgfip,
   mcdonalds,
+
+  //For project images (Project Page)
+  ArboScript,
+  AutomatedCIInfrastructure,
+  CaverneAuxJeux,
+  CICDAutomationToolkit,
+  CompressiveSensing,
+  FoucaultsPendulumSim,
+  GoogleDriveProjectAutomation,
+  LSystemsVisualizer,
+  MultiMode2048,
+  ParkingGame,
+  Portfolio3D,
+  RandomForestOptimization,
+  RobotTrading,
+  SparkHDFSLibraries,
+  SportsAssociationWeb,
+  SubmarineSimulation,
+  TraverseStrategyGame,
+  Velux,
+
+  //For project videos (Project Page)
+  CaverneAuxJeuxmp4
 } from "../assets";
 
 const memoji = {
@@ -61,26 +82,11 @@ const memoji = {
 };
 
 const navLinks = [
-  {
-    id: "user",
-    title: "About",
-  },
-  {
-    id: "briefcase",
-    title: "Work",
-  },
-  {
-    id: "cpu",
-    title: "Projects",
-  },
-  {
-    id: "phone",
-    title: "Contact",
-  },
-  {
-    id: "book-open",
-    title: "Future",
-  },
+  { id: "user", title: "About", path: "/about" },
+  { id: "briefcase", title: "Work", path: "/work" },
+  { id: "cpu", title: "Projects", path: "/projects" },
+  { id: "phone", title: "Contact", path: "/contact" },
+  { id: "book-open", title: "More", path: "/more" },
 ];
 
 const services = [
@@ -111,145 +117,145 @@ const services = [
 ];
 
 const technologies = [
-  {
+  {//Ansible
     name: "Ansible",
     icon: ansible,
     description: "Outil d'automatisation pour l'administration système.",
     link: "https://www.ansible.com/",
   },
-  {
+  {//Terraform
     name: "Terraform",
     icon: terraform,
     description: "Gestionnaire d'infrastructure sous forme de code (IaC).",
     link: "https://www.terraform.io/",
   },
-  {
+  {//Docker
     name: "Docker",
     icon: docker,
     description:
       "Plateforme pour développer et exécuter des applications dans des conteneurs.",
     link: "https://www.docker.com/",
   },
-  {
+  {//Openstack
     name: "Openstack",
     icon: openstack,
     description: "Plateforme cloud open-source pour clouds privés et publics.",
     link: "https://www.openstack.org/",
   },
-  {
+  {//Haproxy
     name: "Haproxy",
     icon: haproxy,
     description: "Équilibreur de charge et proxy pour applications TCP/HTTP.",
     link: "http://www.haproxy.org/",
   },
-  {
+  {//Nginx
     name: "Nginx",
     icon: nginx,
     description: "Serveur web, reverse proxy et équilibreur de charge.",
     link: "https://www.nginx.com/",
   },
-  {
+  {//Python
     name: "Python",
     icon: python,
     description:
       "Langage polyvalent, puissant pour développement web et data science.",
     link: "https://www.python.org/",
   },
-  {
+  {//Javascript
     name: "Javascript",
     icon: javascript,
     description:
       "Langage de script pour ajouter de l'interactivité aux sites web.",
     link: "https://developer.mozilla.org/fr/docs/Web/JavaScript",
   },
-  {
+  {//ReactJs
     name: "ReactJs",
     icon: reactjs,
     description:
       "Bibliothèque JavaScript pour interfaces utilisateur dynamiques.",
     link: "https://reactjs.org/",
   },
-  {
+  {//ThreeJs
     name: "ThreeJs",
     icon: threejs,
     description:
       "Bibliothèque JavaScript pour graphiques 3D dans un navigateur web.",
     link: "https://threejs.org/",
   },
-  {
+  {//CSS
     name: "CSS",
     icon: css,
     description:
       "Langage de feuille de style pour contrôler la présentation des documents.",
     link: "https://www.w3.org/Style/CSS/",
   },
-  {
+  {//SQLite
     name: "SQLite",
     icon: sqlite,
     description: "Base de données relationnelle légère et autonome.",
     link: "https://www.sqlite.org/",
   },
-  {
+  {//Spark
     name: "Spark",
     icon: spark,
     description: "Framework de traitement rapide pour le big data.",
     link: "https://spark.apache.org/",
   },
-  {
+  {//Hadoop HDFS
     name: "Hadoop HDFS",
     icon: hadoophdfs,
     description:
       "Système de fichiers distribué pour stocker de grandes quantités de données.",
     link: "https://hadoop.apache.org/",
   },
-  {
+  {//Redis
     name: "Redis",
     icon: redis,
     description:
       "Base de données en mémoire pour stockage de structures de données.",
     link: "https://redis.io/",
   },
-  {
+  {//Cassandra
     name: "Cassandra",
     icon: cassandra,
     description:
       "Base de données NoSQL distribuée pour gestion de grandes quantités de données.",
     link: "https://cassandra.apache.org/",
   },
-  {
+  {//MongoDB
     name: "MongoDB",
     icon: mongodb,
     description: "Base de données NoSQL orientée documents.",
     link: "https://www.mongodb.com/",
   },
-  {
+  {//Javascript
     name: "Scala",
     icon: scala,
     description:
       "Langage de programmation multi-paradigme, pour systèmes et applications modernes.",
     link: "https://www.scala-lang.org/",
   },
-  {
+  {//Pandas
     name: "Pandas",
     icon: pandas,
     description:
       "Bibliothèque Python pour structures de données pour analyse des données.",
     link: "https://pandas.pydata.org/",
   },
-  {
+  {//Numpy
     name: "Numpy",
     icon: numpy,
     description:
       "Bibliothèque Python pour tableaux multidimensionnels et fonctions mathématiques.",
     link: "https://numpy.org/",
   },
-  {
+  {//Matplotlib
     name: "Matplotlib",
     icon: matplotlib,
     description: "Bibliothèque Python pour création de visualisations.",
     link: "https://matplotlib.org/",
   },
-  {
+  {//TensorFlow
     name: "TensorFlow",
     icon: tensorflow,
     description: "Plateforme open-source pour le machine learning.",
@@ -258,82 +264,82 @@ const technologies = [
 ];
 
 const tools = [
-  {
+  {//GitLab CI
     name: "GitLab CI",
     icon: gitlabci,
     description: "Intégration et déploiement continus intégrés à GitLab.",
     link: "https://docs.gitlab.com/ee/ci/",
   },
-  {
+  {//Jenkins
     name: "Jenkins",
     icon: jenkins,
     description: "Outil d'intégration continue et de livraison continue.",
     link: "https://www.jenkins.io/",
   },
-  {
+  {//Git
     name: "Git",
     icon: git,
     description:
       "Système de contrôle de version pour suivre les changements de code.",
     link: "https://git-scm.com/",
   },
-  {
+  {//SonarQube
     name: "SonarQube",
     icon: sonarqube,
     description: "Analyse de code pour la qualité et la sécurité.",
     link: "https://www.sonarqube.org/",
   },
-  {
+  {//Nexus
     name: "Nexus",
     icon: nexus,
     description: "Gestionnaire de dépôts pour artefacts binaires et builds.",
     link: "https://www.sonatype.com/nexus/repository-oss",
   },
-  {
+  {//VPS
     name: "VPS",
     icon: vps,
     description: "Serveur virtuel utilisé comme serveur dédié.",
     link: "https://en.wikipedia.org/wiki/Virtual_private_server",
   },
-  {
+  {//SSH
     name: "SSH",
     icon: ssh,
     description: "Protocole sécurisé pour les services de réseau.",
     link: "https://www.openssh.com/",
   },
-  {
+  {//Jira
     name: "Jira",
     icon: jira,
     description: "Suivi de bugs et gestion de projet agile de Atlassian.",
     link: "https://www.atlassian.com/software/jira",
   },
-  {
+  {//Confluence
     name: "Confluence",
     icon: confluence,
     description: "Collaboration d'équipe pour documentation et partage.",
     link: "https://www.atlassian.com/software/confluence",
   },
-  {
+  {//Trello
     name: "Trello",
     icon: trello,
     description: "Gestion de projet basé sur des cartes pour organiser tâches.",
     link: "https://trello.com/",
   },
-  {
+  {//Whimsical
     name: "Whimsical",
     icon: whimsical,
     description:
       "Visualisation pour diagrammes, wireframes et flux de travail.",
     link: "https://whimsical.com/",
   },
-  {
+  {//Slack
     name: "Slack",
     icon: slack,
     description:
       "Communication d'équipe basée sur des chaînes et conversations.",
     link: "https://slack.com/",
   },
-  {
+  {//Microsoft Teams
     name: "Microsoft Teams",
     icon: microsoftteams,
     description: "Collaboration avec chat, réunions vidéo et stockage.",
@@ -342,7 +348,7 @@ const tools = [
 ];
 
 const experiences = [
-  {
+  {//Employé Polyvalent
     title: "Employé Polyvalent",
     company_name: "McDonald's",
     icon: mcdonalds,
@@ -356,7 +362,7 @@ const experiences = [
       "Valorisation de chaque tâche, de la commande au nettoyage.",
     ],
   },
-  {
+  {//Apprenti Data Engineer
     title: "Apprenti Data Engineer",
     company_name: "Dgfip",
     icon: dgfip,
@@ -371,7 +377,7 @@ const experiences = [
       "Rédaction de documentation technique : procédures et tutoriels",
     ],
   },
-  {
+  {//Apprenti DevOps Engineer
     title: "Apprenti DevOps Engineer",
     company_name: "Dgfip",
     icon: dgfip,
@@ -385,7 +391,7 @@ const experiences = [
       "Perfectionnement des compétences avec Git.",
     ],
   },
-  {
+  {//Apprenti Infrastructure Engineer
     title: "Apprenti Infrastructure Engineer",
     company_name: "Dgfip",
     icon: dgfip,
@@ -401,161 +407,497 @@ const experiences = [
   },
 ];
 
+
 const projects = [
-  {
-    name: "Car Rent",
-    description:
-      "Web-based platform that allows users to search, book, and manage.",
+  {//Sparse Coding & Signal
+    idname: "CompressiveSensing",
+    name: "Sparse Coding & Signal",
+    shortDescription: "Use of Compressive Sensing to optimize the representation of signals.",
+    longDescription: "This project focuses on the concept of sparse coding in connection with Compressive Sensing. I used techniques that take advantage of the sparsity of signals to reduce the amount of data required for a faithful representation of the signal. The use of Python allowed for smooth implementation, especially with the assistance of libraries like Numpy and Matplotlib.",
     tags: {
       technos: [
-        { name: "React", color: "#61DAFB" },
-        { name: "Node.js", color: "#8CC84B" },
-        { name: "Express", color: "#000000" },
+        { name: "Python", color: "#3776AB" },
+        { name: "Numpy", color: "#9C0F5F" },
+        { name: "Matplotlib", color: "#D44000" },
+        { name: "K-SVD", color: "#DA4619" },
+        { name: "Matching Pursuit", color: "#0A74DA" },
       ],
-      thèmes: [
-        { name: "Transportation", color: "#F46036" },
-        { name: "Car Rental", color: "#3DCCC7" },
-        { name: "Web Platform", color: "#FFD700" },
+      themes: [
+        { name: "Coding", color: "#1F77B4" },
+        { name: "Signal Processing", color: "#17BECF" },
+      ],
+      frame: [
+        { name: "School", color: "#8C564B" },
+        { name: "Project", color: "#9467BD" },
       ],
     },
     media: {
-      image: carrent,
-      video: carrentVideo,
+      image: CompressiveSensing,
+      video: "",
     },
-    source_code_link: "https://github.com/",
+    sourceCodeLink: "https://github.com/",
   },
-  {
-    name: "Car Rent",
-    description:
-      "Web-based platform that allows users to search, book, and manage.",
+  {//Velux: CLI Configurations
+    idname: "Velux",
+    name: "Velux: CLI Configurations",
+    shortDescription: "CLI tool for structuring YAML configurations for the Cloud.",
+    longDescription: "Velux is a command-line tool designed to create and structure YAML file configurations. While it cannot directly create instances, it prepares files intended to be used for Cloud infrastructure deployments. The tool plays a crucial role in setting up projects associated with Openstack and Terraform.",
     tags: {
       technos: [
-        { name: "React", color: "#61DAFB" },
-        { name: "Node.js", color: "#8CC84B" },
-        { name: "Express", color: "#000000" },
+        { name: "Bash", color: "#4EAA25" },
+        { name: "Python", color: "#3776AB" },
+        { name: "API Openstack", color: "#ED8B00" },
+        { name: "Terraform", color: "#623CE4" },
+        { name: "YAML", color: "#A8DADC" },
       ],
-      thèmes: [
-        { name: "Transportation", color: "#F46036" },
-        { name: "Car Rental", color: "#3DCCC7" },
-        { name: "Web Platform", color: "#FFD700" },
+      themes: [
+        { name: "Configuration", color: "#E85D04" },
+        { name: "CLI", color: "#FFC085" },
+      ],
+      frame: [
+        { name: "Pro", color: "#FF5733" },
+        { name: "Project", color: "#9467BD" },
       ],
     },
     media: {
-      image: carrent,
-      video: carrentVideo,
+      image: Velux,
+      video: "",
     },
-    source_code_link: "https://github.com/",
+    sourceCodeLink: "https://github.com/",
   },
-  {
-    name: "Car Rent",
-    description:
-      "Web-based platform that allows users to search, book, and manage.",
+  {//Game Cave
+    idname: "CaverneAuxJeux",
+    name: "Game Cave",
+    shortDescription: "8 mini-games with point tracking and statistical visualization.",
+    longDescription: "The 'Game Cave' is an interactive platform that brings together eight mini-games. Each game awards points to players and allows for online account registration to track progress. In addition to the games, the platform has a data visualization section providing detailed statistics on player performance.",
     tags: {
       technos: [
-        { name: "React", color: "#61DAFB" },
-        { name: "Node.js", color: "#8CC84B" },
-        { name: "Express", color: "#000000" },
+        { name: "Python", color: "#3776AB" },
+        { name: "Tkinter", color: "#FF6347" },
+        { name: "Numpy", color: "#9C0F5F" },
+        { name: "Matplotlib", color: "#D44000" },
+        { name: "MySQL", color: "#4479A1" },
       ],
-      thèmes: [
-        { name: "Transportation", color: "#F46036" },
-        { name: "Car Rental", color: "#3DCCC7" },
-        { name: "Web Platform", color: "#FFD700" },
+      themes: [
+        { name: "Games", color: "#1F77B4" },
+        { name: "Visualization", color: "#17BECF" },
+        { name: "Statistics", color: "#9467BD" },
+      ],
+      frame: [
+        { name: "Personal", color: "#8C564B" },
+        { name: "Games", color: "#9467BD" },
       ],
     },
     media: {
-      image: carrent,
-      video: carrentVideo,
+      image: CaverneAuxJeux,
+      video: CaverneAuxJeuxmp4,
     },
-    source_code_link: "https://github.com/",
+    sourceCodeLink: "https://github.com/",
   },
-  {
-    name: "Car Rent",
-    description:
-      "Web-based platform that allows users to search, book, and manage.",
+  {//Robot Trading Platform
+    idname: "RobotTrading",
+    name: "Robot Trading Platform",
+    shortDescription: "Automated trading platform with real-time updates.",
+    longDescription: "The 'Robot Trading' project is an innovative platform designed for trading primarily managed by bots. It is structured around several services: one for updating data in real time, another dedicated to processing this data, and a final one for the automatic execution of trading orders.",
     tags: {
       technos: [
-        { name: "React", color: "#61DAFB" },
-        { name: "Node.js", color: "#8CC84B" },
-        { name: "Express", color: "#000000" },
+        { name: "Python", color: "#3776AB" },
+        { name: "Cassandra", color: "#1287A1" },
+        { name: "Docker", color: "#0db7ed" },
+        { name: "Redis", color: "#D92B21" },
+        { name: "Kafka", color: "#231F20" },
+        { name: "API Rest", color: "#0298c3" }
       ],
-      thèmes: [
-        { name: "Transportation", color: "#F46036" },
-        { name: "Car Rental", color: "#3DCCC7" },
-        { name: "Web Platform", color: "#FFD700" },
+      themes: [
+        { name: "Data Science", color: "#1F77B4" },
+        { name: "Automated Trading", color: "#17BECF" },
+      ],
+      frame: [
+        { name: "Personal", color: "#8C564B" },
+        { name: "Project", color: "#9467BD" },
       ],
     },
     media: {
-      image: carrent,
-      video: carrentVideo,
+      image: RobotTrading,
+      video: "",
     },
-    source_code_link: "https://github.com/",
+    sourceCodeLink: "https://github.com/",
   },
-  {
-    name: "Car Rent",
-    description:
-      "Web-based platform that allows users to search, book, and manage.",
+  {//Interactive 3D Portfolio
+    nameid: "Portfolio3D",
+    name: "Interactive 3D Portfolio",
+    shortDescription: "Interactive 3D portfolio with automated deployment.",
+    longDescription: "My first portfolio website offers a unique immersion with 3D animations and interactions. It is deployed in a Docker container, forming an integral part of a CI-CD pipeline. The Ansible tool facilitates its automated deployment, thus ensuring a smooth and efficient content update.",
     tags: {
       technos: [
-        { name: "React", color: "#61DAFB" },
-        { name: "Node.js", color: "#8CC84B" },
-        { name: "Express", color: "#000000" },
+        { name: "ReactJs", color: "#61DAFB" },
+        { name: "React3D", color: "#61DAFB" },
+        { name: "CSS", color: "#563D7C" },
+        { name: "Vite", color: "#646CFF" },
+        { name: "Docker", color: "#0db7ed" },
+        { name: "Gitlab CI", color: "#FC6D27" },
+        { name: "Ansible", color: "#EE0000" },
       ],
-      thèmes: [
-        { name: "Transportation", color: "#F46036" },
-        { name: "Car Rental", color: "#3DCCC7" },
-        { name: "Web Platform", color: "#FFD700" },
+      themes: [
+        { name: "3D Interactive", color: "#1F77B4" },
+      ],
+      frame: [
+        { name: "Personal", color: "#8C564B" },
+        { name: "Project", color: "#9467BD" },
       ],
     },
     media: {
-      image: carrent,
-      video: carrentVideo,
+      image: Portfolio3D,
+      video: "",
     },
-    source_code_link: "https://github.com/",
+    sourceCodeLink: "https://github.com/",
   },
-  {
-    name: "Car Rent",
-    description:
-      "Web-based platform that allows users to search, book, and manage.",
+  {//Random Forest Optimization
+    nameid: "RandomForestOptimization",
+    name: "Random Forest Optimization",
+    shortDescription: "Hyperparameter optimization for Random Forest in R.",
+    longDescription: "In this project, I delved deep into the combinations of hyperparameters for the Random Forest model. The main objective was to identify the best combinations, analyze their performance, and deduce an optimization strategy for future applications.",
     tags: {
       technos: [
-        { name: "React", color: "#61DAFB" },
-        { name: "Node.js", color: "#8CC84B" },
-        { name: "Express", color: "#000000" },
+        { name: "R", color: "#3776AB" },
+        { name: "Rstudio", color: "#9C0F5F" },
+        { name: "Random Forest", color: "#D44000" },
+        { name: "Hyperparameter Tuning", color: "#DA4619" },
       ],
-      thèmes: [
-        { name: "Transportation", color: "#F46036" },
-        { name: "Car Rental", color: "#3DCCC7" },
-        { name: "Web Platform", color: "#FFD700" },
+      themes: [
+        { name: "Optimization", color: "#1F77B4" },
+      ],
+      frame: [
+        { name: "School", color: "#8C564B" },
+        { name: "Personal", color: "#9467BD" },
+        { name: "Project", color: "#9467BD" }, // Assuming you want the same color as "Personal"
       ],
     },
     media: {
-      image: carrent,
-      video: carrentVideo,
+      image: RandomForestOptimization, // Add image link if you have one
+      video: "", // Add video link if you have one
     },
-    source_code_link: "https://github.com/",
+    sourceCodeLink: "https://github.com/", // Update this with the correct link to your source code
   },
-  {
-    name: "Car Rent",
-    description:
-      "Web-based platform that allows users to search, book, and manage.",
+  {//Submarine Simulation
+  nameid: "SubmarineSimulation",
+  name: "Submarine Simulation",
+  shortDescription: "Interactive submarine simulation with graphical interfaces.",
+  longDescription: "This project is an interactive submarine simulation using multiple graphical interfaces. Users can pilot the submarine, visualize it on 2D and 3D maps, and monitor its gyroscope. All of this is presented in real-time through the Tkinter interface.",
+  tags: {
+    technos: [
+      { name: "Python", color: "#3776AB" },
+      { name: "Tkinter", color: "#0174DF" },
+      { name: "Simulation", color: "#FFC300" },
+      { name: "Matplotlib", color: "#D44000" },
+      { name: "Numpy", color: "#9C0F5F" },
+      { name: "Submarine", color: "#1A2B34" },
+    ],
+    themes: [
+      { name: "3D", color: "#1F77B4" },
+      { name: "2D", color: "#8CA0B4" },
+      { name: "Gyroscope", color: "#17BECF" },
+    ],
+    frame: [
+      { name: "Personal", color: "#8C564B" },
+      { name: "Project", color: "#9467BD" },
+    ],
+  },
+  media: {
+    image: SubmarineSimulation,
+    video: "",
+  },
+  sourceCodeLink: "https://github.com/",
+  },
+  {//Traverse Strategy Game
+  nameid: "TraverseStrategyGame",
+  name: "Traverse Strategy Game",
+  shortDescription: "Strategic game with pawn crossing and competitive bot.",
+  longDescription: "Traverse is a strategic game where the objective is to get your pawns to the other end of the board. With four distinct types of pawns, an engaging graphical interface, and a bot to face off against, players can save their games to revisit them.",
+  tags: {
+    technos: [
+      { name: "C", color: "#A8B9CC" },
+      { name: "SDL2", color: "#C70D3A" },
+      { name: "Strategy", color: "#FF4500" },
+      { name: "Game", color: "#00FA9A" },
+      { name: "Graphical Interface", color: "#7FFF00" },
+      { name: "Bot", color: "#7D26CD" }
+    ],
+    themes: [
+      { name: "Coding", color: "#1F77B4" }
+    ],
+    frame: [
+      { name: "School", color: "#8C564B" },
+      { name: "Games", color: "#2E8B57" }
+    ],
+  },
+  media: {
+    image: TraverseStrategyGame,
+    video: ""
+  },
+  sourceCodeLink: "https://github.com/"
+  },
+  {//Parking Game
+    nameid: "ParkingGame",
+    name: "Parking Game",
+    shortDescription: "Interactive parking game.",
+    longDescription: "The 'Parking' game is a fun challenge where players generate a parking configuration and then try to fill it or empty it with cars.",
     tags: {
       technos: [
-        { name: "React", color: "#61DAFB" },
-        { name: "Node.js", color: "#8CC84B" },
-        { name: "Express", color: "#000000" },
+        { name: "Python", color: "#3776AB" },
+        { name: "Tkinter", color: "#FFD43B" },
       ],
-      thèmes: [
-        { name: "Transportation", color: "#F46036" },
-        { name: "Car Rental", color: "#3DCCC7" },
-        { name: "Web Platform", color: "#FFD700" },
+      themes: [],
+      frame: [
+        { name: "Personal", color: "#8C564B" },
+        { name: "Games", color: "#9467BD" },
       ],
     },
     media: {
-      image: carrent,
-      video: carrentVideo,
+      image: ParkingGame,
+      video: "",
     },
-    source_code_link: "https://github.com/",
+    sourceCodeLink: "https://github.com/",
   },
+  {//L-Systems Visualizer
+    nameid: "LSystemsVisualizer",
+    name: "L-Systems Visualizer",
+    shortDescription: "Graphic visualization of L-systems with Turtle.",
+    longDescription: "The L-Systems Turtle project is dedicated to the creation and visualization of drawings based on L-systems using the Turtle graphics library. These systems model the growth and development of plants or bacteria, allowing a fascinating visual representation of these biological processes.",
+    tags: {
+      technos: [
+        { name: "Python", color: "#3776AB" },
+        { name: "Turtle", color: "#1F77B4" },
+        { name: "L-Systems", color: "#D44000" },
+      ],
+      themes: [
+        { name: "Modeling", color: "#9C0F5F" },
+        { name: "Growth", color: "#17BECF" },
+        { name: "Biology", color: "#8C564B" },
+      ],
+      frame: [
+        { name: "School", color: "#8C564B" },
+        { name: "Project", color: "#9467BD" },
+      ],
+    },
+    media: {
+      image: LSystemsVisualizer,
+      video: "",
+    },
+    sourceCodeLink: "https://github.com/",
+  },
+  {//2048 MultiMode
+    nameid: "MultiMode2048",
+    name: "2048 MultiMode",
+    shortDescription: "2048 with multiple modes and 8x8 grid.",
+    longDescription: "An enriched version of the famous 2048 game, this implementation offers several game modes: solo, time-trial, duel with another player, or against the computer. In addition to the classic grid, an 8x8 variant is also available for a renewed gaming experience.",
+    tags: {
+      technos: [
+        { name: "C", color: "#A8B9CC" },
+        { name: "SDL2", color: "#FF0000" },
+        { name: "Makefile", color: "#427819" },
+        { name: "Game", color: "#333333" },
+        { name: "2048", color: "#00A4E4" },
+      ],
+      themes: [
+        { name: "Multiplayer", color: "#1F77B4" },
+      ],
+      frame: [
+        { name: "School", color: "#8C564B" },
+        { name: "Games", color: "#9467BD" },
+      ],
+    },
+    media: {
+      image: MultiMode2048,
+      video: "",
+    },
+    sourceCodeLink: "https://github.com/",
+  },
+  {//Foucault's Pendulum Sim
+    nameid: "FoucaultsPendulumSim",
+    name: "Foucault's Pendulum Sim",
+    shortDescription: "Visual simulation of Foucault's pendulum.",
+    longDescription: "This project replicates the Foucault's pendulum, an experiment designed to demonstrate the rotation of the Earth with respect to a Galilean frame of reference. The aim was to calculate and visualize the pendulum's motion using a diagram, facilitating the understanding of this significant phenomenon.",
+    tags: {
+      technos: [
+        { name: "Python", color: "#3776AB" },
+        { name: "Matplotlib", color: "#D44000" }
+      ],
+      themes: [
+        { name: "Simulation", color: "#1F77B4" },
+        { name: "Physics", color: "#17BECF" }
+      ],
+      frame: [
+        { name: "School", color: "#8C564B" },
+        { name: "Project", color: "#9467BD" }
+      ],
+    },
+    media: {
+      image: FoucaultsPendulumSim,
+      video: "",
+    },
+    sourceCodeLink: "https://github.com/",  // Replace this with the actual link to the project's source code
+  },
+  {//Arbo Script
+    nameid: "ArboScript",
+    name: "Arbo Script",
+    shortDescription: "Tree structure generator from YAML.",
+    longDescription: "This Bash script transforms the content of a YAML file into a folder tree on a Linux system. It automates the creation of folders and subfolders based on the YAML structure, providing an efficient way to organize data.",
+    tags: {
+      technos: [
+        { name: "Bash", color: "#4EAA25" },
+        { name: "YAML", color: "#773092" },
+        { name: "Automation", color: "#DA4619" },
+        { name: "Linux", color: "#D1BAE3" },
+      ],
+      themes: [
+        { name: "File System", color: "#1F77B4" },
+      ],
+      frame: [
+        { name: "Professional", color: "#8C564B" },
+        { name: "Project", color: "#9467BD" },
+      ],
+    },
+    media: {
+      image: ArboScript,
+      video: "",
+    },
+    sourceCodeLink: "https://github.com/",
+  },
+  {//Sports Association Web
+    nameid: "SportsAssociationWeb",
+    name: "Sports Association Web",
+    shortDescription: "Website for an association with a shop and events.",
+    longDescription: "Creation of a dedicated website for a sports association offering several essential features. The site allows members to log in using credentials, access an online store, and be informed about upcoming events.",
+    tags: {
+      technos: [
+        { name: "HTML", color: "#E34C26" },
+        { name: "PHP", color: "#777BB3" },
+        { name: "JavaScript", color: "#F7DF1E" },
+        { name: "CSS", color: "#1572B6" },
+      ],
+      themes: [
+        { name: "Web Development", color: "#4CAF50" },
+      ],
+      frame: [
+        { name: "School", color: "#8C564B" },
+        { name: "Project", color: "#9467BD" },
+      ],
+    },
+    media: {
+      image: SportsAssociationWeb,
+      video: "",
+    },
+    sourceCodeLink: "https://github.com/",
+  },
+  {//CI/CD Automation Toolkit
+    nameid: "CICDAutomationToolkit",
+    name: "CI/CD Automation Toolkit",
+    shortDescription: "Automation of CI/CD pipelines using Ansible.",
+    longDescription: "The goal of this project is to automate the setup of a CI/CD pipeline using Ansible scripts. It also includes script templates specifically designed to be used with a Gitlab CI pipeline during the development of Scala/SBT projects. The set provides a significant time savings for workflow setup.",
+    tags: {
+      technos: [
+        { name: "Ansible", color: "#FFA500" }, // This color is just a placeholder, replace it with the desired color.
+        { name: "Docker", color: "#2496ED" },
+        { name: "Bash", color: "#4EAA25" },
+        { name: "Gitlab CI", color: "#FC6D26" },
+        { name: "Scala", color: "#DE3423" },
+        { name: "SBT", color: "#FFB400" },
+      ],
+      themes: [
+        { name: "CI/CD", color: "#0A74DA" }, // This color is also a placeholder.
+      ],
+      frame: [
+        { name: "Professional", color: "#8C564B" }, // 'Pro' translated and color is a placeholder.
+        { name: "Project", color: "#9467BD" },
+      ],
+    },
+    media: {
+      image: CICDAutomationToolkit, // Add link to an image if you have one
+      video: "", // Add link to a video if you have one
+    },
+    sourceCodeLink: "https://github.com/", // Replace with the correct link to the source code
+  },
+  {//Automated CI Infrastructure
+    nameid: "AutomatedCIInfrastructure",
+    name: "Automated CI Infrastructure",
+    shortDescription: "Automation of CI infrastructure deployment with Ansible.",
+    longDescription: "This project involves deploying an infrastructure focused on continuous integration, incorporating the services of Jenkins, Sonarqube, and Nexus. Everything was designed to automate the administrative configuration processes from creation. The services are orchestrated using docker-compose and executed remotely via Ansible, ensuring smooth and automated implementation.",
+    tags: {
+        technos: [
+            { name: "Ansible", color: "#EE0000" },  // Colors are placeholders; adjust as needed
+            { name: "Terraform", color: "#5C4EE5" },
+            { name: "Docker", color: "#0DB7ED" },
+            { name: "Jenkins", color: "#D33837" },
+            { name: "Sonarqube", color: "#4E9BCD" },
+            { name: "Nexus", color: "#6C2F8F" },
+        ],
+        themes: [
+            { name: "CI/CD", color: "#2CA02C" },  // Color is a placeholder; adjust as needed
+        ],
+        frame: [
+            { name: "Pro", color: "#8C564B" },  // Colors are placeholders; adjust as needed
+            { name: "Project", color: "#9467BD" },
+        ],
+    },
+    media: {
+        image: AutomatedCIInfrastructure,  // Link to image if any
+        video: "",  // Link to video if any
+    },
+    sourceCodeLink: "https://github.com/",  // Update with the correct link
+  },
+  {//Spark HDFS Libraries
+    nameid: "SparkHDFSLibraries",
+    name: "Spark HDFS Libraries",
+    shortDescription: "Spark Scala libraries for HDFS.",
+    longDescription: "This project involves developing Spark Scala libraries specially designed to interact efficiently with the distributed file system HDFS. These tools facilitate access and manipulation of data stored in a distributed manner.",
+    tags: {
+      technos: [
+        { name: "Spark", color: "#E25A1C" },
+        { name: "Scala", color: "#DE3423" },
+        { name: "HDFS", color: "#007AAE" },
+      ],
+      themes: [
+        { name: "Big Data", color: "#4D91BF" },
+      ],
+      frame: [
+        { name: "Professional", color: "#8C564B" },
+        { name: "Project", color: "#9467BD" },
+      ],
+    },
+    media: {
+      image: SparkHDFSLibraries,
+      video: "",
+    },
+    sourceCodeLink: "https://github.com/",
+  },
+  {//Google Drive Project Automation
+    nameid: "GoogleDriveProjectAutomation",
+    name: "Google Drive Project Automation",
+    shortDescription: "Automation and framework for Google Drive projects.",
+    longDescription: "Creation of a solution automating the setup of projects on Google Drive, to facilitate their management. This tool sets a framework for project development, thus ensuring better supervision, traceability, and project monitoring.",
+    tags: {
+      technos: [
+        { name: "Google Drive", color: "#4285F4" },
+        { name: "Google App Script", color: "#0F9D58" },
+      ],
+      themes: [
+        { name: "Automation", color: "#1F77B4" },
+        { name: "Project Management", color: "#17BECF" },
+      ],
+      frame: [
+        { name: "Personal", color: "#8C564B" },
+        { name: "Project", color: "#9467BD" },
+      ],
+    },
+    media: {
+      image: GoogleDriveProjectAutomation,
+      video: "",
+    },
+    sourceCodeLink: "https://github.com/",
+  }
+
 ];
 
-export { services, technologies, tools, experiences, projects, memoji };
+
+export { services,navLinks, technologies, tools, experiences, projects, memoji };

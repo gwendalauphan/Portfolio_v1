@@ -8,7 +8,8 @@ import { github } from "../../../assets";
 const ProjectCard = ({
   index,
   name,
-  description,
+  shortDescription,
+  longDescription,
   tags,
   media,
   source_code_link,
@@ -66,7 +67,7 @@ const ProjectCard = ({
               onMouseLeave={handleMouseLeaveVideo}
               onClick={() => console.log("Show project clicked")}
             >
-              <motion.video
+            <motion.video
                 ref={videoRef}
                 preload="none"
                 src={shouldLoadVideo ? media.video : undefined}
@@ -76,7 +77,7 @@ const ProjectCard = ({
                 playsInline
                 initial={{ opacity: 0 }}
                 animate={{
-                  opacity: isHoveredImage ? 1 : 0,
+                  opacity: isHoveredImage && media.video ? 1 : 0,
                   scale: isHoveredCard ? 1.07 : 1,
                 }}
                 transition={{
@@ -84,27 +85,29 @@ const ProjectCard = ({
                   scale: { type: "spring", stiffness: 100 },
                 }}
                 className="absolute inset-0 object-cover rounded-xl "
-              />
-              <motion.img
+            />
+            <motion.img
                 src={media.image}
                 alt={name}
-                initial={{ opacity: 1, scale: 1 }} // <-- Ajout de l'échelle initiale
+                initial={{ opacity: 1, scale: 1 }} 
                 animate={{
-                  opacity: isHoveredImage ? 0 : 1,
-                  scale: isHoveredCard ? 1.07 : 1, // <-- Changement de l'échelle
+                  opacity: (isHoveredImage && media.video) ? 0 : 1,
+                  scale: isHoveredCard ? 1.07 : 1,
                 }}
                 transition={{
                   opacity: { duration: 0.5 },
-                  scale: { type: "spring", stiffness: 100 }, // <-- Transition pour l'échelle
+                  scale: { type: "spring", stiffness: 100 },
                 }}
                 className=" inset-0 object-cover rounded-xl "
-              />
+            />
 
-              <div className="absolute top-[-40px] left-1/2 transform -translate-x-1/2">
-                <h3 className="text-white font-bold text-[28px] text-shadow-card-project">
-                  {name}
-                </h3>
+
+              <div className="absolute top-[-40px] left-1/2 w-[100%] transform -translate-x-1/2 flex justify-center ">
+                  <h3 className="text-white font-bold text-[28px] leading-tight text-shadow-card-project whitespace-normal ">
+                      {name}
+                  </h3>
               </div>
+
 
               <div className="absolute left-[260px] top-[-5px] left-3/4 transform -translate-x-1/10  m-3  ">
                 <div
@@ -126,7 +129,7 @@ const ProjectCard = ({
             transition={{ duration: 0.1 }}
           >
             <div className="mt-5">
-              <p className="mt-2 text-secondary text-[14px]">{description}</p>
+              <p className="mt-2 text-secondary text-[14px]">{shortDescription}</p>
             </div>
 
             <div className="mt-3 flex flex-wrap gap-2">
@@ -140,7 +143,7 @@ const ProjectCard = ({
                   &nbsp;
                 </p>
               ))}
-              {tags.thèmes.map((tag, index) => (
+              {tags.themes.map((tag, index) => (
                 <p
                   key={`theme-${name}-${tag.name}-${index}`}
                   className={`text-[12px] text-${tag.color}`}
@@ -163,9 +166,18 @@ const ProjectCard = ({
                   opacity: isHoveredCard ? 0 : 1,
                 }}
                 transition={{ duration: 0.3 }}
-                className="absolute text-white text-[16px] "
+                className="absolute text-white text-[16px] flex"
               >
-                balblabla
+                {tags.frame.map((tag, index) => (
+                <p
+                  key={`frame-${name}-${tag.name}-${index}`}
+                  className={`text-[14px] text-${tag.color}`}
+                >
+                  {` ${tag.name}  -`} 
+                  &nbsp;
+                </p>
+              ))}
+                
               </motion.div>
               {/* Texte au survol */}
               <motion.div

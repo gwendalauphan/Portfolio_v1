@@ -45,9 +45,6 @@ import whimsical from "./tools/whimsical.svg";
 
 import avatar from "./avatar/avatar.png";
 
-import carrent from "./projects/carrent.png";
-import carrentVideo from "./projects/carrentVideo.mp4";
-
 //For skills (About Page)
 import code from "./skills/code.svg";
 import agile from "./skills/agile.svg";
@@ -57,6 +54,30 @@ import server from "./skills/server.svg";
 //For company logos (Work Page)
 import dgfip from "./company/dgfip.png";
 import mcdonalds from "./company/mcdonalds.png";
+
+//For project images (Project Page)
+import ArboScript from "./projects/ArboScript.png";
+import AutomatedCIInfrastructure from "./projects/AutomatedCIInfrastructure.png";
+import CaverneAuxJeux from "./projects/CaverneAuxJeux.png";
+import CICDAutomationToolkit from "./projects/CICDAutomationToolkit.png";
+import CompressiveSensing from "./projects/CompressiveSensing.png";
+import FoucaultsPendulumSim from "./projects/FoucaultsPendulumSim.png";
+import GoogleDriveProjectAutomation from "./projects/GoogleDriveProjectAutomation.png";
+import LSystemsVisualizer from "./projects/LSystemsVisualizer.png";
+import MultiMode2048 from "./projects/Multimode2048.png";
+import ParkingGame from "./projects/ParkingGame.png";
+import Portfolio3D from "./projects/Portfolio3D.png";
+import RandomForestOptimization from "./projects/RandomForestOptimization.png";
+import RobotTrading from "./projects/RobotTrading.png";
+import SparkHDFSLibraries from "./projects/SparkHDFSLibraries.png";
+import SportsAssociationWeb from "./projects/SportsAssociationWeb.png";
+import SubmarineSimulation from "./projects/SubmarineSimulation.png";
+import TraverseStrategyGame from "./projects/TraverseStrategyGame.png";
+import Velux from "./projects/Velux.png";
+
+//For project videos (Project Page)
+import CaverneAuxJeuxmp4 from "./projects/CaverneAuxJeux.mp4";
+
 
 export {
   logo,
@@ -104,8 +125,6 @@ export {
 
   //
   avatar,
-  carrent,
-  carrentVideo,
   //For Skills (About Page)
   code,
   agile,
@@ -115,4 +134,28 @@ export {
   //For company logos (Work Page)
   dgfip,
   mcdonalds,
+
+  //For project images (Project Page)
+  ArboScript,
+  AutomatedCIInfrastructure,
+  CaverneAuxJeux,
+  CICDAutomationToolkit,
+  CompressiveSensing,
+  FoucaultsPendulumSim,
+  GoogleDriveProjectAutomation,
+  LSystemsVisualizer,
+  MultiMode2048,
+  ParkingGame,
+  Portfolio3D,
+  RandomForestOptimization,
+  RobotTrading,
+  SparkHDFSLibraries,
+  SportsAssociationWeb,
+  SubmarineSimulation,
+  TraverseStrategyGame,
+  Velux,
+
+  //For project videos (Project Page)
+  CaverneAuxJeuxmp4
 };
+

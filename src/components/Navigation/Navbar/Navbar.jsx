@@ -6,16 +6,9 @@ import "./Navbar.scss";
 import { logo, menu, close } from "../../../assets";
 import { styles } from "../../../styles";
 import LogoSVG from "../../../assets/boussole.svg";
-//import { navLinks } from '../../../constants';
+import { navLinks } from '../../../constants';
 
-const navLinks = [
-  //{ id: 'home', title: 'Accueil', path: '/' },
-  { id: "user", title: "About", path: "/about" },
-  { id: "briefcase", title: "Work", path: "/work" },
-  { id: "cpu", title: "Projects", path: "/projects" },
-  { id: "phone", title: "Contact", path: "/contact" },
-  { id: "book-open", title: "More", path: "/more" },
-];
+
 
 function Navbar() {
   const controls = useAnimation();
