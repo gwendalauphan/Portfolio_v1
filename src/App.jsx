@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, Link, useLocation } from "react-router-dom";
 
 import { AnimatePresence } from "framer-motion";
 
@@ -19,6 +19,17 @@ import WorkPage from "./pages/WorkPage";
 import ProjectsPage from "./pages/ProjectsPage";
 import ContactPage from "./pages/ContactPage";
 import MorePage from "./pages/MorePage";
+
+function ScrollToTop() {
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'auto' });
+
+  }, [pathname]);
+
+  return null;
+}
 
 function NoMatch() {
   return (
@@ -56,12 +67,13 @@ function App() {
     window.addEventListener("scroll", handleScroll);
 
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  }, [scrolled]);
 
   return (
     <ToggleProvider value={{ isEnabled, setIsEnabled }}>
       <ProgressProvider value={{ scrollPercentage, setScrollPercentage }}>
         <Router>
+        <ScrollToTop />
           <div className="relative z-0 ">
             <div
               style={{

@@ -1,12 +1,37 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { motion } from "framer-motion";
 import Tilt from "react-parallax-tilt";
 import { fadeIn, textVariant } from "../../../utils/motion";
-
+import { useInView } from 'react-intersection-observer';
 import { github } from "../../../assets";
+
+
+const fadeInCard = (direction, type, delay, duration) => {
+  return {
+    hidden: {
+      x: direction === "left" ? 100 : direction === "right" ? -100 : 0,
+      y: direction === "up" ? 100 : direction === "down" ? -100 : 0,
+      opacity: 0,
+    },
+    show: {
+      x: 0,
+      y: 0,
+      opacity: 1,
+      transition: {
+        type: type,
+        delay: delay,
+        duration: duration,
+        ease: "easeOut",
+      },
+    },
+  };
+};
+
 
 const ProjectCard = ({
   index,
+  handleCardDisplay,
+  displayedCount,
   name,
   shortDescription,
   longDescription,
@@ -14,6 +39,22 @@ const ProjectCard = ({
   media,
   source_code_link,
 }) => {
+
+  const [ref, inView] = useInView({
+    triggerOnce: true,  // L'animation se déclenchera une seule fois
+    threshold: 0.1      // L'animation se déclenche lorsque 10% de l'élément est visible
+  });
+
+  //const [displayedCardsCount, setDisplayedCardsCount] = useState(0);
+  const cardCountedRef = useRef(false);
+
+  useEffect(() => {
+    if (inView) {
+      handleCardDisplay();
+    }
+  }, [inView, handleCardDisplay]);
+
+
   const [isHoveredImage, setIsHoveredImage] = useState(false);
   const [isHoveredCard, setIsHoveredCard] = useState(false);
   const [shouldLoadVideo, setShouldLoadVideo] = useState(false);
@@ -36,9 +77,13 @@ const ProjectCard = ({
   const videoRef = useRef(null);
 
   return (
-    <div
-      className="inner-div pb-2"
+    <motion.div
+      ref={ref}
+      initial="hidden"
+      animate={inView ? "show" : "hidden"}
+      variants={fadeInCard("up", "spring", (index - displayedCount) * 0.2, 2)}
       style={{ opacity: isHoveredCard ? 1 : 0.95 }}
+      className="inner-div pb-2"
     >
       <motion.div
         animate={{
@@ -48,7 +93,7 @@ const ProjectCard = ({
         className={`card-container-project relative rounded-xl ${
           isHoveredCard ? "shadow-card-project" : ""
         }`}
-        variants={fadeIn("up", "spring", index * 0.2, 2)}
+        //variants={fadeIn("up", "spring", index * 0.2, 2)}
         onMouseEnter={() => setIsHoveredCard(true)}
         onMouseLeave={() => setIsHoveredCard(false)}
       >
@@ -200,7 +245,7 @@ const ProjectCard = ({
           {/* ... autres contenus de la carte ... */}
         </Tilt>
       </motion.div>
-    </div>
+    </motion.div>
   );
 };
 

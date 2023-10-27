@@ -13,6 +13,7 @@ react-vertical-timeline-component
 react-parallax-tilt
 react-fast-marquee
 @emailjs/browser
+lodash
 
 # React + Vite feat/POR-13
 

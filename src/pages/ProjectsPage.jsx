@@ -8,6 +8,9 @@ import { ToggleContext } from "../components/Context/ToggleContext";
 
 import Projects from "../components/Works/Projects/Projects";
 
+import { textVariant } from "../utils/motion";
+import { styles } from "../styles";
+
 const pageVariants = {
   initial: { scale: 0.9, y: "-50%", opacity: 0 },
   in: { scale: 1, y: "0%", opacity: 1 },

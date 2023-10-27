@@ -2,78 +2,60 @@ import React, { useState, useEffect, useContext, useRef } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { ProgressContext } from '../../Context/ProgressContext';
 
+import { throttle } from 'lodash';
+
 const paths = ['/', '/about', '/work', '/projects', '/contact', '/more'];
-const totalSections = 6;
 
 function ProgressBar() {
   const { scrollPercentage, setScrollPercentage } = useContext(ProgressContext);
-  const [programmaticScroll, setProgrammaticScroll] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
-
-  let lastPage = getCurrentPage();
-
-
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, [location.pathname]);
   
+  const lastPageRef = useRef(getCurrentPage());
+  const totalSections = paths.length; // Je suppose que vous avez oublié de le mentionner dans votre exemple initial.
 
-  useEffect(() => {
-    if (programmaticScroll) {
-      const pageHeight = document.documentElement.scrollHeight - window.innerHeight;
-      const scrollPosition = pageHeight * (scrollPercentage % (100 / totalSections)) / 100;
-      window.scrollTo({
-        top: scrollPosition,
-        behavior: 'smooth'
-      });
-      setProgrammaticScroll(false);
+  function computeScrollPercentage(scrollPosition, totalHeight) {
+    if (totalHeight <= window.innerHeight) {
+      return 100;
     }
-  }, [scrollPercentage, programmaticScroll]);
+    return (scrollPosition / (totalHeight - window.innerHeight)) * 100;
+  }
   
   function getCurrentPage() {
     const pathname = location.pathname;
     return paths.indexOf(pathname);
   }
-  
-  
 
-  useEffect(() => {
-    const handleScroll = () => {
-      const totalHeight = document.documentElement.scrollHeight;
-      const scrollPosition = window.scrollY;
-    
-      let percentageScrolled;
-    
-      if (totalHeight <= window.innerHeight) { // Si le contenu ne déborde pas
-        percentageScrolled = 100;
-    } else {
-        percentageScrolled = (scrollPosition / (totalHeight - window.innerHeight)) * 100;
-    }
-    
+  const handleScroll = throttle(() => {
+    const totalHeight = document.documentElement.scrollHeight;
+    const scrollPosition = window.scrollY;
+    const percentageScrolled = computeScrollPercentage(scrollPosition, totalHeight);
     const currentPage = getCurrentPage();
     const sectionPercentage = 100 / totalSections;
-    
-    // Réinitialisez le pourcentage de défilement lorsque la page change
-    if (lastPage !== currentPage) {
-        setScrollPercentage(currentPage * sectionPercentage);
-        lastPage = currentPage;
-        return;
+
+    if (lastPageRef.current !== currentPage) {
+      const newProgress = currentPage * sectionPercentage;
+      updateProgress(newProgress);
+      lastPageRef.current = currentPage;
+      return;
     }
-    
+
     const totalProgress = currentPage * sectionPercentage + percentageScrolled * (sectionPercentage / 100);
-    
-    setScrollPercentage(totalProgress);
-    localStorage.setItem('scrollProgress', String(totalProgress));
-    
-    };
-    
+    updateProgress(totalProgress);
+  }, 20);
 
+  useEffect(() => {
     handleScroll();
-
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
-  }, [location.pathname, programmaticScroll]);
+  }, [location.pathname]);
+
+  function updateProgress(progress) {
+    if (progress !== scrollPercentage) {
+      setScrollPercentage(progress);
+      localStorage.setItem('scrollProgress', String(progress));
+    }
+  }
 
   const handleClick = (event) => {
     const sectionHeight = window.innerHeight / totalSections;
@@ -105,6 +87,7 @@ function ProgressBar() {
           top: scrollPosition,
           behavior: 'smooth'
         });
+        
       }
     }
   };
@@ -112,17 +95,15 @@ function ProgressBar() {
   
   useEffect(() => {
     const percentage = location.state?.scrollTo;
-    
     if (percentage !== undefined) {
       const pageHeight = document.documentElement.scrollHeight - window.innerHeight;
-      
-      if (pageHeight > 0) { // Check if the page is scrollable
+      if (pageHeight > 0) {
         const scrollPosition = pageHeight * percentage;
-        
         window.scrollTo({
           top: scrollPosition,
           behavior: 'smooth'
         });
+        
       }
     }
   }, [location]);
