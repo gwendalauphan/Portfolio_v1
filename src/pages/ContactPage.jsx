@@ -16,6 +16,13 @@ import Annimation from "../components/Contact/Annimation/Annimation";
 const ContactPage = () => {
   const location = useLocation();
 
+  
+  useEffect(() => {
+    
+    window.scrollTo({top: 0, behavior: 'smooth'});
+    
+  }, [location.pathname]); // Déclenchez l'effet à chaque changement de route
+
   const { isEnabled } = useContext(ToggleContext);
 
   useScrollNavigation(location.pathname, isEnabled);

@@ -4,10 +4,12 @@ import { projects } from "../../../constants";
 import { motion } from "framer-motion";
 import { styles } from "../../../styles";
 import SectionWrapper from "../../../hoc/SectionWrapper";
+import { useScroll } from "../../../components/Context/ScrollContext";
 
 import { textVariant } from "../../../utils/motion";
 
 const Projects = () => {
+  const { hasScrolled } = useScroll();
   const displayedCardsCountRef = useRef(0);
 
   const handleCardDisplay = useCallback(() => {
@@ -37,7 +39,8 @@ const Projects = () => {
           <span className="command">${"ls  ~/projects  -al"}</span>
         </pre>
       </div>
-    
+      
+      {hasScrolled && ( 
       <div className="mt-20 flex flex-wrap gap-10 justify-center w-full">
         {projects.map((project, index) => (
           <ProjectCard 
@@ -49,6 +52,7 @@ const Projects = () => {
           />
         ))}
       </div>
+      )}
       </>
   );
 }

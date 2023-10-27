@@ -1,10 +1,14 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useLayoutEffect } from "react";
 import { BrowserRouter as Router, Routes, Route, Link, useLocation } from "react-router-dom";
+
+import { animateScroll } from 'react-scroll';
 
 import { AnimatePresence } from "framer-motion";
 
 import { ProgressProvider } from "./components/Context/ProgressContext";
 import { ToggleProvider } from "./components/Context/ToggleContext";
+import { ScrollProvider } from "./components/Context/ScrollContext";
+import { useScroll } from "./components/Context/ScrollContext";
 
 import Navbar from "./components/Navigation/Navbar/Navbar";
 import { StarsCanvas, EarthCanvas } from "./components/canvas";
@@ -19,17 +23,6 @@ import WorkPage from "./pages/WorkPage";
 import ProjectsPage from "./pages/ProjectsPage";
 import ContactPage from "./pages/ContactPage";
 import MorePage from "./pages/MorePage";
-
-function ScrollToTop() {
-  const { pathname } = useLocation();
-
-  useEffect(() => {
-    window.scrollTo({ top: 0, behavior: 'auto' });
-
-  }, [pathname]);
-
-  return null;
-}
 
 function NoMatch() {
   return (
@@ -72,8 +65,8 @@ function App() {
   return (
     <ToggleProvider value={{ isEnabled, setIsEnabled }}>
       <ProgressProvider value={{ scrollPercentage, setScrollPercentage }}>
+      <ScrollProvider>  
         <Router>
-        <ScrollToTop />
           <div className="relative z-0 ">
             <div
               style={{
@@ -115,6 +108,7 @@ function App() {
             </div>
           </div>
         </Router>
+        </ScrollProvider>
       </ProgressProvider>
     </ToggleProvider>
   );

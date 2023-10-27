@@ -8,6 +8,9 @@ import { styles } from "../../../styles";
 import LogoSVG from "../../../assets/boussole.svg";
 import { navLinks } from '../../../constants';
 
+import { useScroll } from "../../Context/ScrollContext";
+
+
 
 
 function Navbar() {
@@ -30,6 +33,13 @@ function Navbar() {
   useEffect(() => {
     setActive(location.pathname);
   }, [location.pathname]);
+
+  const { setHasScrolled } = useScroll();
+
+  const handleNavClick = (path) => {
+    setHasScrolled(false);
+    setActive(path);
+  };
 
   //-----------------------------------
 
@@ -64,7 +74,7 @@ function Navbar() {
               key={nav.id}
               className={`navbar__item`}
               style={{ marginLeft: 0, paddingLeft: 15, paddingRight: 15 }}
-              onClick={() => setActive(nav.path)}
+              onClick={() => handleNavClick(nav.path)}
             >
               <Link
                 to={nav.path}

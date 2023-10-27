@@ -14,6 +14,7 @@ react-parallax-tilt
 react-fast-marquee
 @emailjs/browser
 lodash
+react-scroll
 
 # React + Vite feat/POR-13
 

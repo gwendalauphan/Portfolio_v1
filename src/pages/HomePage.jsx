@@ -13,6 +13,9 @@ import SectionWrapper from "../hoc/SectionWrapper";
 
 import { ToggleContext } from "../components/Context/ToggleContext";
 
+import ScrollToTop from "../components/Navigation/ScrollOnTop/ScrollOnTop";
+import { useScroll } from "../components/Context/ScrollContext";
+
 const pageVariants = {
   initial: { scale: 0.9, y: "-50%", opacity: 0 },
   in: { scale: 1, y: "0%", opacity: 1 },
@@ -41,6 +44,9 @@ const HomePage = () => {
   }, [isEnabled]);
 
   return (
+    <>
+    
+    <ScrollToTop />
     <motion.div
       initial="initial"
       animate="in"
@@ -94,6 +100,7 @@ const HomePage = () => {
         </div>
       </div>
     </motion.div>
+    </>
   );
 };
 

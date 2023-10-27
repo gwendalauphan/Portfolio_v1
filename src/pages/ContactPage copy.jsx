@@ -13,6 +13,8 @@ import Form from "../components/Contact/Form/Form";
 import ContactHeader from "../components/Contact/Header/ContactHeader";
 import Annimation from "../components/Contact/Annimation/Annimation";
 
+import ScrollToTop from "../components/Navigation/ScrollOnTop/ScrollOnTop";
+
 const ContactPage = () => {
   const location = useLocation();
 

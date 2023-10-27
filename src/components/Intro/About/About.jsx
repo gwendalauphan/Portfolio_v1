@@ -14,6 +14,8 @@ import ImageSlider from "./ImageSlider";
 
 import { useInView } from "react-intersection-observer";
 
+import { useScroll } from "../../Context/ScrollContext";
+
 const ServiceCard = ({ index, title, description, icon }) => {
   const { ref, inView } = useInView({
     triggerOnce: true,
@@ -72,6 +74,8 @@ const ServiceCard = ({ index, title, description, icon }) => {
 };
 
 const About = () => {
+  const { hasScrolled } = useScroll();
+  console.log(hasScrolled);
   return (
     <>
       <motion.div className="mb-4" variants={textVariant()}>
@@ -82,7 +86,7 @@ const About = () => {
           About <span className="keyword-purple">me.</span>
         </h2>
       </motion.div>
-
+      
       <div className="w-full flex flex-col-reverse sm:flex-row">
         <div className="Home-pageContainer md:w-[75%]">
           <div className="Home-contentSection ">
@@ -133,6 +137,7 @@ const About = () => {
 
       <div className="separator-bar"></div>
 
+      
       <motion.div
         className="flex items-center justify-center Experise-Title-text-shadow"
         variants={textVariant()}
@@ -142,11 +147,13 @@ const About = () => {
         </p>
       </motion.div>
 
+      {hasScrolled && (
       <div className="mt-10 flex flex-wrap gap-10 justify-center">
         {services.map((service, index) => (
           <ServiceCard key={service.title} index={index} {...service} />
         ))}
       </div>
+      )}
     </>
   );
 };

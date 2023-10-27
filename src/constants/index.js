@@ -116,7 +116,156 @@ const services = [
   },
 ];
 
+
 const technologies = [
+  {//Ansible
+    name: "Ansible",
+    icon: ansible,
+    description: "Automation tool for system administration.",
+    link: "https://www.ansible.com/",
+  },
+  {//Terraform
+    name: "Terraform",
+    icon: terraform,
+    description: "Infrastructure as Code (IaC) management tool.",
+    link: "https://www.terraform.io/",
+  },
+  {//Docker
+    name: "Docker",
+    icon: docker,
+    description:
+      "Platform for developing and running applications in containers.",
+    link: "https://www.docker.com/",
+  },
+  {//Openstack
+    name: "Openstack",
+    icon: openstack,
+    description: "Open-source cloud platform for private and public clouds.",
+    link: "https://www.openstack.org/",
+  },
+  {//Haproxy
+    name: "Haproxy",
+    icon: haproxy,
+    description: "Load balancer and proxy for TCP/HTTP applications.",
+    link: "http://www.haproxy.org/",
+  },
+  {//Nginx
+    name: "Nginx",
+    icon: nginx,
+    description: "Web server, reverse proxy, and load balancer.",
+    link: "https://www.nginx.com/",
+  },
+  {//Python
+    name: "Python",
+    icon: python,
+    description:
+      "Versatile, powerful language for web development and data science.",
+    link: "https://www.python.org/",
+  },
+  {//Javascript
+    name: "Javascript",
+    icon: javascript,
+    description:
+      "Scripting language for adding interactivity to websites.",
+    link: "https://developer.mozilla.org/fr/docs/Web/JavaScript",
+  },
+  {//ReactJs
+    name: "ReactJs",
+    icon: reactjs,
+    description:
+      "JavaScript library for dynamic user interfaces.",
+    link: "https://reactjs.org/",
+  },
+  {//ThreeJs
+    name: "ThreeJs",
+    icon: threejs,
+    description:
+      "JavaScript library for 3D graphics in a web browser.",
+    link: "https://threejs.org/",
+  },
+  {//CSS
+    name: "CSS",
+    icon: css,
+    description:
+      "Stylesheet language for controlling document presentation.",
+    link: "https://www.w3.org/Style/CSS/",
+  },
+  {//SQLite
+    name: "SQLite",
+    icon: sqlite,
+    description: "Lightweight, standalone relational database.",
+    link: "https://www.sqlite.org/",
+  },
+  {//Spark
+    name: "Spark",
+    icon: spark,
+    description: "Fast processing framework for big data.",
+    link: "https://spark.apache.org/",
+  },
+  {//Hadoop HDFS
+    name: "Hadoop HDFS",
+    icon: hadoophdfs,
+    description:
+      "Distributed file system for storing large amounts of data.",
+    link: "https://hadoop.apache.org/",
+  },
+  {//Redis
+    name: "Redis",
+    icon: redis,
+    description:
+      "In-memory database for storing data structures.",
+    link: "https://redis.io/",
+  },
+  {//Cassandra
+    name: "Cassandra",
+    icon: cassandra,
+    description:
+      "Distributed NoSQL database for managing large amounts of data.",
+    link: "https://cassandra.apache.org/",
+  },
+  {//MongoDB
+    name: "MongoDB",
+    icon: mongodb,
+    description: "Document-oriented NoSQL database.",
+    link: "https://www.mongodb.com/",
+  },
+  {//Scala
+    name: "Scala",
+    icon: scala,
+    description:
+      "Multi-paradigm programming language for modern systems and applications.",
+    link: "https://www.scala-lang.org/",
+  },
+  {//Pandas
+    name: "Pandas",
+    icon: pandas,
+    description:
+      "Python library for data structures for data analysis.",
+    link: "https://pandas.pydata.org/",
+  },
+  {//Numpy
+    name: "Numpy",
+    icon: numpy,
+    description:
+      "Python library for multi-dimensional arrays and mathematical functions.",
+    link: "https://numpy.org/",
+  },
+  {//Matplotlib
+    name: "Matplotlib",
+    icon: matplotlib,
+    description: "Python library for creating visualizations.",
+    link: "https://matplotlib.org/",
+  },
+  {//TensorFlow
+    name: "TensorFlow",
+    icon: tensorflow,
+    description: "Open-source platform for machine learning.",
+    link: "https://www.tensorflow.org/",
+  },
+];
+
+
+const technologies_fr = [
   {//Ansible
     name: "Ansible",
     icon: ansible,
@@ -263,7 +412,90 @@ const technologies = [
   },
 ];
 
+
 const tools = [
+  {//GitLab CI
+    name: "GitLab CI",
+    icon: gitlabci,
+    description: "Continuous integration and deployment integrated with GitLab.",
+    link: "https://docs.gitlab.com/ee/ci/",
+  },
+  {//Jenkins
+    name: "Jenkins",
+    icon: jenkins,
+    description: "Continuous integration and continuous delivery tool.",
+    link: "https://www.jenkins.io/",
+  },
+  {//Git
+    name: "Git",
+    icon: git,
+    description: "Version control system to track code changes.",
+    link: "https://git-scm.com/",
+  },
+  {//SonarQube
+    name: "SonarQube",
+    icon: sonarqube,
+    description: "Code analysis for quality and security.",
+    link: "https://www.sonarqube.org/",
+  },
+  {//Nexus
+    name: "Nexus",
+    icon: nexus,
+    description: "Repository manager for binary artifacts and builds.",
+    link: "https://www.sonatype.com/nexus/repository-oss",
+  },
+  {//VPS
+    name: "VPS",
+    icon: vps,
+    description: "Virtual server used as a dedicated server.",
+    link: "https://en.wikipedia.org/wiki/Virtual_private_server",
+  },
+  {//SSH
+    name: "SSH",
+    icon: ssh,
+    description: "Secure protocol for network services.",
+    link: "https://www.openssh.com/",
+  },
+  {//Jira
+    name: "Jira",
+    icon: jira,
+    description: "Bug tracking and agile project management from Atlassian.",
+    link: "https://www.atlassian.com/software/jira",
+  },
+  {//Confluence
+    name: "Confluence",
+    icon: confluence,
+    description: "Team collaboration for documentation and sharing.",
+    link: "https://www.atlassian.com/software/confluence",
+  },
+  {//Trello
+    name: "Trello",
+    icon: trello,
+    description: "Card-based project management to organize tasks.",
+    link: "https://trello.com/",
+  },
+  {//Whimsical
+    name: "Whimsical",
+    icon: whimsical,
+    description: "Visualization for diagrams, wireframes, and workflows.",
+    link: "https://whimsical.com/",
+  },
+  {//Slack
+    name: "Slack",
+    icon: slack,
+    description: "Team communication based on channels and conversations.",
+    link: "https://slack.com/",
+  },
+  {//Microsoft Teams
+    name: "Microsoft Teams",
+    icon: microsoftteams,
+    description: "Collaboration with chat, video meetings, and storage.",
+    link: "https://www.microsoft.com/en-us/microsoft-teams/",
+  },
+];
+
+
+const tools_fr = [
   {//GitLab CI
     name: "GitLab CI",
     icon: gitlabci,
@@ -348,6 +580,68 @@ const tools = [
 ];
 
 const experiences = [
+  {//Versatile Employee
+    title: "Versatile Employee",
+    company_name: "McDonald's",
+    icon: mcdonalds,
+    iconBg: "#383E56",
+    date: "Jul. 2020 - Jun. 2021",
+    description: "Learning in a dynamic environment",
+    points: [
+      "Quick adaptation to various fast-food responsibilities.",
+      "Consistently professional attitude with customers.",
+      "Efficient management of cooking and anticipation of stock needs.",
+      "Valuing every task, from ordering to cleaning.",
+    ],
+  },
+  {//Data Engineer Apprentice
+    title: "Data Engineer Apprentice",
+    company_name: "Dgfip",
+    icon: dgfip,
+    iconBg: "#E6DEDD",
+    date: "Sept 2021 - May 2022",
+    description: "Initiation and development of technical foundations",
+    points: [
+      "Discovery of the world of big data and its scope.",
+      "Developing Spark Scala scripts for various projects as well as a library.",
+      "Adoption of the agile approach and initiation to CI/CD methods with Gitlab CI.",
+      "Adoption of Docker and strengthening in Bash scripting.",
+      "Writing technical documentation: procedures and tutorials",
+    ],
+  },
+  {//DevOps Engineer Apprentice
+    title: "DevOps Engineer Apprentice",
+    company_name: "Dgfip",
+    icon: dgfip,
+    iconBg: "#E6DEDD",
+    date: "May 2022 - Jan 2023",
+    description: "Expanding responsibilities and mastering advanced tools",
+    points: [
+      "Automation with Ansible and setting up Gitlab CI pipelines.",
+      "Adoption of Terraform to manage cloud instances, coupled with Ansible to automate processes.",
+      "In-depth mastery of Jira and broadening knowledge on Docker, Linux, and networks.",
+      "Refining skills with Git.",
+    ],
+  },
+  {//Infrastructure Engineer Apprentice
+    title: "Infrastructure Engineer Apprentice",
+    company_name: "Dgfip",
+    icon: dgfip,
+    iconBg: "#E6DEDD",
+    date: "Jan 2023 - Present",
+    description: "Finalizing major projects and knowledge transfer",
+    points: [
+      "Setting up technical elements: haproxy, self-signed SSL certificates, mounting points, dependency installations, etc.",
+      "Creation of a CLI tool to facilitate deployment configuration via the Openstack API.",
+      "Implementation of an infrastructure integrating Jenkins, Nexus, and Sonarqube.",
+      "Leading workshops for the community and documentary contribution.",
+    ],
+  },
+];
+
+
+
+const experiences_fr = [
   {//Employé Polyvalent
     title: "Employé Polyvalent",
     company_name: "McDonald's",

@@ -13,6 +13,8 @@ import ImageSlider from "../components/Intro/About/ImageSlider";
 
 import { ToggleContext } from "../components/Context/ToggleContext";
 
+import { useScroll } from "../components/Context/ScrollContext";
+
 const pageVariants = {
   initial: { scale: 0.9, y: "-50%", opacity: 0 },
   in: { scale: 1, y: "0%", opacity: 1 },
@@ -27,6 +29,19 @@ const pageTransition = {
 
 const AboutPage = () => {
   const location = useLocation();
+
+  const { setHasScrolled } = useScroll();
+  
+  useEffect(() => {
+    
+    window.scrollTo(0, 0);
+    
+    const timer = setTimeout(() => {
+      setHasScrolled(true);
+    }, 1000);
+
+    return () => clearTimeout(timer); 
+  }, [location.pathname]); // Déclenchez l'effet à chaque changement de route
 
   const { isEnabled } = useContext(ToggleContext);
 
@@ -59,14 +74,21 @@ const AboutPage = () => {
     }
   }, [isEnabled]);
 
+  
+
   return (
+    <>
+    
     <div
       ref={parentRef}
       className={`page-container ${!isEnabled ? "" : "masque"}`}
     >
+      
       <About />
-
+        
+      
       <Tech onCardHoverChange={handleCardHoverChange} />
+      
       {hoveredCardData && (
         <div
           ref={descriptionRef}
@@ -99,7 +121,11 @@ const AboutPage = () => {
           </div>
         </div>
       )}
+      
     </div>
+    
+  
+    </>
   );
 };
 

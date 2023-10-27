@@ -10,6 +10,8 @@ import { motion } from "framer-motion";
 import { styles } from "../styles";
 import { textVariant } from "../utils/motion";
 
+
+
 const MorePage = () => {
   const location = useLocation();
 
@@ -27,7 +29,7 @@ const MorePage = () => {
 
   return (
     <div className={`page-container ${!isEnabled ? "" : "masque"}`}>
-      <>
+      
         <motion.div className="mb-4" variants={textVariant()}>
           <p className={`${styles.sectionSubText} keyword-blue`}>In My Mind</p>
           <h2
@@ -48,7 +50,6 @@ const MorePage = () => {
             <span className="command">${"ls ~/more/ | less"}</span>
           </pre>
         </div>
-      </>
       <div
         style={{
           display: "flex",

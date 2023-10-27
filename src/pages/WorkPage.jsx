@@ -10,6 +10,10 @@ import { ToggleContext } from "../components/Context/ToggleContext";
 
 import Experience from "../components/Experiences/Missions/Missions";
 
+import { useScroll } from "../components/Context/ScrollContext";
+
+
+
 const pageVariants = {
   initial: { scale: 0.9, y: "-50%", opacity: 0 },
   in: { scale: 1, y: "0%", opacity: 1 },
@@ -23,7 +27,22 @@ const pageTransition = {
 };
 
 const WorkPage = () => {
+
   const location = useLocation();
+
+  const { setHasScrolled } = useScroll();
+  
+  useEffect(() => {
+    setHasScrolled(false);
+    window.scrollTo(0, 0);
+    
+    const timer = setTimeout(() => {
+      setHasScrolled(true);
+    }, 20);
+
+    return () => clearTimeout(timer); 
+  }, [location.pathname]); // Déclenchez l'effet à chaque changement de route
+  
 
   const { isEnabled } = useContext(ToggleContext);
 
@@ -37,10 +56,15 @@ const WorkPage = () => {
     }
   }, [isEnabled]);
 
+  
   return (
+    
     <div className={`page-container ${!isEnabled ? "" : "masque"}`}>
+    
       <Experience />
+
     </div>
+    
   );
 };
 
