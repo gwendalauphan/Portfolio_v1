@@ -66,6 +66,7 @@ const Tech = ({ onCardHoverChange }) => {
           <MarqueeCards direction="left">
             {technologies.map((technology) => (
               <Card
+                key={technology.name}
                 onHoverChange={onCardHoverChange}
                 icon={technology.icon}
                 name={technology.name}
@@ -80,6 +81,7 @@ const Tech = ({ onCardHoverChange }) => {
           <MarqueeCards direction="right">
             {tools.map((tool) => (
               <Card
+                key={tool.name}
                 onHoverChange={onCardHoverChange}
                 icon={tool.icon}
                 name={tool.name}

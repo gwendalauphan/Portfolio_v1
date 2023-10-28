@@ -13,13 +13,16 @@ import SectionWrapper from "../hoc/SectionWrapper";
 
 import { ToggleContext } from "../components/Context/ToggleContext";
 
-import ScrollToTop from "../components/Navigation/ScrollOnTop/ScrollOnTop";
-import { useScroll } from "../components/Context/ScrollContext";
-
-const pageVariants = {
+const pageVariantsTitle = {
   initial: { scale: 0.9, y: "-50%", opacity: 0 },
   in: { scale: 1, y: "0%", opacity: 1 },
   out: { scale: 0.75, y: "-50%", opacity: 0 },
+};
+
+const pageVariantsSection = {
+  initial: { scale: 0.9, y: "50%", opacity: 0 },
+  in: { scale: 1, y: "0%", opacity: 1 },
+  out: { scale: 0.75, y: "50%", opacity: 0 },
 };
 
 const pageTransition = {
@@ -45,41 +48,49 @@ const HomePage = () => {
 
   return (
     <>
-    
-    <ScrollToTop />
-    <motion.div
-      initial="initial"
-      animate="in"
-      exit="out"
-      variants={pageVariants}
-      transition={pageTransition}
-    >
       <div className={`page-container mt-10 ${!isEnabled ? "" : "masque"}`}>
-        <div
-          className={`${styles.paddingX}  ml-40 mx-auto flex flex-row items-start gap-5`}
+        <motion.div
+          initial="initial"
+          animate="in"
+          exit="out"
+          variants={pageVariantsTitle}
+          transition={pageTransition}
         >
-          <div className="flex flex-col justify-center items-center mt-5">
-            <div className="w-5 h-5 rounded-full bg-[#915EFF]" />
-            <div className="w-1 sm:h-80 h-40 violet-gradient" />
-          </div>
+          <div
+            className={`${styles.paddingX}  ml-40 mx-auto flex flex-row items-start gap-5`}
+          >
+            <div className="flex flex-col justify-center items-center mt-5">
+              <div className="w-5 h-5 rounded-full bg-[#915EFF]" />
+              <div className="w-1 sm:h-80 h-40 violet-gradient" />
+            </div>
 
-          <div>
-            <h1
-              className={`${styles.heroHeadText} text-white Home-Title-text-shadow`}
-            >
-              Hi, I'm <span className="text-[#915EFF]">Gwendal Auphan</span>
-            </h1>
-            <h1
-              className={`${styles.heroSubHeadText} text-white Home-Title-text-shadow`}
-            >
-              Passionate by <span className="text-[#35CFA9]">coding</span> and{" "}
-              <span className="text-[#35CFA9]">adventure</span>
-            </h1>
+            <div>
+              <h1
+                className={`${styles.heroHeadText} text-white Home-Title-text-shadow`}
+              >
+                Hi, I'm <span className="text-[#915EFF]">Gwendal Auphan</span>
+              </h1>
+              <h1
+                className={`${styles.heroSubHeadText} text-white Home-Title-text-shadow`}
+              >
+                Passionate by <span className="text-[#35CFA9]">coding</span> and{" "}
+                <span className="text-[#35CFA9]">adventure</span>
+              </h1>
+            </div>
           </div>
-        </div>
-        <div className="home-section-parent">
-          <HomeSection />
-        </div>
+        </motion.div>
+
+        <motion.div
+          initial="initial"
+          animate="in"
+          exit="out"
+          variants={pageVariantsSection}
+          transition={pageTransition}
+        >
+          <div className="home-section-parent">
+            <HomeSection />
+          </div>
+        </motion.div>
 
         <div className="absolute w-full flex justify-center items-center">
           <Link to="/about">
@@ -99,7 +110,6 @@ const HomePage = () => {
           </Link>
         </div>
       </div>
-    </motion.div>
     </>
   );
 };
