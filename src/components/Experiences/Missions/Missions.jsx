@@ -13,8 +13,12 @@ import SectionWrapper from "../../../hoc/SectionWrapper";
 
 import { experiences } from "../../../constants";
 
+import { useScroll } from "../../Context/ScrollContext";
+
+
 
 const ExperienceCard = ({ experience }) => {
+  
   return (
     <VerticalTimelineElement
       contentStyle={{
@@ -59,6 +63,7 @@ const ExperienceCard = ({ experience }) => {
 };
 
 const Experience = () => {
+  const { hasScrolled } = useScroll();
   return (
     <>
     <motion.div className="mb-4" variants={textVariant()}>
@@ -74,6 +79,7 @@ const Experience = () => {
         </pre>
         </div>
 
+        {hasScrolled && (
         <VerticalTimeline>
           {experiences.map((experience, index) => (
             <ExperienceCard
@@ -82,6 +88,9 @@ const Experience = () => {
             />
           ))}
         </VerticalTimeline>
+        )}
+        
+
       
       </div>
     </>

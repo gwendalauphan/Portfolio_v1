@@ -1,11 +1,13 @@
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useEffect, useRef } from 'react';
 import './Scroll.css'
+import { useScroll } from '../../Context/ScrollContext';
 
 const routesOrder = ['/', '/about', '/work', '/projects', '/contact', '/more'];
 
 
 const useScrollNavigation = (currentRoute, isEnabled) => {
+    const { setHasScrolled } = useScroll();
     const navigate = useNavigate();
     const currentIndex = routesOrder.indexOf(currentRoute);
   
@@ -40,9 +42,11 @@ const useScrollNavigation = (currentRoute, isEnabled) => {
         if (Math.abs(totalScroll) > maxScroll) totalScroll = Math.sign(totalScroll) * maxScroll; // Ne permet pas un scroll trop excessif
     
         if (totalScroll > scrollThreshold && currentIndex < routesOrder.length - 1) {
+            setHasScrolled(false);
             totalScroll = 0;
             navigate(routesOrder[currentIndex + 1]);
         } else if (totalScroll < -scrollThreshold && currentIndex > 0) {
+            setHasScrolled(false);
             totalScroll = 0;
             navigate(routesOrder[currentIndex - 1]);
         }
