@@ -1,83 +1,96 @@
-
 import MarqueeCards from "./Marquee";
-import { technologies } from "../../../constants";
+import { technologies, tools } from "../../../constants";
 
-
-import React, { useState, useEffect, useRef } from 'react';
-
-
-
+import React, { useState, useEffect, useRef } from "react";
 
 // Card.jsx
 
-
-const Card = ({ icon, description }) => {
+const Card = ({ onHoverChange, icon, name, description, link }) => {
   const [isHovered, setIsHovered] = useState(false);
   const hoverTimeoutRef = useRef(null);
+  const cardRef = useRef(null); // 1. Ajoute cette référence
 
   const handleMouseEnter = () => {
+    const rect = cardRef.current.getBoundingClientRect(); // 2. Capture la position et les dimensions
+
     hoverTimeoutRef.current = setTimeout(() => {
       setIsHovered(true);
+      if (onHoverChange) {
+        onHoverChange({
+          isHovered: true,
+          name: name,
+          description: description,
+          link: link,
+          top: rect.top,
+          left: rect.left,
+          width: rect.width,
+          height: rect.height,
+        });
+      }
     }, 500); // Set timeout of 1 second
   };
 
   const handleMouseLeave = () => {
-    clearTimeout(hoverTimeoutRef.current);  // Clear the timeout if mouse leaves before 1 second
+    clearTimeout(hoverTimeoutRef.current); // Clear the timeout if mouse leaves before 1 second
     setIsHovered(false);
   };
 
   useEffect(() => {
-    return () => {
-      // Clear the timeout when the component is unmounted
-      clearTimeout(hoverTimeoutRef.current);
-    };
-  }, []);
+    if (onHoverChange && !isHovered) {
+      onHoverChange({
+        isHovered: false,
+      });
+    }
+  }, [isHovered]);
 
   return (
     <div
-      className='w-20 h-20 image_wrapper relative'
+      className="p-1 w-20 h-20 image_wrapper relative"
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
+      ref={cardRef}
     >
-      <img src={icon} alt="" />
-      {isHovered && (
-        <div
-          className="absolute bg-white text-black p-2"
-          style={{ top: '-5%', left: '50%', transform: 'translate(-50%, 0)', zIndex: 1000 }}
-        >
-          {description}
-        </div>
-      )}
+      <img src={icon} alt="" className="w-full h-full" />
     </div>
   );
 };
 
-
-
-
-
-const Tech = () => {
+const Tech = ({ onCardHoverChange }) => {
   return (
-    <div className="w-full flex justify-center mt-20 mx-auto" style={{ maxWidth: "90%" }}>
+    <div
+      className="w-full flex justify-center mt-20 mx-auto"
+      style={{ maxWidth: "90%" }}
+    >
       <div className="w-full flex flex-col ">
-
-      <div className="w-full flex flex-col pb-4">
+        <div className="w-full flex flex-col pb-4">
           <MarqueeCards direction="left">
-              {technologies.map((technology) => (
-                  <Card icon={technology.icon} description={"essai"} />
-                        ))}
+            {technologies.map((technology) => (
+              <Card
+                key={technology.name}
+                onHoverChange={onCardHoverChange}
+                icon={technology.icon}
+                name={technology.name}
+                description={technology.description}
+                link={technology.link}
+              />
+            ))}
           </MarqueeCards>
-          </div>
+        </div>
 
-          <div className="w-full flex flex-col pb-4">
+        <div className="w-full flex flex-col pb-4">
           <MarqueeCards direction="right">
-          {technologies.map((technology) => (
-                 <Card icon={technology.icon} description={"essai"} />
-                        ))}
+            {tools.map((tool) => (
+              <Card
+                key={tool.name}
+                onHoverChange={onCardHoverChange}
+                icon={tool.icon}
+                name={tool.name}
+                description={tool.description}
+                link={tool.link}
+              />
+            ))}
           </MarqueeCards>
-          </div>
-
-
+        </div>
       </div>
     </div>
   );

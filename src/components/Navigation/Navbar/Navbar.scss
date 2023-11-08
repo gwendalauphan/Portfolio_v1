@@ -20,7 +20,7 @@ $scale-7: 1.5;
 
 $gap_unit: 3rem;
 $height_unit: 4rem;
-$height_unit_header: 4.5rem;
+$height_unit_header: 4rem;
 
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@600&display=swap');
 
@@ -154,7 +154,7 @@ $height_unit_header: 4.5rem;
         position: absolute;
         left: -8rem;
         margin-left: math.div($linkWidth, 2);
-        bottom: -1.25rem;
+        bottom: -0.75rem;
         height: 0.5rem;
         width: 2px;
         background: $primary;
