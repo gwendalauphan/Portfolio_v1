@@ -1,6 +1,6 @@
 import React, { useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
-import HomeSection from "../components/Intro/Home/Home3";
+import HomeSection from "../components/Intro/Home/Home";
 
 import { styles } from "../styles";
 import "../index.css";
@@ -8,8 +8,6 @@ import "../index.css";
 import { motion } from "framer-motion";
 import useScrollNavigation from "../components/Navigation/Scroll/Scroll";
 import { useLocation } from "react-router-dom";
-
-import SectionWrapper from "../hoc/SectionWrapper";
 
 import { ToggleContext } from "../components/Context/ToggleContext";
 

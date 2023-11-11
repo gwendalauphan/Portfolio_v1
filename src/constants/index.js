@@ -1,3 +1,10 @@
+import User from 'feather-icons-react/build/IconComponents/User';
+import Briefcase from 'feather-icons-react/build/IconComponents/Briefcase';
+import Cpu from 'feather-icons-react/build/IconComponents/Cpu';
+import Phone from 'feather-icons-react/build/IconComponents/Phone';
+import BookOpen from 'feather-icons-react/build/IconComponents/BookOpen';
+
+
 import {
   logo,
   github,
@@ -82,11 +89,11 @@ const memoji = {
 };
 
 const navLinks = [
-  { id: "user", title: "About", path: "/about" },
-  { id: "briefcase", title: "Work", path: "/work" },
-  { id: "cpu", title: "Projects", path: "/projects" },
-  { id: "phone", title: "Contact", path: "/contact" },
-  { id: "book-open", title: "More", path: "/more" },
+  { id: "user", icon: User, title: "About", path: "/about" },
+  { id: "briefcase", icon: Briefcase, title: "Work", path: "/work" },
+  { id: "cpu", icon: Cpu, title: "Projects", path: "/projects" },
+  { id: "phone", icon: Phone, title: "Contact", path: "/contact" },
+  { id: "book-open", icon: BookOpen, title: "More", path: "/more" },
 ];
 
 const services = [

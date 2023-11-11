@@ -1,17 +1,14 @@
-import React, { useEffect, useState, useCallback } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
-import feather from "feather-icons";
+
 import { motion, useAnimation } from "framer-motion";
 import "./Navbar.scss";
-import { logo, menu, close } from "../../../assets";
-import { styles } from "../../../styles";
+import { menu, close } from "../../../assets";
+
 import LogoSVG from "../../../assets/boussole.svg";
-import { navLinks } from '../../../constants';
+import { navLinks } from "../../../constants";
 
 import { useScroll } from "../../Context/ScrollContext";
-
-
-
 
 function Navbar() {
   const controls = useAnimation();
@@ -45,10 +42,6 @@ function Navbar() {
 
   const [active, setActive] = useState("");
   const [toggle, setToggle] = useState(false);
-
-  useEffect(() => {
-    feather.replace();
-  }, []);
 
   return (
     <div className="header flex items-center justify-between ">
@@ -85,7 +78,7 @@ function Navbar() {
                                     : "text-secondary"
                                 } hover:text-white`}
               >
-                <i data-feather={nav.id}></i>
+                <nav.icon />
                 {nav.title}
               </Link>
             </li>

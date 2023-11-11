@@ -1,8 +1,8 @@
-import React, { useState, useEffect, useContext, useRef } from "react";
+import React, { useEffect, useContext, useRef } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { ProgressContext } from "../../Context/ProgressContext";
 
-import { throttle } from "lodash";
+import throttle from "lodash/throttle";
 
 const paths = ["/", "/about", "/work", "/projects", "/contact", "/more"];
 

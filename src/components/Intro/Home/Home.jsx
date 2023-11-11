@@ -1,41 +1,60 @@
 import React from "react";
-import { motion } from "framer-motion";
-import { fadeIn, textVariant } from "../../../utils/motion";
-import { styles } from "../../../styles";
+
 import SectionWrapper from "../../../hoc/SectionWrapper";
 
 const HomeSection = () => {
-    return (
-        <motion.div 
-            className={`${styles.padding} rounded-xl bg-white bg-opacity-10 mt-8 mx-auto w-4/5`}
-            variants={textVariant()}
-        >
-            <motion.div className="flex flex-col items-start">
-                <p className={styles.sectionSubText}>Bienvenue</p>
-                <h2 className={styles.heroHeadText}>Prénom Nom</h2>
-                <motion.p
-                    variants={fadeIn("", "", 0.1, 1)}
-                    className={`${styles.sectionSubText} mt-2`}
-                >
-                    Je suis développeur doué en TypeScript et JavaScript, spécialisé en React, Node.js et Three.js. Je collabore étroitement pour fournir des solutions efficaces.
-                </motion.p>
-                <motion.div 
-                    className="mt-4"
-                    variants={textVariant()}
-                >
-                    <p className={styles.sectionSubText}>À propos du site</p>
-                    <motion.p
-                        variants={fadeIn("", "", 0.1, 1)}
-                        className='mt-4 text-secondary text-[17px] max-w-3xl leading-[30px]'
-                    >
-                        Ce site est une exploration des mondes et des technologies. Naviguez entre les sections pour découvrir chaque aspect. Bonne visite !
-                    </motion.p>
-                </motion.div>
-            </motion.div>
-        </motion.div>
-    );
+  return (
+    <div className="Home-pageContainer">
+      <div className="Home-contentSection">
+        <pre className="code-snippet">
+          <span className="prompt">gwendal@portfolio:~$</span>{" "}
+          <span className="command">cd ~</span>
+        </pre>
+        <div className="bash-function">
+          <p className="Home-sectionSubText">
+            As a <span className="keyword-purple">full-stack developer</span>,
+            each new project is an invitation to{" "}
+            <span className="keyword-blue"> creation </span> and{" "}
+            <span className="keyword-blue">innovation</span>.
+            <br />
+            <br />
+            My enthusiasm for fresh challenges pairs with a continuous
+            exploration of <span className="keyword-purple">
+              philosophy
+            </span>{" "}
+            and <span className="keyword-purple">personal development. </span>
+            Always ready for{" "}
+            <span className="keyword-blue">new enriching adventures.</span>
+          </p>
+          <br></br>
+
+          <p className="bash-function-header">
+            <span className="func-keyword">func</span>{" "}
+            <span className="func-name">explore</span>{" "}
+            <span className="bracket-open">{`(){`}</span>
+          </p>
+          <p
+            className="Home-sectionSubText"
+            style={{ marginLeft: "15px", marginBottom: 0 }}
+          >
+            You've landed in a space-themed universe, enjoy your voyage as you
+            explore my world of code and creativity.
+          </p>
+          <p className="bash-function-footer" style={{ marginBottom: "0px" }}>
+            <span className="bracket-close">{`}`}</span>
+          </p>
+          <br />
+        </div>
+        <h2 className="Home-sectionHeadText">
+          <span className="hash-symbol">#</span> echo{" "}
+          <span className="bracket-close">"</span>
+          <span className="keyword-blue">Happy</span>{" "}
+          <span className="keyword-purple">Exploring !</span>
+          <span className="bracket-close">"</span>
+        </h2>
+      </div>
+    </div>
+  );
 };
 
 export default SectionWrapper(HomeSection, "HomeSection");
-
-

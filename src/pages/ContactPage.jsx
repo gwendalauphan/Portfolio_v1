@@ -5,10 +5,6 @@ import { useLocation } from "react-router-dom";
 import { ToggleContext } from "../components/Context/ToggleContext";
 import { SectionWrapper } from "../hoc";
 
-import { motion } from "framer-motion";
-import { styles } from "../styles";
-import { textVariant } from "../utils/motion";
-
 import Form from "../components/Contact/Form/Form";
 import ContactHeader from "../components/Contact/Header/ContactHeader";
 import Annimation from "../components/Contact/Annimation/Annimation";
@@ -16,11 +12,8 @@ import Annimation from "../components/Contact/Annimation/Annimation";
 const ContactPage = () => {
   const location = useLocation();
 
-  
   useEffect(() => {
-    
-    window.scrollTo({top: 0, behavior: 'smooth'});
-    
+    window.scrollTo({ top: 0, behavior: "smooth" });
   }, [location.pathname]); // Déclenchez l'effet à chaque changement de route
 
   const { isEnabled } = useContext(ToggleContext);

@@ -9,16 +9,12 @@ import "react-vertical-timeline-component/style.min.css";
 
 import { textVariant } from "../../../utils/motion";
 import { styles } from "../../../styles";
-import SectionWrapper from "../../../hoc/SectionWrapper";
 
 import { experiences } from "../../../constants";
 
 import { useScroll } from "../../Context/ScrollContext";
 
-
-
 const ExperienceCard = ({ experience }) => {
-  
   return (
     <VerticalTimelineElement
       contentStyle={{
@@ -29,30 +25,32 @@ const ExperienceCard = ({ experience }) => {
       date={experience.date}
       iconStyle={{ background: experience.iconBg }}
       icon={
-        <div className='flex justify-center items-center w-full h-full '>
+        <div className="flex justify-center items-center w-full h-full ">
           <img
             src={experience.icon}
             alt={experience.company_name}
-            className='w-[60%] h-[60%] object-contain'
+            className="w-[60%] h-[60%] object-contain"
           />
         </div>
       }
     >
       <div>
-        <h3 className='text-white text-[24px] font-bold '>{experience.title}</h3>
+        <h3 className="text-white text-[24px] font-bold ">
+          {experience.title}
+        </h3>
         <p
-          className='text-secondary text-[16px] font-semibold '
+          className="text-secondary text-[16px] font-semibold "
           style={{ margin: 0 }}
         >
           {experience.company_name}
         </p>
       </div>
 
-      <ul className='mt-5 list-disc ml-5 space-y-2 '>
+      <ul className="mt-5 list-disc ml-5 space-y-2 ">
         {experience.points.map((point, index) => (
           <li
             key={`experience-point-${index}`}
-            className='text-white-100 text-[14px] pl-1 tracking-wider'
+            className="text-white-100 text-[14px] pl-1 tracking-wider"
           >
             {point}
           </li>
@@ -66,32 +64,44 @@ const Experience = () => {
   const { hasScrolled } = useScroll();
   return (
     <>
-    <motion.div className="mb-4" variants={textVariant()}>
-        <p className={`${styles.sectionSubText} keyword-blue`}>Steps Along my Path</p>
-        <h2 className={`${styles.heroHeadText} text-white Home-Title-text-shadow`}>Work <span className="keyword-purple">Experience.</span></h2>
+      <motion.div className="mb-4" variants={textVariant()}>
+        <p className={`${styles.sectionSubText} keyword-blue`}>
+          Steps Along my Path
+        </p>
+        <h2
+          className={`${styles.heroHeadText} text-white Home-Title-text-shadow`}
+        >
+          Work <span className="keyword-purple">Experience.</span>
+        </h2>
       </motion.div>
 
-      <div className='mt-6 flex flex-col pb-4 your-div-class' style={{ backgroundColor: 'rgba(0, 0, 0, 0.2)', borderRadius: '24px' }} >
-      <div className="inner-div" style={{flex: 1}}>
-
-        <pre className="code-snippet mt-6 mr-4 ml-4" style={{ backgroundColor: 'rgba(0, 0, 0, 0.95)', marginBottom: "24px"}}>
-            <span className="prompt">gwendal@portfolio:~$</span> <span className="command">${'history 3 > work'}</span>
-        </pre>
+      <div
+        className="mt-6 flex flex-col pb-4 your-div-class"
+        style={{ backgroundColor: "rgba(0, 0, 0, 0.2)", borderRadius: "24px" }}
+      >
+        <div className="inner-div" style={{ flex: 1 }}>
+          <pre
+            className="code-snippet mt-6 mr-4 ml-4"
+            style={{
+              backgroundColor: "rgba(0, 0, 0, 0.95)",
+              marginBottom: "24px",
+            }}
+          >
+            <span className="prompt">gwendal@portfolio:~$</span>{" "}
+            <span className="command">${"history 3 > work"}</span>
+          </pre>
         </div>
 
         {hasScrolled && (
-        <VerticalTimeline>
-          {experiences.map((experience, index) => (
-            <ExperienceCard
-              key={`experience-${index}`}
-              experience={experience}
-            />
-          ))}
-        </VerticalTimeline>
+          <VerticalTimeline>
+            {experiences.map((experience, index) => (
+              <ExperienceCard
+                key={`experience-${index}`}
+                experience={experience}
+              />
+            ))}
+          </VerticalTimeline>
         )}
-        
-
-      
       </div>
     </>
   );

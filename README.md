@@ -15,6 +15,10 @@ react-fast-marquee
 @emailjs/browser
 lodash
 react-scroll
+@loadable/component
+source-map-explorer
+webpack-bundle-analyzer
+feather-icons-react
 
 # React + Vite feat/POR-13
 

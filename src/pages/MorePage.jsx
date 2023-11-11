@@ -10,8 +10,6 @@ import { motion } from "framer-motion";
 import { styles } from "../styles";
 import { textVariant } from "../utils/motion";
 
-
-
 const MorePage = () => {
   const location = useLocation();
 
@@ -29,27 +27,26 @@ const MorePage = () => {
 
   return (
     <div className={`page-container ${!isEnabled ? "" : "masque"}`}>
-      
-        <motion.div className="mb-4" variants={textVariant()}>
-          <p className={`${styles.sectionSubText} keyword-blue`}>In My Mind</p>
-          <h2
-            className={`${styles.heroHeadText} text-white Home-Title-text-shadow`}
-          >
-            <span className="keyword-purple">More.</span>
-          </h2>
-        </motion.div>
-        <div className="inner-div" style={{ flex: 1 }}>
-          <pre
-            className="code-snippet mt-6"
-            style={{
-              backgroundColor: "rgba(0, 0, 0, 0.9)",
-              marginBottom: "24px",
-            }}
-          >
-            <span className="prompt">gwendal@portfolio:~$</span>{" "}
-            <span className="command">${"ls ~/more/ | less"}</span>
-          </pre>
-        </div>
+      <motion.div className="mb-4" variants={textVariant()}>
+        <p className={`${styles.sectionSubText} keyword-blue`}>In My Mind</p>
+        <h2
+          className={`${styles.heroHeadText} text-white Home-Title-text-shadow`}
+        >
+          <span className="keyword-purple">More.</span>
+        </h2>
+      </motion.div>
+      <div className="inner-div" style={{ flex: 1 }}>
+        <pre
+          className="code-snippet mt-6"
+          style={{
+            backgroundColor: "rgba(0, 0, 0, 0.9)",
+            marginBottom: "24px",
+          }}
+        >
+          <span className="prompt">gwendal@portfolio:~$</span>{" "}
+          <span className="command">${"ls ~/more/ | less"}</span>
+        </pre>
+      </div>
       <div
         style={{
           display: "flex",

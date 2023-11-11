@@ -43,7 +43,7 @@ import trello from "./tools/trello.svg";
 import vps from "./tools/vps.svg";
 import whimsical from "./tools/whimsical.svg";
 
-import avatar from "./avatar/avatar.png";
+import avatar from "./avatar/avatar.webp";
 
 //For skills (About Page)
 import code from "./skills/code.svg";
@@ -52,28 +52,28 @@ import processing from "./skills/processing.svg";
 import server from "./skills/server.svg";
 
 //For company logos (Work Page)
-import dgfip from "./company/dgfip.png";
-import mcdonalds from "./company/mcdonalds.png";
+import dgfip from "./company/dgfip.webp";
+import mcdonalds from "./company/mcdonalds.webp";
 
 //For project images (Project Page)
-import ArboScript from "./projects/ArboScript.png";
-import AutomatedCIInfrastructure from "./projects/AutomatedCIInfrastructure.png";
-import CaverneAuxJeux from "./projects/CaverneAuxJeux.png";
-import CICDAutomationToolkit from "./projects/CICDAutomationToolkit.png";
-import CompressiveSensing from "./projects/CompressiveSensing.png";
-import FoucaultsPendulumSim from "./projects/FoucaultsPendulumSim.png";
-import GoogleDriveProjectAutomation from "./projects/GoogleDriveProjectAutomation.png";
-import LSystemsVisualizer from "./projects/LSystemsVisualizer.png";
-import MultiMode2048 from "./projects/Multimode2048.png";
-import ParkingGame from "./projects/ParkingGame.png";
-import Portfolio3D from "./projects/Portfolio3D.png";
-import RandomForestOptimization from "./projects/RandomForestOptimization.png";
-import RobotTrading from "./projects/RobotTrading.png";
-import SparkHDFSLibraries from "./projects/SparkHDFSLibraries.png";
-import SportsAssociationWeb from "./projects/SportsAssociationWeb.png";
-import SubmarineSimulation from "./projects/SubmarineSimulation.png";
-import TraverseStrategyGame from "./projects/TraverseStrategyGame.png";
-import Velux from "./projects/Velux.png";
+import ArboScript from "./projects/ArboScript.webp";
+import AutomatedCIInfrastructure from "./projects/AutomatedCIInfrastructure.webp";
+import CaverneAuxJeux from "./projects/CaverneAuxJeux.webp";
+import CICDAutomationToolkit from "./projects/CICDAutomationToolkit.webp";
+import CompressiveSensing from "./projects/CompressiveSensing.webp";
+import FoucaultsPendulumSim from "./projects/FoucaultsPendulumSim.webp";
+import GoogleDriveProjectAutomation from "./projects/GoogleDriveProjectAutomation.webp";
+import LSystemsVisualizer from "./projects/LSystemsVisualizer.webp";
+import MultiMode2048 from "./projects/Multimode2048.webp";
+import ParkingGame from "./projects/ParkingGame.webp";
+import Portfolio3D from "./projects/Portfolio3D.webp";
+import RandomForestOptimization from "./projects/RandomForestOptimization.webp";
+import RobotTrading from "./projects/RobotTrading.webp";
+import SparkHDFSLibraries from "./projects/SparkHDFSLibraries.webp";
+import SportsAssociationWeb from "./projects/SportsAssociationWeb.webp";
+import SubmarineSimulation from "./projects/SubmarineSimulation.webp";
+import TraverseStrategyGame from "./projects/TraverseStrategyGame.webp";
+import Velux from "./projects/Velux.webp";
 
 //For project videos (Project Page)
 import CaverneAuxJeuxmp4 from "./projects/CaverneAuxJeux.mp4";
