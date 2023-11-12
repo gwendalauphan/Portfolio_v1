@@ -3,7 +3,7 @@ import { useFrame } from "@react-three/fiber";
 import { useGLTF } from "@react-three/drei";
 
 const Earth = ({ controlsRef, setAngles }) => {
-  const earth = useGLTF("./earth/scene.gltf");
+  const earth = useGLTF("./earth/scene-optimized.gltf");
 
   useFrame(() => {
     if (controlsRef.current) {

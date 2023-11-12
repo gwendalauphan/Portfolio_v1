@@ -1,7 +1,7 @@
 //Logo
 import logo from "./logo.svg";
 import menu from "./menu.svg";
-import github from "./github.png";
+import github from "./github.webp";
 import close from "./close.svg";
 
 //Technologies & Tools
@@ -35,7 +35,7 @@ import gitlabci from "./tools/gitlabci.svg";
 import jenkins from "./tools/jenkins.svg";
 import jira from "./tools/jira.svg";
 import microsoftteams from "./tools/microsoftteams.svg";
-import nexus from "./tools/nexus.png";
+import nexus from "./tools/nexus.svg";
 import slack from "./tools/slack.svg";
 import sonarqube from "./tools/sonarqube.svg";
 import ssh from "./tools/ssh.svg";

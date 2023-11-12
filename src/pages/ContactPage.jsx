@@ -1,5 +1,5 @@
 import React, { useContext, useState, useEffect } from "react";
-import useScrollNavigation from "../components/Navigation/Scroll/Scroll";
+
 import { useLocation } from "react-router-dom";
 
 import { ToggleContext } from "../components/Context/ToggleContext";
@@ -8,6 +8,8 @@ import { SectionWrapper } from "../hoc";
 import Form from "../components/Contact/Form/Form";
 import ContactHeader from "../components/Contact/Header/ContactHeader";
 import Annimation from "../components/Contact/Annimation/Annimation";
+
+//import useScrollNavigation from "../components/Navigation/Scroll/Scroll";
 
 const ContactPage = () => {
   const location = useLocation();
@@ -18,7 +20,7 @@ const ContactPage = () => {
 
   const { isEnabled } = useContext(ToggleContext);
 
-  useScrollNavigation(location.pathname, isEnabled);
+  //useScrollNavigation(location.pathname, isEnabled); //Utilisation de la navigation par scroll (haut et bas de page)
 
   useEffect(() => {
     if (isEnabled) {

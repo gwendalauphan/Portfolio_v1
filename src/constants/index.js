@@ -6,10 +6,6 @@ import BookOpen from 'feather-icons-react/build/IconComponents/BookOpen';
 
 
 import {
-  logo,
-  github,
-  close,
-  menu,
   //Technologies & Tools
   ansible,
   cassandra,

@@ -1,6 +1,5 @@
 import React, { useContext, useEffect } from "react";
 
-import useScrollNavigation from "../components/Navigation/Scroll/Scroll";
 import { useLocation } from "react-router-dom";
 
 import SectionWrapper from "../hoc/SectionWrapper";
@@ -10,6 +9,8 @@ import { ToggleContext } from "../components/Context/ToggleContext";
 import Experience from "../components/Experiences/Missions/Missions";
 
 import { useScroll } from "../components/Context/ScrollContext";
+
+//import useScrollNavigation from "../components/Navigation/Scroll/Scroll";
 
 const WorkPage = () => {
   const location = useLocation();
@@ -29,7 +30,7 @@ const WorkPage = () => {
 
   const { isEnabled } = useContext(ToggleContext);
 
-  useScrollNavigation(location.pathname, isEnabled);
+  //useScrollNavigation(location.pathname, isEnabled); //Utilisation de la navigation par scroll (haut et bas de page)
 
   useEffect(() => {
     if (isEnabled) {

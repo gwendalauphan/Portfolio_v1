@@ -19,6 +19,7 @@ react-scroll
 source-map-explorer
 webpack-bundle-analyzer
 feather-icons-react
+npm install -g gltf-pipeline
 
 # React + Vite feat/POR-13
 

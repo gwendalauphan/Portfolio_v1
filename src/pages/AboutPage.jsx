@@ -1,6 +1,5 @@
 import React, { useContext, useEffect, useState, useRef } from "react";
 
-import useScrollNavigation from "../components/Navigation/Scroll/Scroll";
 import { useLocation } from "react-router-dom";
 
 import About from "../components/Intro/About/About";
@@ -9,6 +8,8 @@ import Tech from "../components/Experiences/Tech/Tech";
 import { ToggleContext } from "../components/Context/ToggleContext";
 
 import { useScroll } from "../components/Context/ScrollContext";
+
+//import useScrollNavigation from "../components/Navigation/Scroll/Scroll";
 
 const AboutPage = () => {
   const location = useLocation();
@@ -20,14 +21,14 @@ const AboutPage = () => {
 
     const timer = setTimeout(() => {
       setHasScrolled(true);
-    }, 1000);
+    }, 50);
 
     return () => clearTimeout(timer);
   }, [location.pathname]); // Déclenchez l'effet à chaque changement de route
 
   const { isEnabled } = useContext(ToggleContext);
 
-  useScrollNavigation(location.pathname, isEnabled);
+  //useScrollNavigation(location.pathname, isEnabled); //Utilisation de la navigation par scroll (haut et bas de page)
 
   const [hoveredCardData, setHoveredCardData] = useState(null);
   const parentRef = useRef(null);

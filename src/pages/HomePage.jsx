@@ -6,10 +6,11 @@ import { styles } from "../styles";
 import "../index.css";
 
 import { motion } from "framer-motion";
-import useScrollNavigation from "../components/Navigation/Scroll/Scroll";
-import { useLocation } from "react-router-dom";
 
 import { ToggleContext } from "../components/Context/ToggleContext";
+
+//import { useLocation } from "react-router-dom";
+//import useScrollNavigation from "../components/Navigation/Scroll/Scroll";
 
 const pageVariantsTitle = {
   initial: { scale: 0.9, y: "-50%", opacity: 0 },
@@ -30,11 +31,12 @@ const pageTransition = {
 };
 
 const HomePage = () => {
-  const location = useLocation();
+  
 
   const { isEnabled } = useContext(ToggleContext);
 
-  useScrollNavigation(location.pathname, isEnabled);
+  //const location = useLocation();
+  //useScrollNavigation(location.pathname, isEnabled); //Utilisation de la navigation par scroll (haut et bas de page)
 
   useEffect(() => {
     if (isEnabled) {

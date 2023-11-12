@@ -1,6 +1,4 @@
 import React, { useContext, useEffect } from "react";
-import useScrollNavigation from "../components/Navigation/Scroll/Scroll";
-import { useLocation } from "react-router-dom";
 
 import { ToggleContext } from "../components/Context/ToggleContext";
 
@@ -10,12 +8,16 @@ import { motion } from "framer-motion";
 import { styles } from "../styles";
 import { textVariant } from "../utils/motion";
 
+//import { useLocation } from "react-router-dom";
+//import useScrollNavigation from "../components/Navigation/Scroll/Scroll";
+
 const MorePage = () => {
-  const location = useLocation();
+  
 
   const { isEnabled } = useContext(ToggleContext);
 
-  useScrollNavigation(location.pathname, isEnabled);
+  //const location = useLocation();
+  //useScrollNavigation(location.pathname, isEnabled); //Utilisation de la navigation par scroll (haut et bas de page)
 
   useEffect(() => {
     if (isEnabled) {
