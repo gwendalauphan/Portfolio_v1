@@ -75,6 +75,7 @@ import {
   SubmarineSimulation,
   TraverseStrategyGame,
   Velux,
+  FiniteStateMachine,
 
   //For project videos (Project Page)
   CaverneAuxJeuxmp4
@@ -1189,6 +1190,29 @@ const projects = [
     },
     media: {
       image: GoogleDriveProjectAutomation,
+      video: "",
+    },
+    sourceCodeLink: "https://github.com/",
+  },
+  {//Finite State Machine Editor
+    name: "Finite State Machine Editor",
+    shortDescription: "Editor for designing and implementing finite state machines in C.",
+    longDescription: "Developed a dedicated editor for finite state machines, using C programming language. The project involved creating a user-friendly interface for designing, visualizing, and implementing finite state machines, commonly used in computing and mathematical computations.",
+    tags: {
+      technos: [
+        { name: "C", color: "#A8B9CC" },
+      ],
+      themes: [
+        { name: "Finite State Machines", color: "#1F77B4" },
+        { name: "Software Development", color: "#17BECF" },
+      ],
+      frame: [
+        { name: "School", color: "#8C564B" },
+        { name: "Project", color: "#9467BD" },
+      ],
+    },
+    media: {
+      image: FiniteStateMachine,
       video: "",
     },
     sourceCodeLink: "https://github.com/",

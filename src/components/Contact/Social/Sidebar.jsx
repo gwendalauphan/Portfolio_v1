@@ -69,6 +69,9 @@ class Sidebar extends Component {
               </li>
             ))}
           </ul>
+          <a href="/CV_Gwendal_Auphan.pdf" target="_blank">
+            CV
+          </a>
         </div>
         <div
           className={`arrow ${isArrowRotated ? "rotated" : ""}`}

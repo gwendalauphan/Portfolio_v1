@@ -74,6 +74,7 @@ import SportsAssociationWeb from "./projects/SportsAssociationWeb.webp";
 import SubmarineSimulation from "./projects/SubmarineSimulation.webp";
 import TraverseStrategyGame from "./projects/TraverseStrategyGame.webp";
 import Velux from "./projects/Velux.webp";
+import FiniteStateMachine from "./projects/FiniteStateMachine.webp";
 
 //For project videos (Project Page)
 import CaverneAuxJeuxmp4 from "./projects/CaverneAuxJeux.mp4";
@@ -154,6 +155,7 @@ export {
   SubmarineSimulation,
   TraverseStrategyGame,
   Velux,
+  FiniteStateMachine,
 
   //For project videos (Project Page)
   CaverneAuxJeuxmp4
