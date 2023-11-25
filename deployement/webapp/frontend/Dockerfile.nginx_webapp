@@ -1,0 +1,9 @@
+# Étape pour servir l'application avec NGINX et SQLite
+FROM nginx:alpine
+
+ARG DEFAULT_CONF_NGINX="./webapp/frontend/webappconfig/nginx/conf.d/default.conf"
+ARG CONF_NGINX="./webapp/frontend/webappconfig/nginx/nginx.conf"
+
+# (Optionnel) Si tu as une configuration NGINX personnalisée
+COPY $DEFAULT_CONF_NGINX /etc/nginx/conf.d/default.conf
+COPY $CONF_NGINX /etc/nginx/nginx.conf

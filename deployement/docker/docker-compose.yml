@@ -1,0 +1,45 @@
+version: '3.8'
+services:
+
+  frontend-builder:
+    extends:
+        file: ../webapp/frontend.docker-compose.yml
+        service: frontend-builder
+    environment:
+      - DEBUG=1
+
+  webapp:
+    extends:
+      file: ../webapp/frontend.docker-compose.yml
+      service: webapp
+    environment:
+      - DEBUG=1
+    networks:
+      - webapp_network
+
+    depends_on:
+      - frontend-builder
+
+
+  swag:
+    extends:
+      file: ../swag/swag.docker-compose.yml
+      service: swag
+    environment:
+      - DEBUG=1
+    networks:
+      - webapp_network
+
+
+volumes:
+  nginx_logs:
+  nginx_conf:
+  build_volume:
+
+networks:
+  webapp_network:
+    driver: bridge
+
+
+  
+  
