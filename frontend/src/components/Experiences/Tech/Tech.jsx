@@ -1,7 +1,9 @@
 import MarqueeCards from "./Marquee";
 import { technologies, tools } from "../../../constants";
+import { useInView } from "react-intersection-observer";
 
 import React, { useState, useEffect, useRef } from "react";
+import { useScroll } from "../../Context/ScrollContext";
 
 // Card.jsx
 
@@ -56,42 +58,51 @@ const Card = ({ onHoverChange, icon, name, description, link }) => {
 };
 
 const Tech = ({ onCardHoverChange }) => {
+  const { hasScrolled } = useScroll();
+  const { ref, inView } = useInView({
+    triggerOnce: true,
+    threshold: 0.1,
+  });
+
   return (
     <div
+      ref={ref} // Attacher la référence ici
       className="w-full flex justify-center mt-20 mx-auto"
       style={{ maxWidth: "90%" }}
     >
-      <div className="w-full flex flex-col ">
-        <div className="w-full flex flex-col pb-4">
-          <MarqueeCards direction="left">
-            {technologies.map((technology) => (
-              <Card
-                key={technology.name}
-                onHoverChange={onCardHoverChange}
-                icon={technology.icon}
-                name={technology.name}
-                description={technology.description}
-                link={technology.link}
-              />
-            ))}
-          </MarqueeCards>
-        </div>
+      {inView && hasScrolled && (
+        <div className="w-full flex flex-col ">
+          <div className="w-full flex flex-col pb-4">
+            <MarqueeCards direction="left">
+              {technologies.map((technology) => (
+                <Card
+                  key={technology.name}
+                  onHoverChange={onCardHoverChange}
+                  icon={technology.icon}
+                  name={technology.name}
+                  description={technology.description}
+                  link={technology.link}
+                />
+              ))}
+            </MarqueeCards>
+          </div>
 
-        <div className="w-full flex flex-col pb-4">
-          <MarqueeCards direction="right">
-            {tools.map((tool) => (
-              <Card
-                key={tool.name}
-                onHoverChange={onCardHoverChange}
-                icon={tool.icon}
-                name={tool.name}
-                description={tool.description}
-                link={tool.link}
-              />
-            ))}
-          </MarqueeCards>
+          <div className="w-full flex flex-col pb-4">
+            <MarqueeCards direction="right">
+              {tools.map((tool) => (
+                <Card
+                  key={tool.name}
+                  onHoverChange={onCardHoverChange}
+                  icon={tool.icon}
+                  name={tool.name}
+                  description={tool.description}
+                  link={tool.link}
+                />
+              ))}
+            </MarqueeCards>
+          </div>
         </div>
-      </div>
+      )}
     </div>
   );
 };
