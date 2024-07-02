@@ -1,0 +1,8 @@
+---
+- hosts: server_ovh
+  become: yes
+  gather_facts: no
+  remote_user: rocky
+  tasks:
+    - import_role:
+        name: install_docker
