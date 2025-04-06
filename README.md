@@ -41,3 +41,14 @@ Quality tools
 - npm run test
 - hadolint
 - CHANGELOG.md
+
+Need to finish:
+- tag-release, implement trigger to update variables_management for dev and prd
+
+Need to check:
+- https://docs.gitlab.com/ci/docker/docker_layer_caching/
+- https://docs.docker.com/build/bake/reference/
+- Dockle
+- Hadolint
+
+
