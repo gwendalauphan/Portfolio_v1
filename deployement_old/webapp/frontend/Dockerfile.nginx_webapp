@@ -1,2 +1,0 @@
-# Étape pour servir l'application avec NGINX et SQLite
-FROM nginx:alpine
