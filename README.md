@@ -33,3 +33,11 @@ And build the project the image.
 Run the pipeline or the playbooks to deploy the project.
 
 
+
+Quality tools
+- Gitlab CI/CD
+- npm run lint
+- npm run format
+- npm run test
+- hadolint
+- CHANGELOG.md
