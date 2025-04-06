@@ -25,16 +25,29 @@ debug:
       echo "NODE_VERSION: $NODE_VERSION"
       echo "User: $CI_REGISTRY_USER"
       echo "Registry: $CI_REGISTRY"
+  only:
+    - merge_requests
+    - branches
+    - tags
   
 test:
   stage: test
   image: node:${NODE_VERSION}
+  only:
+    - merge_requests
+    - branches
+    - tags
+  cache:
+    key: ${CI_COMMIT_REF_SLUG}
+    paths:
+      - app/node_modules/
   script:
     - cd app
     - node -v
     - npm ci
     #- npm run lint
     #- npm run test
+    - npm run build
 
 .before_docker_login: &before_docker_login
   before_script:
@@ -48,23 +61,61 @@ build:
     - docker:dind
   <<: *before_docker_login
   script:
+    - echo "Build image"
     - docker compose -f docker/docker-compose.yml build --pull
-    - docker push ${BUILD_IMAGE}
+    - echo "Run containers for standalone"
+    - docker compose -f standalone/docker-compose.yml up -d
+    #- immplement /healthz
+    - docker compose -f standalone/docker-compose.yml down
 
-main-release:
-  stage: deploy
-  only:
-    - main
-  image: docker:latest
-  services:
-    - docker:dind
-  <<: *before_docker_login
-  script:
-    - ENV_DEPLOYMENT=prd
-    - PORTFOLIO_V1_TAG=${CI_COMMIT_SHORT_SHA}
-    - TARGET_IMAGE=${PORTFOLIO_V1_GROUP_REGISTRY}/${PORTFOLIO_V1_REPO_NAME}/${ENV_DEPLOYMENT}/${PORTFOLIO_V1_IMAGE_NAME}:${PORTFOLIO_V1_TAG}
-    - docker tag ${BUILD_IMAGE} ${TARGET_IMAGE}
-    - docker push ${TARGET_IMAGE}
+    # On reste ici en syntaxe *shell* (bash) pour le script (ok).
+    - |
+      echo "==== Début du push d'image en fonction des conditions ===="
+      if [[ "$CI_COMMIT_MESSAGE" == *"[update:image]"* ]] && [[ "$CI_COMMIT_BRANCH" != "main" ]]; then
+        echo "Condition 1: commit message contient [update:image] et branch != main"
+        echo "-> On pousse directement l'image: ${BUILD_IMAGE}"
+        docker push "${BUILD_IMAGE}"
+
+      elif [[ "$CI_COMMIT_BRANCH" == "main" ]]; then
+        echo "Condition 2: branch == main"
+        echo "-> On retag l'image avant de la pousser"
+        ENV_DEPLOYMENT="prd"
+        PORTFOLIO_V1_TAG="${CI_COMMIT_SHORT_SHA}"
+        TARGET_IMAGE="${PORTFOLIO_V1_GROUP_REGISTRY}/${PORTFOLIO_V1_REPO_NAME}/${ENV_DEPLOYMENT}/${PORTFOLIO_V1_IMAGE_NAME}:${PORTFOLIO_V1_TAG}"
+
+        echo "Retagging ${BUILD_IMAGE} vers ${TARGET_IMAGE}"
+        docker tag "${BUILD_IMAGE}" "${TARGET_IMAGE}"
+        echo "Push de ${TARGET_IMAGE}"
+        docker push "${TARGET_IMAGE}"
+
+      elif [[ "$CI_PIPELINE_SOURCE" == "tag" ]]; then
+        echo "Condition 3: on est sur un pipeline de type 'tag'"
+        echo "-> On retag l'image avant de la pousser"
+        ENV_DEPLOYMENT="prd"
+        PORTFOLIO_V1_TAG="${CI_COMMIT_TAG}"
+        TARGET_IMAGE="${PORTFOLIO_V1_GROUP_REGISTRY}/${PORTFOLIO_V1_REPO_NAME}/${ENV_DEPLOYMENT}/${PORTFOLIO_V1_IMAGE_NAME}:${PORTFOLIO_V1_TAG}"
+
+        echo "Retagging ${BUILD_IMAGE} vers ${TARGET_IMAGE}"
+        docker tag "${BUILD_IMAGE}" "${TARGET_IMAGE}"
+        echo "Push de ${TARGET_IMAGE}"
+        docker push "${TARGET_IMAGE}"
+
+      else
+        echo "Condition 4: Aucune condition remplie"
+        echo "Skipping image push : pas de [update:image], pas de main, pas de tag."
+      fi
+      echo "==== Fin du push d'image ===="
+
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
+      when: always
+    - if: '$CI_PIPELINE_SOURCE == "push" && $CI_COMMIT_MESSAGE =~ /(\[update:image\])/'
+      when: always
+    - if: '$CI_PIPELINE_SOURCE == "push" && $CI_COMMIT_BRANCH == "main"'
+      when: always
+    - if: '$CI_PIPELINE_SOURCE == "tag"'
+      when: always
+      
 
 tag-release:
   stage: deploy
@@ -75,8 +126,11 @@ tag-release:
     - docker:dind
   <<: *before_docker_login
   script:
-    - PORTFOLIO_V1_TAG=${CI_COMMIT_TAG}
-    - ENV_DEPLOYMENT=prd
-    - TARGET_IMAGE=${PORTFOLIO_V1_GROUP_REGISTRY}/${PORTFOLIO_V1_REPO_NAME}/${ENV_DEPLOYMENT}/${PORTFOLIO_V1_IMAGE_NAME}:${PORTFOLIO_V1_TAG}
-    - docker tag ${BUILD_IMAGE} ${TARGET_IMAGE}
-    - docker push ${TARGET_IMAGE}
+    - curl -X POST \
+      -F token=$TRIGGER_TOKEN \
+      -F ref=main \
+      -F "variables[RELEASE_TAG]=$CI_COMMIT_TAG" \
+      -F "variables[PROJECT_NAME]=$CI_PROJECT_NAME" \
+      https://gitlab.com/api/v4/projects/<project_id>/trigger/pipeline
+
+
