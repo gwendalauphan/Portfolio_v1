@@ -68,14 +68,17 @@ build:
     #- immplement /healthz
     - docker compose -f standalone/docker-compose.yml down
 
-    # On reste ici en syntaxe *shell* (bash) pour le script (ok).
-    - |
-      echo "==== Début du push d'image en fonction des conditions ===="
-      if [[ "$CI_COMMIT_MESSAGE" == *"[update:image]"* ]] && [[ "$CI_COMMIT_BRANCH" != "main" ]]; then
-        echo "Condition 1: commit message contient [update:image] et branch != main"
-        echo "-> On pousse directement l'image: ${BUILD_IMAGE}"
-        docker push "${BUILD_IMAGE}"
+    - echo "=== Variables debug ==="
+    - echo "CI_PIPELINE_SOURCE  = $CI_PIPELINE_SOURCE"
+    - echo "CI_COMMIT_BRANCH    = $CI_COMMIT_BRANCH"
+    - echo "CI_COMMIT_MESSAGE   = <$CI_COMMIT_MESSAGE>"
 
+    - |
+      echo "=== Choix de la condition d'envoi d'image ==="
+      if [[ "$CI_COMMIT_MESSAGE" == *"\[update:image\]"* ]] && [[ "$CI_COMMIT_BRANCH" != "main" ]]; then
+        echo "Condition 1: [update:image] détecté et branch != main"
+        echo "→ On pousse directement l'image: ${BUILD_IMAGE}"
+        docker push "${BUILD_IMAGE}"
       elif [[ "$CI_COMMIT_BRANCH" == "main" ]]; then
         echo "Condition 2: branch == main"
         echo "-> On retag l'image avant de la pousser"
@@ -88,20 +91,8 @@ build:
         echo "Push de ${TARGET_IMAGE}"
         docker push "${TARGET_IMAGE}"
 
-      elif [[ "$CI_PIPELINE_SOURCE" == "tag" ]]; then
-        echo "Condition 3: on est sur un pipeline de type 'tag'"
-        echo "-> On retag l'image avant de la pousser"
-        ENV_DEPLOYMENT="prd"
-        PORTFOLIO_V1_TAG="${CI_COMMIT_TAG}"
-        TARGET_IMAGE="${PORTFOLIO_V1_GROUP_REGISTRY}/${PORTFOLIO_V1_REPO_NAME}/${ENV_DEPLOYMENT}/${PORTFOLIO_V1_IMAGE_NAME}:${PORTFOLIO_V1_TAG}"
-
-        echo "Retagging ${BUILD_IMAGE} vers ${TARGET_IMAGE}"
-        docker tag "${BUILD_IMAGE}" "${TARGET_IMAGE}"
-        echo "Push de ${TARGET_IMAGE}"
-        docker push "${TARGET_IMAGE}"
-
       else
-        echo "Condition 4: Aucune condition remplie"
+        echo "Condition 3: Aucune condition remplie"
         echo "Skipping image push : pas de [update:image], pas de main, pas de tag."
       fi
       echo "==== Fin du push d'image ===="
@@ -114,19 +105,45 @@ build:
     - if: '$CI_PIPELINE_SOURCE == "push" && $CI_COMMIT_BRANCH == "main"'
       when: always
     - if: '$CI_PIPELINE_SOURCE == "tag"'
-      when: always
-      
+      when: never
+
+build-tag:
+  stage: build
+  image: docker:latest
+  only:
+    - tags
+  services:
+    - docker:dind
+  <<: *before_docker_login
+  script:
+    - |
+      echo "-> On retag l'image avant de la pousser"
+      ENV_DEPLOYMENT="prd"
+      PORTFOLIO_V1_TAG="${CI_COMMIT_TAG}"
+      COMMIT_SHA_MAIN=$(git ls-remote --heads origin main | awk '{print substr($1, 1, 8)}')
+      echo "COMMIT_SHA_MAIN: ${COMMIT_SHA_MAIN}"
+
+      LAST_IMAGE_MAIN="${PORTFOLIO_V1_GROUP_REGISTRY}/${PORTFOLIO_V1_REPO_NAME}/${ENV_DEPLOYMENT}/${PORTFOLIO_V1_IMAGE_NAME}:${COMMIT_SHA_MAIN}"
+      TARGET_IMAGE="${PORTFOLIO_V1_GROUP_REGISTRY}/${PORTFOLIO_V1_REPO_NAME}/${ENV_DEPLOYMENT}/${PORTFOLIO_V1_IMAGE_NAME}:${PORTFOLIO_V1_TAG}"
+
+      echo "Retagging ${LAST_IMAGE_MAIN} vers ${TARGET_IMAGE}"
+      docker pull "${LAST_IMAGE_MAIN}"
+      docker tag "${LAST_IMAGE_MAIN}" "${TARGET_IMAGE}"
+      echo "Push de ${TARGET_IMAGE}"
+      docker push "${TARGET_IMAGE}"
 
 tag-release:
   stage: deploy
   only:
     - tags
-  image: docker:latest
-  services:
-    - docker:dind
   <<: *before_docker_login
   script:
-    - curl -X POST \
+    - |
+      echo "Triggering the release pipeline"
+      echo "CI_COMMIT_TAG: $CI_COMMIT_TAG"
+      echo "CI_PROJECT_NAME: $CI_PROJECT_NAME"
+      exit 0
+      curl -X POST \
       -F token=$TRIGGER_TOKEN \
       -F ref=main \
       -F "variables[RELEASE_TAG]=$CI_COMMIT_TAG" \
