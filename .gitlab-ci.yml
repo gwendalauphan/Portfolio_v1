@@ -25,10 +25,11 @@ debug:
       echo "NODE_VERSION: $NODE_VERSION"
       echo "User: $CI_REGISTRY_USER"
       echo "Registry: $CI_REGISTRY"
-  only:
-    - merge_requests
-    - branches
-    - tags
+  rules:
+    - if: '$CI_COMMIT_MESSAGE =~ /(\[debug:true\])/'
+      when: always
+    - when: never
+
   
 test:
   stage: test
@@ -75,8 +76,8 @@ build:
 
     - |
       echo "=== Choix de la condition d'envoi d'image ==="
-      if [[ "$CI_COMMIT_MESSAGE" == *"\[update:image\]"* ]] && [[ "$CI_COMMIT_BRANCH" != "main" ]]; then
-        echo "Condition 1: [update:image] détecté et branch != main"
+      if [[ "$CI_COMMIT_MESSAGE" == *"\[build:image\]"* ]] && [[ "$CI_COMMIT_BRANCH" != "main" ]]; then
+        echo "Condition 1: [build:image] détecté et branch != main"
         echo "→ On pousse directement l'image: ${BUILD_IMAGE}"
         docker push "${BUILD_IMAGE}"
       elif [[ "$CI_COMMIT_BRANCH" == "main" ]]; then
@@ -93,14 +94,14 @@ build:
 
       else
         echo "Condition 3: Aucune condition remplie"
-        echo "Skipping image push : pas de [update:image], pas de main, pas de tag."
+        echo "Skipping image push : pas de [build:image], pas de main, pas de tag."
       fi
       echo "==== Fin du push d'image ===="
 
   rules:
     - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
       when: always
-    - if: '$CI_PIPELINE_SOURCE == "push" && $CI_COMMIT_MESSAGE =~ /(\[update:image\])/'
+    - if: '$CI_PIPELINE_SOURCE == "push" && $CI_COMMIT_MESSAGE =~ /(\[build:image\])/'
       when: always
     - if: '$CI_PIPELINE_SOURCE == "push" && $CI_COMMIT_BRANCH == "main"'
       when: always
@@ -136,7 +137,6 @@ tag-release:
   stage: deploy
   only:
     - tags
-  <<: *before_docker_login
   script:
     - |
       echo "Triggering the release pipeline"
