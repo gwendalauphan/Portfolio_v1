@@ -1,0 +1,43 @@
+spec:
+  inputs:
+    REGISTRY_IMAGE:
+      description: "Link to the image in the registry"
+      type: string
+      required: true
+    PROJECT_NAME:
+      description: "Name of the project"
+      type: string
+      required: true
+    ENV_DEPLOYMENT:
+      description: "Environment deployment"
+      type: string
+      required: true
+
+---
+
+update-variable-managment:
+  stage: deploy
+  script:
+    - |
+      echo "Triggering the update-variable-managment pipeline"
+      echo "PROJECT_NAME: $PROJECT_NAME"
+      echo "ENV_DEPLOYMENT: $ENV_DEPLOYMENT"
+      echo "REGISTRY_IMAGE: $REGISTRY_IMAGE"
+
+      curl -X POST \
+      -F token=$TRIGGER_TOKEN \
+      -F ref=main \
+      -F "variables[REGISTRY_IMAGE]=$REGISTRY_IMAGE" \
+      -F "variables[PROJECT_NAME]=$PROJECT_NAME" \
+      -F "variables[ENV_DEPLOYMENT]=$ENV_DEPLOYMENT" \
+      https://gitlab.com/api/v4/projects/<project_id>/trigger/pipeline
+
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "tag"'
+      when: always
+    - when: manual
+
+
+
+
+

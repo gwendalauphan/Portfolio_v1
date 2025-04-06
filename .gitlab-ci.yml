@@ -8,6 +8,10 @@ variables:
   PORTFOLIO_V1_TAG: "latest"
   BUILD_IMAGE: "${PORTFOLIO_V1_GROUP_REGISTRY}/${PORTFOLIO_V1_REPO_NAME}/${ENV_DEPLOYMENT}/${PORTFOLIO_V1_IMAGE_NAME}:${PORTFOLIO_V1_TAG}"
   NODE_VERSION: "18"
+  SHARED_ENV_FILE: deploy_inputs.env
+  VARIABLES_MANAGMENT_PROJECT_ID: "68617213" # Remplacez <project_id> par l'ID de votre projet GitLab
+
+
 
 stages:
   - debug
@@ -133,21 +137,35 @@ build-tag:
       echo "Push de ${TARGET_IMAGE}"
       docker push "${TARGET_IMAGE}"
 
-tag-release:
+    - echo "REGISTRY_IMAGE=${TARGET_IMAGE}" > $SHARED_ENV_FILE
+    - echo "PROJECT_NAME=${PORTFOLIO_V1_REPO_NAME}" >> $SHARED_ENV_FILE
+    - echo "ENV_DEPLOYMENT=${ENV_DEPLOYMENT}" >> $SHARED_ENV_FILE
+    - cat $SHARED_ENV_FILE
+  artifacts:
+    reports:
+      dotenv: $SHARED_ENV_FILE
+
+
+
+
+# Job DEPLOY
+update-variable-managment-manual:
   stage: deploy
-  only:
-    - tags
-  script:
-    - |
-      echo "Triggering the release pipeline"
-      echo "CI_COMMIT_TAG: $CI_COMMIT_TAG"
-      echo "CI_PROJECT_NAME: $CI_PROJECT_NAME"
-      exit 0
-      curl -X POST \
-      -F token=$TRIGGER_TOKEN \
-      -F ref=main \
-      -F "variables[RELEASE_TAG]=$CI_COMMIT_TAG" \
-      -F "variables[PROJECT_NAME]=$CI_PROJECT_NAME" \
-      https://gitlab.com/api/v4/projects/<project_id>/trigger/pipeline
+  variables:
+    REGISTRY_IMAGE:
+      value: ""
+    PROJECT_NAME:
+      value: ""
+    ENV_DEPLOYMENT:
+      value: ""
+  rules:
+    - when: manual
+      allow_failure: false
+      
+  inherit:
+    variables: false
+  trigger:
+    project: "web6464113/portfolio_v1-variable-managment"
+    branch: "main"
 
 
