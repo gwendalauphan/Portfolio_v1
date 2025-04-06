@@ -1,0 +1,72 @@
+variables:
+  DOCKER_HOST: tcp://docker:2375/
+  DOCKER_TLS_CERTDIR: ""
+  PORTFOLIO_V1_GROUP_REGISTRY: registry.gitlab.com/web6464113
+  PORTFOLIO_V1_REPO_NAME: "portfolio_v1"
+  ENV_DEPLOYMENT: "dev"
+  PORTFOLIO_V1_IMAGE_NAME: "portfolio_v1-app-builder"
+  PORTFOLIO_V1_TAG: "latest"
+  BUILD_IMAGE: "${PORTFOLIO_V1_GROUP_REGISTRY}/${PORTFOLIO_V1_REPO_NAME}/${ENV_DEPLOYMENT}/${PORTFOLIO_V1_IMAGE_NAME}:${PORTFOLIO_V1_TAG}"
+  NODE_VERSION: "18"
+
+stages:
+  - debug
+  - test
+  - build
+  - deploy
+
+debug:
+  stage: debug
+  script:
+    - |
+      source ./docker/.env
+      echo "LOCAL_WEBAPP_DIR: $LOCAL_WEBAPP_DIR"
+      echo "BUILD_IMAGE: $BUILD_IMAGE"
+      echo "NODE_VERSION: $NODE_VERSION"
+      echo "User: $CI_REGISTRY_USER"
+      echo "Registry: $CI_REGISTRY"
+  
+test:
+  stage: test
+  image: node:${NODE_VERSION}
+  script:
+    - cd app
+    - node -v
+    - npm ci
+    #- npm run lint
+    #- npm run test
+
+build:
+  stage: build
+  image: docker:latest
+  services:
+    - docker:dind
+  before_script:
+    - docker info
+    - export COMPOSE_BAKE=true
+    - echo "$CI_REGISTRY_PASSWORD" | docker login $CI_REGISTRY -u $CI_REGISTRY_USER --password-stdin
+  script:
+    - docker compose -f docker/docker-compose.yml build --pull
+    - docker push ${BUILD_IMAGE}
+
+main-release:
+  stage: deploy
+  only:
+    - main
+  script:
+    - ENV_DEPLOYMENT=prd
+    - PORTFOLIO_V1_TAG=${CI_COMMIT_SHORT_SHA}
+    - TARGET_IMAGE=${PORTFOLIO_V1_GROUP_REGISTRY}/${PORTFOLIO_V1_REPO_NAME}/${ENV_DEPLOYMENT}/${PORTFOLIO_V1_IMAGE_NAME}:${PORTFOLIO_V1_TAG}
+    - docker tag ${BUILD_IMAGE} ${TARGET_IMAGE}
+    - docker push ${TARGET_IMAGE}
+
+tag-release:
+  stage: deploy
+  only:
+    - tags
+  script:
+    - PORTFOLIO_V1_TAG=${CI_COMMIT_TAG}
+    - ENV_DEPLOYMENT=prd
+    - TARGET_IMAGE=${PORTFOLIO_V1_GROUP_REGISTRY}/${PORTFOLIO_V1_REPO_NAME}/${ENV_DEPLOYMENT}/${PORTFOLIO_V1_IMAGE_NAME}:${PORTFOLIO_V1_TAG}
+    - docker tag ${BUILD_IMAGE} ${TARGET_IMAGE}
+    - docker push ${TARGET_IMAGE}

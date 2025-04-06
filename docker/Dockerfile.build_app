@@ -1,0 +1,34 @@
+# --------- Build Stage ---------
+ARG NODE_VERSION=18
+FROM node:${NODE_VERSION} AS build
+
+ARG WORKDIR_PATH="/app/portfolio_v1"
+ARG LOCAL_WEBAPP_DIR="app"
+ARG BUILD_DIR="dist"
+
+ENV BUILD_PATH=${WORKDIR_PATH}/${BUILD_DIR}
+
+WORKDIR ${WORKDIR_PATH}
+
+COPY ${LOCAL_WEBAPP_DIR}/package*.json ./
+RUN npm install && npm cache clean --force
+
+COPY ${LOCAL_WEBAPP_DIR}/ ./
+RUN npm run build
+
+
+# --------- Final Slim Image ---------
+FROM alpine:latest
+
+# Install only if needed (e.g., for debugging or access)
+RUN apk add --no-cache bash
+
+# Set workdir and copy the built dist folder
+
+ARG WORKDIR_PATH="/app/portfolio_v1"
+ARG LOCAL_WEBAPP_DIR="app"
+ARG BUILD_DIR="dist"
+ENV BUILD_PATH=${WORKDIR_PATH}/${BUILD_DIR}
+
+COPY --from=build /app/portfolio_v1/dist /app/portfolio_v1/dist
+COPY swagconfig/ /app/portfolio_v1/swagconfig

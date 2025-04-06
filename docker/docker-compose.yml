@@ -1,0 +1,12 @@
+services:
+  app-builder:
+    image: registry.gitlab.com/web6464113/portfolio_v1/dev/portfolio_v1-app-builder:${PORTFOLIO_V1_TAG:-latest}
+    build:
+      context: ${PROJECT_CONTEXT:-..}
+      dockerfile: ./docker/Dockerfile.build_app
+      args:
+        NODE_VERSION: ${NODE_VERSION:-18}
+        WORKDIR_PATH: ${WORKDIR_PATH:-/app/portfolio_v1}
+        LOCAL_WEBAPP_DIR: ${LOCAL_WEBAPP_DIR:-app}
+        BUILD_DIR: ${BUILD_DIR:-dist}
+
