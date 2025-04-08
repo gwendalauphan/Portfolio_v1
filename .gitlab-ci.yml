@@ -9,11 +9,11 @@ variables:
   BUILD_IMAGE: "${PORTFOLIO_V1_GROUP_REGISTRY}/${PORTFOLIO_V1_REPO_NAME}/${ENV_DEPLOYMENT}/${PORTFOLIO_V1_IMAGE_NAME}:${PORTFOLIO_V1_TAG}"
   NODE_VERSION: "18"
   SHARED_ENV_FILE: deploy_inputs.env
-  VARIABLES_MANAGMENT_PROJECT_ID: "68617213" # Remplacez <project_id> par l'ID de votre projet GitLab
-
+  VARIABLES_MANAGMENT_PROJECT_ID: "68617213"
 
 
 stages:
+  - trigger
   - debug
   - test
   - build
@@ -62,10 +62,31 @@ test:
 build:
   stage: build
   image: docker:latest
+  needs:
+    - test
   services:
     - docker:dind
   <<: *before_docker_login
   script:
+    # if tag and branch == main
+    # check if image already exists
+    # if not, build and push
+    # if yes, skip build and push
+    - touch $SHARED_ENV_FILE
+    - |
+      if [[ $CI_PIPELINE_SOURCE == "tag" && $CI_COMMIT_BRANCH == "main" ]]; then
+        #check if image already exists
+        ENV_DEPLOYMENT="prd"
+        IMAGE_TAG="${PORTFOLIO_V1_GROUP_REGISTRY}/${PORTFOLIO_V1_REPO_NAME}/${ENV_DEPLOYMENT}/${PORTFOLIO_V1_IMAGE_NAME}:${CI_COMMIT_TAG}"
+        echo "IMAGE_TAG: ${IMAGE_TAG}"
+        echo "Checking if image already exists..."
+        if docker pull "${IMAGE_TAG}"; then
+          echo "Image already exists, skipping build and push"
+          exit 0
+        else
+          echo "Image does not exist, building and pushing"
+        fi
+      fi
     - echo "Build image"
     - docker compose -f docker/docker-compose.yml build --pull
     - echo "Run containers for standalone"
@@ -80,25 +101,48 @@ build:
 
     - |
       echo "=== Choix de la condition d'envoi d'image ==="
+
       if [[ "$CI_COMMIT_MESSAGE" == *"\[build:image\]"* ]] && [[ "$CI_COMMIT_BRANCH" != "main" ]]; then
         echo "Condition 1: [build:image] détecté et branch != main"
         echo "→ On pousse directement l'image: ${BUILD_IMAGE}"
-        docker push "${BUILD_IMAGE}"
-      elif [[ "$CI_COMMIT_BRANCH" == "main" ]]; then
-        echo "Condition 2: branch == main"
-        echo "-> On retag l'image avant de la pousser"
-        ENV_DEPLOYMENT="prd"
+        
+        ENV_DEPLOYMENT="dev"
         PORTFOLIO_V1_TAG="${CI_COMMIT_SHORT_SHA}"
         TARGET_IMAGE="${PORTFOLIO_V1_GROUP_REGISTRY}/${PORTFOLIO_V1_REPO_NAME}/${ENV_DEPLOYMENT}/${PORTFOLIO_V1_IMAGE_NAME}:${PORTFOLIO_V1_TAG}"
 
-        echo "Retagging ${BUILD_IMAGE} vers ${TARGET_IMAGE}"
         docker tag "${BUILD_IMAGE}" "${TARGET_IMAGE}"
-        echo "Push de ${TARGET_IMAGE}"
+        docker push "${TARGET_IMAGE}"
+        docker push "${BUILD_IMAGE}"
+
+        echo "REGISTRY_IMAGE=${TARGET_IMAGE}" > $SHARED_ENV_FILE
+        echo "PROJECT_NAME=${PORTFOLIO_V1_REPO_NAME}" >> $SHARED_ENV_FILE
+        echo "ENV_DEPLOYMENT=${ENV_DEPLOYMENT}" >> $SHARED_ENV_FILE
+        cat $SHARED_ENV_FILE
+
+      elif [[ "$CI_COMMIT_BRANCH" == "main" ]]; then
+        echo "Condition 2: branch == main"
+        echo "-> On retag l'image avant de la pousser"
+        
+        ENV_DEPLOYMENT="prd"
+        PORTFOLIO_V1_TAG="${CI_COMMIT_SHORT_SHA}"
+        TARGET_IMAGE="${PORTFOLIO_V1_GROUP_REGISTRY}/${PORTFOLIO_V1_REPO_NAME}/${ENV_DEPLOYMENT}/${PORTFOLIO_V1_IMAGE_NAME}:${PORTFOLIO_V1_TAG}"
+        TARGET_IMAGE_LATEST="${PORTFOLIO_V1_GROUP_REGISTRY}/${PORTFOLIO_V1_REPO_NAME}/${ENV_DEPLOYMENT}/${PORTFOLIO_V1_IMAGE_NAME}:latest"
+        
+        docker tag "${BUILD_IMAGE}" "${TARGET_IMAGE}"
+        docker tag "${BUILD_IMAGE}" "${TARGET_IMAGE_LATEST}"
+        docker push "${TARGET_IMAGE}"
+        docker push "${TARGET_IMAGE_LATEST}"
+
+      elif [[ "$CI_COMMIT_REF_NAME" == "main" && "$CI_PIPELINE_SOURCE" == "tag" ]]; then
+        echo "Condition 3: branch == main et tag"
+        PORTFOLIO_V1_TAG="${CI_COMMIT_SHORT_SHA}"
+        TARGET_IMAGE="${PORTFOLIO_V1_GROUP_REGISTRY}/${PORTFOLIO_V1_REPO_NAME}/${ENV_DEPLOYMENT}/${PORTFOLIO_V1_IMAGE_NAME}:${PORTFOLIO_V1_TAG}"
+        docker tag "${BUILD_IMAGE}" "${TARGET_IMAGE}"
         docker push "${TARGET_IMAGE}"
 
       else
-        echo "Condition 3: Aucune condition remplie"
-        echo "Skipping image push : pas de [build:image], pas de main, pas de tag."
+        echo "Condition 4: Aucune condition remplie"
+        echo "Skipping image push : pas de [build:image], pas de main, pas de nouveau tag."
       fi
       echo "==== Fin du push d'image ===="
 
@@ -109,14 +153,24 @@ build:
       when: always
     - if: '$CI_PIPELINE_SOURCE == "push" && $CI_COMMIT_BRANCH == "main"'
       when: always
-    - if: '$CI_PIPELINE_SOURCE == "tag"'
-      when: never
+    - if: '$CI_COMMIT_REF_NAME == "main" && $CI_PIPELINE_SOURCE == "tag"'
+      when: always
+    - when: never
+  artifacts:
+    paths:
+      - $SHARED_ENV_FILE
+    expire_in: 1 hour
+    when: always
 
-build-tag:
+push-tag:
   stage: build
   image: docker:latest
-  only:
-    - tags
+  needs:
+    - build
+  rules:
+    - if: '$CI_COMMIT_REF_NAME == "main" && $CI_PIPELINE_SOURCE == "tag"'
+      when: always
+    - when: never
   services:
     - docker:dind
   <<: *before_docker_login
@@ -125,32 +179,33 @@ build-tag:
       echo "-> On retag l'image avant de la pousser"
       ENV_DEPLOYMENT="prd"
       PORTFOLIO_V1_TAG="${CI_COMMIT_TAG}"
-      COMMIT_SHA_MAIN=$(git ls-remote --heads origin main | awk '{print substr($1, 1, 8)}')
+      COMMIT_SHA_MAIN=${CI_COMMIT_SHORT_SHA}
       echo "COMMIT_SHA_MAIN: ${COMMIT_SHA_MAIN}"
 
-      LAST_IMAGE_MAIN="${PORTFOLIO_V1_GROUP_REGISTRY}/${PORTFOLIO_V1_REPO_NAME}/${ENV_DEPLOYMENT}/${PORTFOLIO_V1_IMAGE_NAME}:${COMMIT_SHA_MAIN}"
+      IMAGE_TAG_MAIN="${PORTFOLIO_V1_GROUP_REGISTRY}/${PORTFOLIO_V1_REPO_NAME}/${ENV_DEPLOYMENT}/${PORTFOLIO_V1_IMAGE_NAME}:${COMMIT_SHA_MAIN}"
       TARGET_IMAGE="${PORTFOLIO_V1_GROUP_REGISTRY}/${PORTFOLIO_V1_REPO_NAME}/${ENV_DEPLOYMENT}/${PORTFOLIO_V1_IMAGE_NAME}:${PORTFOLIO_V1_TAG}"
+      TARGET_IMAGE_LATEST="${PORTFOLIO_V1_GROUP_REGISTRY}/${PORTFOLIO_V1_REPO_NAME}/${ENV_DEPLOYMENT}/${PORTFOLIO_V1_IMAGE_NAME}:latest"
 
-      echo "Retagging ${LAST_IMAGE_MAIN} vers ${TARGET_IMAGE}"
-      docker pull "${LAST_IMAGE_MAIN}"
-      docker tag "${LAST_IMAGE_MAIN}" "${TARGET_IMAGE}"
-      echo "Push de ${TARGET_IMAGE}"
+      docker pull "${IMAGE_TAG_MAIN}"
+      docker tag "${IMAGE_TAG_MAIN}" "${TARGET_IMAGE}"
+      docker tag "${IMAGE_TAG_MAIN}" "${TARGET_IMAGE_LATEST}"
+     
+      
       docker push "${TARGET_IMAGE}"
+      docker push "${TARGET_IMAGE_LATEST}"
 
     - echo "REGISTRY_IMAGE=${TARGET_IMAGE}" > $SHARED_ENV_FILE
     - echo "PROJECT_NAME=${PORTFOLIO_V1_REPO_NAME}" >> $SHARED_ENV_FILE
     - echo "ENV_DEPLOYMENT=${ENV_DEPLOYMENT}" >> $SHARED_ENV_FILE
     - cat $SHARED_ENV_FILE
   artifacts:
-    reports:
-      dotenv: $SHARED_ENV_FILE
+    paths:
+      - $SHARED_ENV_FILE
+    expire_in: 1 hour
+    when: always
 
-
-
-
-# Job DEPLOY
-update-variable-managment-manual:
-  stage: deploy
+trigger-variable-manament-manual:
+  stage: trigger
   variables:
     REGISTRY_IMAGE:
       value: ""
@@ -160,12 +215,45 @@ update-variable-managment-manual:
       value: ""
   rules:
     - when: manual
-      allow_failure: false
-      
-  inherit:
-    variables: false
-  trigger:
-    project: "web6464113/portfolio_v1-variable-managment"
-    branch: "main"
+      allow_failure: true
+  script:
+    - |
+      echo "Déploiement du projet : $PROJECT_NAME"
+      echo "Image utilisée : $REGISTRY_IMAGE"
+      echo "Environnement : $ENV_DEPLOYMENT"
+      if [[ -z "$REGISTRY_IMAGE" || -z "$PROJECT_NAME" || -z "$ENV_DEPLOYMENT" ]]; then
+        echo "Erreur : une ou plusieurs variables d'environnement sont vides."
+        exit 1
+      fi
+      curl -X POST --fail \
+      -F token=$CI_JOB_TOKEN \
+      -F ref=main \
+      -F "variables[REGISTRY_IMAGE]=$REGISTRY_IMAGE" \
+      -F "variables[PROJECT_NAME]=$PROJECT_NAME" \
+      -F "variables[ENV_DEPLOYMENT]=$ENV_DEPLOYMENT" \
+      https://gitlab.com/api/v4/projects/$VARIABLES_MANAGMENT_PROJECT_ID/trigger/pipeline
+  
 
+# Job DEPLOY
+update-variable-managment:
+  stage: deploy
+  needs:
+    - job: push-tag
+      artifacts: true
+      optional: true
+    - job: build
+      artifacts: true
+      optional: true
+  rules:
+    # Déclenchement automatique après un tag
+    - if: '$CI_COMMIT_TAG'
+      when: on_success
+    # Déclenchement sur branche different de main avec [build:image]
+    - if: '$CI_COMMIT_BRANCH != "main" && $CI_COMMIT_MESSAGE =~ /(\[build:image\])/'
+      when: on_success
+
+  trigger:
+    project: "web6464113/variables_managment"
+    forward:
+      pipeline_variables: true
 
