@@ -134,7 +134,11 @@ build:
         docker push "${TARGET_IMAGE_LATEST}"
 
       elif [[ "$CI_COMMIT_TAG" ]]; then
-        if git merge-base --is-ancestor "origin/main" HEAD; then
+        git fetch origin main
+        echo "Checking if commit $CI_COMMIT_SHA is reachable from main branch"
+        is_from_main=$(git rev-list origin/main | grep -w "$CI_COMMIT_SHA" || echo "false")
+        is_from_main=$(if [ $is_from_main = "false" ]; then echo "false"; else echo "true"; fi)
+        if [ "$is_from_main" = "true" ]; then
           echo "Condition 3: branch == main et tag"
           PORTFOLIO_V1_TAG="${CI_COMMIT_SHORT_SHA}"
           TARGET_IMAGE="${PORTFOLIO_V1_GROUP_REGISTRY}/${PORTFOLIO_V1_REPO_NAME}/${ENV_DEPLOYMENT}/${PORTFOLIO_V1_IMAGE_NAME}:${PORTFOLIO_V1_TAG}"
@@ -180,7 +184,11 @@ push-tag:
   script:
     - |
       touch $SHARED_ENV_FILE
-      if git merge-base --is-ancestor "origin/main" HEAD; then
+      git fetch origin main
+      echo "Checking if commit $CI_COMMIT_SHA is reachable from main branch"
+      is_from_main=$(git rev-list origin/main | grep -w "$CI_COMMIT_SHA" || echo "false")
+      is_from_main=$(if [ $is_from_main = "false" ]; then echo "false"; else echo "true"; fi)
+        if [ "$is_from_main" = "true" ]; then
         echo "OK : le tag actuel est issu d'un commit présent dans 'main'";
       else
         echo "ERREUR : ce tag n'a pas été créé sur la branche 'main'.";
