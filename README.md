@@ -23,7 +23,7 @@ git checkout main
 git pull origin main
 git checkout -b test-ci-cd
 git add .
-git commit -m "test de la CI/CD"
+git commit -m "test de la CI/CD [build:image]" # if you want to push the image into dev registry
 git push
 ```
 
