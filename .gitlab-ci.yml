@@ -74,7 +74,7 @@ build:
     # if yes, skip build and push
     - touch $SHARED_ENV_FILE
     - |
-      if [[ $CI_PIPELINE_SOURCE == "tag" && $CI_COMMIT_BRANCH == "main" ]]; then
+      if [[ "$CI_COMMIT_TAG" ]]; then
         #check if image already exists
         ENV_DEPLOYMENT="prd"
         IMAGE_TAG="${PORTFOLIO_V1_GROUP_REGISTRY}/${PORTFOLIO_V1_REPO_NAME}/${ENV_DEPLOYMENT}/${PORTFOLIO_V1_IMAGE_NAME}:${CI_COMMIT_TAG}"
@@ -133,7 +133,7 @@ build:
         docker push "${TARGET_IMAGE}"
         docker push "${TARGET_IMAGE_LATEST}"
 
-      elif [[ "$CI_PIPELINE_SOURCE" == "tag" ]]; then
+      elif [[ "$CI_COMMIT_TAG" ]]; then
         if git merge-base --is-ancestor "origin/main" HEAD; then
           echo "Condition 3: branch == main et tag"
           PORTFOLIO_V1_TAG="${CI_COMMIT_SHORT_SHA}"
@@ -156,7 +156,7 @@ build:
       when: always
     - if: '$CI_PIPELINE_SOURCE == "push" && $CI_COMMIT_BRANCH == "main"'
       when: always
-    - if: '$CI_PIPELINE_SOURCE == "tag"'
+    - if: '$CI_COMMIT_TAG'
       when: always
     - when: never
   artifacts:
@@ -166,12 +166,12 @@ build:
     when: always
 
 push-tag:
-  stage: build
+  stage: deploy
   image: docker:latest
   needs:
     - build
   rules:
-    - if: '$CI_PIPELINE_SOURCE == "tag"'
+    - if: '$CI_COMMIT_TAG'
       when: always
     - when: never
   services:
@@ -186,6 +186,11 @@ push-tag:
         echo "ERREUR : ce tag n'a pas été créé sur la branche 'main'.";
         exit 1;
       fi
+      if [[ ! "$CI_COMMIT_TAG" =~ ^v[0-9]{1,2}\.[0-9]{1,2}\.[0-9]{1,2}$ ]]; then
+        echo "ERREUR : le tag '$CI_COMMIT_TAG' ne respecte pas le format requis '^v[0-9]{1,2}\.[0-9]{1,2}\.[0-9]{1,2}$'.";
+        exit 1;
+      fi
+
       echo "-> On retag l'image avant de la pousser"
       ENV_DEPLOYMENT="prd"
       PORTFOLIO_V1_TAG="${CI_COMMIT_TAG}"
@@ -214,18 +219,7 @@ push-tag:
     expire_in: 1 hour
     when: always
 
-trigger-variable-manament-manual:
-  stage: trigger
-  variables:
-    REGISTRY_IMAGE:
-      value: ""
-    PROJECT_NAME:
-      value: ""
-    ENV_DEPLOYMENT:
-      value: ""
-  rules:
-    - when: manual
-      allow_failure: true
+.update-variable-managment-template: &update-variable-managment-template
   script:
     - |
       echo "Déploiement du projet : $PROJECT_NAME"
@@ -242,31 +236,47 @@ trigger-variable-manament-manual:
       -F "variables[PROJECT_NAME]=$PROJECT_NAME" \
       -F "variables[ENV_DEPLOYMENT]=$ENV_DEPLOYMENT" \
       https://gitlab.com/api/v4/projects/$VARIABLES_MANAGMENT_PROJECT_ID/trigger/pipeline
-  
 
-# Job DEPLOY
-update-variable-managment:
+
+trigger-variable-managment-from-manual:
+  stage: trigger
+  variables:
+    description: "REGISTRY_IMAGE"
+    value: ""
+    PROJECT_NAME:
+      value: ""
+    ENV_DEPLOYMENT:
+      value: ""
+  rules:
+    - when: manual
+      allow_failure: true
+  <<: *update-variable-managment-template
+
+update-variable-managment-from-tag:
   stage: deploy
+  before_script:
+    - source $SHARED_ENV_FILE
+  <<: *update-variable-managment-template
   needs:
     - job: push-tag
       artifacts: true
-      optional: true
-    - job: build
-      artifacts: true
-      optional: true
   rules:
-    # Déclenchement automatique après un tag
     - if: '$CI_COMMIT_TAG'
       when: on_success
       allow_failure: false
+
+update-variable-managment-from-build:
+  stage: deploy
+  before_script:
+    - source $SHARED_ENV_FILE
+  <<: *update-variable-managment-template
+  needs:
+    - job: build
+      artifacts: true
+  rules:
     # Déclenchement sur branche different de main avec [build:image]
     - if: '$CI_COMMIT_BRANCH != "main" && $CI_COMMIT_MESSAGE =~ /(\[build:image\])/'
       when: on_success
       allow_failure: false
 
-  trigger:
-    project: "web6464113/variables_managment"
-    branch: main
-    forward:
-      pipeline_variables: true
 
