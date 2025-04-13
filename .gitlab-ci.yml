@@ -133,13 +133,16 @@ build:
         docker push "${TARGET_IMAGE}"
         docker push "${TARGET_IMAGE_LATEST}"
 
-      elif [[ "$CI_COMMIT_REF_NAME" == "main" && "$CI_PIPELINE_SOURCE" == "tag" ]]; then
-        echo "Condition 3: branch == main et tag"
-        PORTFOLIO_V1_TAG="${CI_COMMIT_SHORT_SHA}"
-        TARGET_IMAGE="${PORTFOLIO_V1_GROUP_REGISTRY}/${PORTFOLIO_V1_REPO_NAME}/${ENV_DEPLOYMENT}/${PORTFOLIO_V1_IMAGE_NAME}:${PORTFOLIO_V1_TAG}"
-        docker tag "${BUILD_IMAGE}" "${TARGET_IMAGE}"
-        docker push "${TARGET_IMAGE}"
-
+      elif [[ "$CI_PIPELINE_SOURCE" == "tag" ]]; then
+        if git merge-base --is-ancestor "origin/main" HEAD; then
+          echo "Condition 3: branch == main et tag"
+          PORTFOLIO_V1_TAG="${CI_COMMIT_SHORT_SHA}"
+          TARGET_IMAGE="${PORTFOLIO_V1_GROUP_REGISTRY}/${PORTFOLIO_V1_REPO_NAME}/${ENV_DEPLOYMENT}/${PORTFOLIO_V1_IMAGE_NAME}:${PORTFOLIO_V1_TAG}"
+          docker tag "${BUILD_IMAGE}" "${TARGET_IMAGE}"
+          docker push "${TARGET_IMAGE}"
+        else
+          echo "Tag not created on main branch, skipping push"
+        fi
       else
         echo "Condition 4: Aucune condition remplie"
         echo "Skipping image push : pas de [build:image], pas de main, pas de nouveau tag."
@@ -153,7 +156,7 @@ build:
       when: always
     - if: '$CI_PIPELINE_SOURCE == "push" && $CI_COMMIT_BRANCH == "main"'
       when: always
-    - if: '$CI_COMMIT_REF_NAME == "main" && $CI_PIPELINE_SOURCE == "tag"'
+    - if: '$CI_PIPELINE_SOURCE == "tag"'
       when: always
     - when: never
   artifacts:
@@ -168,7 +171,7 @@ push-tag:
   needs:
     - build
   rules:
-    - if: '$CI_COMMIT_REF_NAME == "main" && $CI_PIPELINE_SOURCE == "tag"'
+    - if: '$CI_PIPELINE_SOURCE == "tag"'
       when: always
     - when: never
   services:
@@ -176,6 +179,13 @@ push-tag:
   <<: *before_docker_login
   script:
     - |
+      touch $SHARED_ENV_FILE
+      if git merge-base --is-ancestor "origin/main" HEAD; then
+        echo "OK : le tag actuel est issu d'un commit présent dans 'main'";
+      else
+        echo "ERREUR : ce tag n'a pas été créé sur la branche 'main'.";
+        exit 1;
+      fi
       echo "-> On retag l'image avant de la pousser"
       ENV_DEPLOYMENT="prd"
       PORTFOLIO_V1_TAG="${CI_COMMIT_TAG}"
@@ -248,12 +258,15 @@ update-variable-managment:
     # Déclenchement automatique après un tag
     - if: '$CI_COMMIT_TAG'
       when: on_success
+      allow_failure: false
     # Déclenchement sur branche different de main avec [build:image]
     - if: '$CI_COMMIT_BRANCH != "main" && $CI_COMMIT_MESSAGE =~ /(\[build:image\])/'
       when: on_success
+      allow_failure: false
 
   trigger:
     project: "web6464113/variables_managment"
+    branch: main
     forward:
       pipeline_variables: true
 

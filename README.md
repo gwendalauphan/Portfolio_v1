@@ -15,7 +15,55 @@ npm run dev
 cd standalone
 docker compose up -d
 ```
-# How to deploy in production
+# How to deploy in production (CI/CD)
+
+## Development
+```bash
+git checkout main
+git pull origin main
+git checkout -b test-ci-cd
+git add .
+git commit -m "test de la CI/CD"
+git push
+```
+
+Development Pipeline
+```mermaid
+graph TD
+    A[Test] --> B[Build & Standalone Test]
+    B --> C[Push-Tag Dev only if commit message contains build:image]
+    C --> D[Trigger Variables Management Dev if commit message contains build:image]
+```
+
+## Merge request on Gitlab UI
+Go on Gitlab UI, and create a merge request into the branch main.
+Let the pipeline running and people approve.
+Merge request Pipeline
+```mermaid
+graph TD
+    A[Test] --> B[Build & Standalone Test]
+```
+
+### Create a tag on Gitlab UI
+Once you merged you need create a tag to register your application image and update variables_managment in production.
+Create a tag following the regex: vx.x.x
+Tag Pipeline
+```mermaid
+graph TD
+    A[Test] --> B[Build & Standalone Test]
+    B --> C[Push-Tag Prod]
+    C --> D[Trigger Variables Management Prod]
+```
+
+### Tigger manually the deploy pipeline
+Go on Gitlab UI, and trigger the trigger-variable-manament-manual step.
+Then input the following variables:
+- REGISTRY_IMAGE
+- PROJECT_NAME
+- ENV_DEPLOYMENT
+
+
+# How to deploy in production (Manually)
 ```bash
 cd docker
 docker compose build
