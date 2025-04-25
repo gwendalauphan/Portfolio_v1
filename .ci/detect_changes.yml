@@ -1,0 +1,98 @@
+detect_changes:
+  stage: detect_changes
+  image: alpine:latest
+  rules:
+    - when: always
+
+  before_script:
+    - apk add --no-cache git
+  script:
+    - |
+      echo "Current branch: $CI_COMMIT_REF_NAME"
+      # Déterminer la base pour git diff
+      if [[ "$CI_PIPELINE_SOURCE" == "merge_request_event" ]]; then
+        echo "→ Merge Request detected"
+        git fetch origin main
+        GIT_DIFF_BASE="origin/main...HEAD"
+
+      elif [[ "$CI_COMMIT_BRANCH" == "main" ]]; then
+        echo "→ Push on main"
+        if [ "$(git rev-list --count HEAD)" -eq 1 ]; then
+          GIT_DIFF_BASE="--root"
+        else
+          GIT_DIFF_BASE="HEAD^ HEAD"
+        fi
+
+      else
+        echo "→ Push on branch: $CI_COMMIT_BRANCH"
+        if [ "$(git rev-list --count HEAD)" -eq 1 ]; then
+          GIT_DIFF_BASE="--root"
+        else
+          GIT_DIFF_BASE="HEAD^ HEAD"
+        fi
+      fi
+
+    # Appliquer le diff et filtrer
+    - |
+      echo "Fichiers modifiés depuis: $GIT_DIFF_BASE"
+      git_diff_output=$(git diff --name-only $GIT_DIFF_BASE)
+      echo "$git_diff_output" > changed_files.txt
+
+      if echo "$git_diff_output" | grep -qE '^(app/|docker/|standalone/)'; then
+        echo "✅ Changements détectés dans les dossiers surveillés"
+        touch run_npm_test
+      else
+        echo "❌ Aucun changement pertinent détecté"
+      fi
+
+      if echo "$git_diff_output" | grep -qE '^(app/|docker/|standalone/)'; then
+        echo "✅ Changements détectés dans les dossiers surveillés"
+        touch run_docker_test
+      else
+        echo "❌ Aucun changement pertinent détecté"
+      fi
+
+      if [[ "$CI_PIPELINE_SOURCE" == "tag" ]]; then
+        touch run_npm_test
+        touch run_docker_test
+      fi
+  artifacts:
+    paths:
+      - run_npm_test
+      - run_docker_test
+    expire_in: 15 minutes
+    when: always
+
+conditional_run_npm_test:
+  stage: detect_changes
+  rules:
+    - when: always
+  image: alpine:latest
+  needs:
+    - job: detect_changes
+      artifacts: true
+  script:
+    - |
+      if [ -f run_npm_test ]; then
+        echo "Activation des tests npm"
+      else
+        echo "Aucun changement pertinent détecté dans l'application, pas de tests npm à exécuter"
+        exit 1
+      fi
+
+conditional_run_docker_test:
+  stage: detect_changes
+  rules:
+    - when: always
+  image: alpine:latest
+  needs:
+    - job: detect_changes
+      artifacts: true
+  script:
+    - |
+      if [ -f run_docker_test ]; then
+        echo "Activation des tests docker"
+      else
+        echo "Aucun changement pertinent détecté dans l'application, pas de tests docker à exécuter"
+        exit 1
+      fi

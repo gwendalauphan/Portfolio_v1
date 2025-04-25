@@ -1,0 +1,19 @@
+.update-variable-managment-template: # &update-variable-managment-template
+  image: alpine:latest
+  script:
+    - |
+      apk add --no-cache curl
+      echo "Déploiement du projet : $PROJECT_NAME"
+      echo "Image utilisée : $REGISTRY_IMAGE"
+      echo "Environnement : $ENV_DEPLOYMENT"
+      if [[ -z "$REGISTRY_IMAGE" || -z "$PROJECT_NAME" || -z "$ENV_DEPLOYMENT" ]]; then
+        echo "Erreur : une ou plusieurs variables d'environnement sont vides."
+        exit 1
+      fi
+      curl -X POST --fail \
+      -F token=$CI_JOB_TOKEN \
+      -F ref=main \
+      -F "variables[REGISTRY_IMAGE]=$REGISTRY_IMAGE" \
+      -F "variables[PROJECT_NAME]=$PROJECT_NAME" \
+      -F "variables[ENV_DEPLOYMENT]=$ENV_DEPLOYMENT" \
+      https://gitlab.com/api/v4/projects/$VARIABLES_MANAGMENT_PROJECT_ID/trigger/pipeline

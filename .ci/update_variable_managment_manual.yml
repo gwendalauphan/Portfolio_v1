@@ -1,0 +1,16 @@
+include:
+  - local: .ci/common.yml
+
+trigger-variable-managment-from-manual:
+  stage: trigger
+  variables:
+    REGISTRY_IMAGE:
+    value: $[[ inputs.REGISTRY_IMAGE ]]
+    PROJECT_NAME:
+      value: $[[ inputs.PROJECT_NAME ]]
+    ENV_DEPLOYMENT:
+      value: $[[ inputs.ENV_DEPLOYMENT ]]
+  rules:
+    - when: manual
+  extends: .update-variable-managment-template
+  allow_failure: true
