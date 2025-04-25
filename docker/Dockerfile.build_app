@@ -31,4 +31,3 @@ ARG BUILD_DIR="dist"
 ENV BUILD_PATH=${WORKDIR_PATH}/${BUILD_DIR}
 
 COPY --from=build /app/portfolio_v1/dist /app/portfolio_v1/dist
-COPY swagconfig/ /app/portfolio_v1/swagconfig

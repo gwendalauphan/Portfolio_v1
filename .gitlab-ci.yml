@@ -11,10 +11,15 @@ variables:
   SHARED_ENV_FILE: deploy_inputs.env
   VARIABLES_MANAGMENT_PROJECT_ID: "68617213"
 
+include:
+  - local: .ci/common.yml
+  - local: .ci/update_variable_managment_manual.yml
+  - local: .ci/detect_changes.yml
 
 stages:
   - trigger
   - debug
+  - detect_changes
   - test
   - build
   - deploy
@@ -34,10 +39,11 @@ debug:
       when: always
     - when: never
 
-  
 test:
   stage: test
   image: node:${NODE_VERSION}
+  needs:
+    - job: conditional_run_npm_test
   only:
     - merge_requests
     - branches
@@ -54,6 +60,19 @@ test:
     #- npm run test
     - npm run build
 
+test-skipped:
+  stage: test
+  image: alpine:latest
+  when: on_failure
+  only:
+    - merge_requests
+    - branches
+    - tags
+  script:
+    - echo "No test to run, skipping"
+  rules:
+
+
 .before_docker_login: &before_docker_login
   before_script:
     - export COMPOSE_BAKE=true
@@ -63,7 +82,10 @@ build:
   stage: build
   image: docker:latest
   needs:
-    - test
+    - job: test
+      optional: true
+    - job: conditional_run_docker_test
+  
   services:
     - docker:dind
   <<: *before_docker_login
@@ -227,44 +249,12 @@ push-tag:
     expire_in: 1 hour
     when: always
 
-.update-variable-managment-template: &update-variable-managment-template
-  script:
-    - |
-      echo "Déploiement du projet : $PROJECT_NAME"
-      echo "Image utilisée : $REGISTRY_IMAGE"
-      echo "Environnement : $ENV_DEPLOYMENT"
-      if [[ -z "$REGISTRY_IMAGE" || -z "$PROJECT_NAME" || -z "$ENV_DEPLOYMENT" ]]; then
-        echo "Erreur : une ou plusieurs variables d'environnement sont vides."
-        exit 1
-      fi
-      curl -X POST --fail \
-      -F token=$CI_JOB_TOKEN \
-      -F ref=main \
-      -F "variables[REGISTRY_IMAGE]=$REGISTRY_IMAGE" \
-      -F "variables[PROJECT_NAME]=$PROJECT_NAME" \
-      -F "variables[ENV_DEPLOYMENT]=$ENV_DEPLOYMENT" \
-      https://gitlab.com/api/v4/projects/$VARIABLES_MANAGMENT_PROJECT_ID/trigger/pipeline
-
-
-trigger-variable-managment-from-manual:
-  stage: trigger
-  variables:
-    description: "REGISTRY_IMAGE"
-    value: ""
-    PROJECT_NAME:
-      value: ""
-    ENV_DEPLOYMENT:
-      value: ""
-  rules:
-    - when: manual
-      allow_failure: true
-  <<: *update-variable-managment-template
 
 update-variable-managment-from-tag:
   stage: deploy
   before_script:
     - source $SHARED_ENV_FILE
-  <<: *update-variable-managment-template
+  extends: .update-variable-managment-template
   needs:
     - job: push-tag
       artifacts: true
@@ -277,7 +267,7 @@ update-variable-managment-from-build:
   stage: deploy
   before_script:
     - source $SHARED_ENV_FILE
-  <<: *update-variable-managment-template
+  extends: .update-variable-managment-template
   needs:
     - job: build
       artifacts: true

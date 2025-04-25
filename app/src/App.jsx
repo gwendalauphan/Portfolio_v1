@@ -2,9 +2,7 @@ import React, { useEffect, useState, lazy, Suspense } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 import { getGPUTier } from 'detect-gpu';
-
 import { AnimatePresence } from "framer-motion";
-
 import { ProgressProvider } from "./components/Context/ProgressContext";
 import { ToggleProvider } from "./components/Context/ToggleContext";
 import { ScrollProvider } from "./components/Context/ScrollContext";
