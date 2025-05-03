@@ -11,6 +11,15 @@ Le format est basé sur [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 - 🐛 Corrections
 - 📝 Documentation
 
+## [v0.0.8] - 2025-05-03
+🎉 Seconde vraie release
+
+- Amélioreation de la CI/CD
+- Ajout d'un Health
+
+### ✨ Ajouts
+- Ajout d'un health dans l'application web
+- Ajout d'un health check dans la CI/CD
 
 ### ⚙️ Changements
 - Refacorisation de la CI/CD en plusieurs fichiers

@@ -109,12 +109,32 @@ build:
           echo "Image does not exist, building and pushing"
         fi
       fi
+
+    - |
+      health_check() {
+        RESPONSE=$1
+        EXPECTED=$2
+        echo "$RESPONSE" | grep -q "$EXPECTED"
+        if [ $? -ne 0 ]; then
+          echo "❌ Health check failed: $EXPECTED not found"
+          exit 1
+        else
+          echo "✅ Health check passed: $EXPECTED found"
+        fi
+      }
     - echo "Build image"
     - docker compose -f docker/docker-compose.yml build --pull
     - echo "Run containers for standalone"
     - docker compose -f standalone/docker-compose.yml up -d
-    #- immplement /healthz
-    - docker compose -f standalone/docker-compose.yml down
+    - sleep 10
+    - NGINX_PORTFOLIO_V1_IP=$(docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' nginx-portfolio_v1)
+    - |
+      echo "NGINX_PORTFOLIO_V1_IP: $NGINX_PORTFOLIO_V1_IP"
+      RESPONSE=$(docker run --rm --network container:nginx-portfolio_v1 curlimages/curl:latest curl --http1.1 --max-time 5 --resolve gwendalauphan.com:80:$NGINX_PORTFOLIO_V1_IP  http://gwendalauphan.com/health.html)
+
+      health_check "$RESPONSE" "Status Health: OK"
+      
+      docker compose -f standalone/docker-compose.yml down
 
     - echo "=== Variables debug ==="
     - echo "CI_PIPELINE_SOURCE  = $CI_PIPELINE_SOURCE"
