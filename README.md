@@ -15,6 +15,10 @@ npm run dev
 cd standalone
 docker compose up -d
 ```
+Go to http://localhost
+To check the health of the app, go to http://localhost/health.html
+To check the resolution of the name, curl --resolve gwendalauphan.com:80:127.0.0.1 http://gwendalauphan.com/health.html
+
 # How to deploy in production (CI/CD)
 
 ## Development
