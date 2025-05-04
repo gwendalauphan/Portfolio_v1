@@ -89,6 +89,7 @@ const CosmonauteCanvas = ({
   rotationDelta,
   setIsRotating,
   setInitialMousePos,
+  isMobile,
 }) => {
   const [isHovered, setIsHovered] = useState(false);
 
@@ -105,31 +106,41 @@ const CosmonauteCanvas = ({
         position: [-4, -4, 1],
       }}
       style={{
-        cursor: `${isHovered ? (isRotating ? "grabbing" : "grab") : ""}`,
+        cursor: isMobile
+          ? "default"
+          : isHovered
+          ? isRotating
+            ? "grabbing"
+            : "grab"
+          : "",
+        touchAction: isMobile ? "none" : "auto", // pour éviter les gestures mobiles
+        pointerEvents: isMobile ? "none" : "auto", // empêche toute interaction
       }}
     >
       <Suspense fallback={<CanvasLoader />}>
         <OrbitControls
-          autoRotate={false}
+          autoRotate
+          autoRotateSpeed={1.5}
           enableZoom={false}
+          enableRotate={!isMobile} // interaction bloquée
+          enablePan={false}
           maxPolarAngle={Math.PI}
           minPolarAngle={Math.PI}
           maxAzimuthAngle={0}
           minAzimuthAngle={0}
-          m
         />
         <Cosmonaute
-          isRotating={isRotating}
+          isRotating={!isMobile && isRotating}
           rotationDelta={rotationDelta}
           setIsRotating={setIsRotating}
           setInitialMousePos={setInitialMousePos}
           setIsHovered={setIsHovered}
         />
-
         <Preload all />
       </Suspense>
     </Canvas>
   );
 };
+
 
 export default CosmonauteCanvas;
