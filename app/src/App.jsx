@@ -161,7 +161,7 @@ function App() {
               
               <div className="fixed top-0 left-0 w-full h-full z-[-1] bg-primary">
                 <Suspense fallback={<div>Loading...</div>}>
-                  <StarsCanvas rotateCanvas={rotateCanvas} />
+                  <StarsCanvas key="background-stars" rotateCanvas={rotateCanvas} />
                 </Suspense>
               </div>
               

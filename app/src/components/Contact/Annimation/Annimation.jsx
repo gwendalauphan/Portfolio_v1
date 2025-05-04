@@ -10,6 +10,7 @@ const Annimation = ({
   rotationDelta,
   setIsRotating,
   setInitialMousePos,
+  isMobile,
 }) => {
   return (
     <>
@@ -22,6 +23,7 @@ const Annimation = ({
           rotationDelta={rotationDelta}
           setIsRotating={setIsRotating}
           setInitialMousePos={setInitialMousePos}
+          isMobile={isMobile}
         />
       </motion.div>
     </>

@@ -1,5 +1,5 @@
 import { useState, useRef, Suspense, useContext, useEffect, memo, useCallback, useMemo } from "react";
-import { Canvas, useFrame } from "@react-three/fiber";
+import { Canvas } from "@react-three/fiber";
 import {
   OrbitControls,
   Points,

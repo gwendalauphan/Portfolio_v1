@@ -8,10 +8,12 @@ import { SectionWrapper } from "../hoc";
 import Form from "../components/Contact/Form/Form";
 import ContactHeader from "../components/Contact/Header/ContactHeader";
 import Annimation from "../components/Contact/Annimation/Annimation";
+import useIsMobile from "../hooks/useIsMobile";
 
 //import useScrollNavigation from "../components/Navigation/Scroll/Scroll";
 
 const ContactPage = () => {
+  const isMobile = useIsMobile();
   const location = useLocation();
 
   useEffect(() => {
@@ -35,6 +37,7 @@ const ContactPage = () => {
   const [rotationDelta, setRotationDelta] = useState(null);
 
   useEffect(() => {
+    if (isMobile) return; // désactiver la rotation sur mobile
     const handleMouseUp = () => setIsRotating(false);
     const handleMouseMove = (event) => {
       if (!isRotating || !initialMousePos) return;
@@ -56,7 +59,7 @@ const ContactPage = () => {
       document.removeEventListener("mouseup", handleMouseUp);
       document.removeEventListener("mousemove", handleMouseMove);
     };
-  }, [isRotating, initialMousePos]);
+  }, [isRotating, initialMousePos, isMobile]);
 
   return (
     <div className={`page-container ${!isEnabled ? "" : "masque"}`}>
@@ -70,6 +73,7 @@ const ContactPage = () => {
           rotationDelta={rotationDelta}
           setIsRotating={setIsRotating}
           setInitialMousePos={setInitialMousePos}
+          isMobile={isMobile}
         />
       </div>
     </div>

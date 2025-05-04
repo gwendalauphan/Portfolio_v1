@@ -11,7 +11,23 @@ Le format est basé sur [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 - 🐛 Corrections
 - 📝 Documentation
 
-## [v0.0.8] - 2025-05-03
+## [v0.0.9] - 2025-05-05
+🎉 Good fixes
+
+- Meilleure responsivité pour mobile
+- Amélioration de la page contact
+
+### ✨ Ajouts
+- Meilleures explications dans le README.md
+
+### ⚙️ Changements
+- Modification de la logique de la page Work
+- Implémentation manuelle de la timeLine en react pour mobile
+
+### 🐛 Corrections
+- Ajustement de la page contact pour mobile
+
+## [v0.0.8] - 2025-03-05
 🎉 Seconde vraie release
 
 - Amélioreation de la CI/CD
@@ -41,5 +57,6 @@ Le format est basé sur [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 - Remplacement de librairies pour les icons
 
 [unreleased]: https://gitlab.com/web6464113/portfolio_v1/-/commits/main
+[v0.0.8]: https://gitlab.com/web6464113/portfolio_v1/-/commits/v0.0.8
 [v0.0.2]: https://gitlab.com/web6464113/portfolio_v1/-/commits/v0.0.2
 
