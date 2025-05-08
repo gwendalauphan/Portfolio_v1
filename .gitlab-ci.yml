@@ -176,7 +176,7 @@ build:
                   end
                 )
               )
-            ' < "$filename"
+            ' < "$filename"| jq -c .
           )
           echo "VARS_ENV=${VARS_ENV}"
         }
@@ -307,7 +307,7 @@ push-tag:
                 end
               )
             )
-          ' < "$filename"
+          ' < "$filename"| jq -c .
         )
         echo "VARS_ENV=${VARS_ENV}"
       }
