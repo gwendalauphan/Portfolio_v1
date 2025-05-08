@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import { Component } from "react";
 import { SocialIcon } from "react-social-icons/component";
 import { IoIosPaper } from "react-icons/io";
 import "react-social-icons/github";
@@ -10,8 +10,10 @@ import "react-social-icons/mailto";
 import "./Sidebar.css";
 import "./ArrowButton.css";
 
-import { socialMediaHandlesLinks, currilculumVitaeLink  } from "../../../constants";
-
+import {
+  socialMediaHandlesLinks,
+  currilculumVitaeLink,
+} from "../../../constants";
 
 class Sidebar extends Component {
   state = {
@@ -55,7 +57,6 @@ class Sidebar extends Component {
     window.removeEventListener("resize", this.updateIconSize);
   }
 
-
   render() {
     const { isSidebarVisible } = this.state;
     const { isArrowRotated } = this.state;
@@ -92,19 +93,20 @@ class Sidebar extends Component {
         <div
           className={`arrow ${isArrowRotated ? "rotated" : ""}`}
           onClick={this.toggleSidebarAndArrowDirection}
-
         >
           <span
-          style={{
-            width: "15px",
-            height: "15px",
-          }}></span>
+            style={{
+              width: "15px",
+              height: "15px",
+            }}
+          ></span>
 
           <span
-          style={{
-            width: "15px",
-            height: "15px",
-          }}></span>
+            style={{
+              width: "15px",
+              height: "15px",
+            }}
+          ></span>
         </div>
       </div>
     );

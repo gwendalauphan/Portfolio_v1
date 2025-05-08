@@ -1,10 +1,10 @@
-import React, { useRef, useCallback } from "react";
+import { useRef, useCallback } from "react";
 import ProjectCard from "./ProjectCard";
 import { projects } from "../../../constants";
 import { motion } from "framer-motion";
 import { styles } from "../../../styles";
 import SectionWrapper from "../../../hoc/SectionWrapper";
-import { useScroll } from "../../../components/Context/ScrollContext";
+import { useScroll } from "../../../hooks/useScroll";
 
 import { textVariant } from "../../../utils/motion";
 
@@ -18,16 +18,15 @@ const Projects = () => {
 
   return (
     <>
-    <div className={`page-container`}>
-      <motion.div className="mb-4 " variants={textVariant()}>
-        <p className={`${styles.sectionSubText} keyword-blue`}>
-          My Opus</p>
-        <h2
-          className={`${styles.heroHeadText} text-white Home-Title-text-shadow`}
-        >
-          <span className="keyword-purple">Projects.</span>
-        </h2>
-      </motion.div>
+      <div className={`page-container`}>
+        <motion.div className="mb-4 " variants={textVariant()}>
+          <p className={`${styles.sectionSubText} keyword-blue`}>My Opus</p>
+          <h2
+            className={`${styles.heroHeadText} text-white Home-Title-text-shadow`}
+          >
+            <span className="keyword-purple">Projects.</span>
+          </h2>
+        </motion.div>
       </div>
       <div className="inner-div " style={{ flex: 1 }}>
         <pre

@@ -1,4 +1,13 @@
-import { useState, useRef, Suspense, useContext, useEffect, memo, useCallback, useMemo } from "react";
+import {
+  useState,
+  useRef,
+  Suspense,
+  useContext,
+  useEffect,
+  memo,
+  useCallback,
+  useMemo,
+} from "react";
 import { Canvas } from "@react-three/fiber";
 import {
   OrbitControls,
@@ -6,11 +15,12 @@ import {
   PointMaterial,
   Preload,
 } from "@react-three/drei";
-import * as random from 'maath/random';
+import * as random from "maath/random";
 import Earth from "./Earth";
 
-import { ToggleContext } from "../Context/ToggleContext";
+import { ToggleContext } from "../Context/ToggleContextDefinition";
 
+// eslint-disable-next-line
 const Stars = memo((props) => {
   const ref = useRef();
 
@@ -19,10 +29,10 @@ const Stars = memo((props) => {
     return random.inSphere(new Float32Array(3000), { radius: 6 });
   }, []); // Le tableau vide indique que cette valeur ne dépend d'aucun prop ou état
 
-
   const initialRotation = useMemo(() => [0, 0, Math.PI / 4], []);
 
   return (
+    // eslint-disable-next-line
     <group rotation={initialRotation}>
       <Points ref={ref} positions={sphere} stride={3} frustumCulled {...props}>
         <PointMaterial
@@ -36,8 +46,7 @@ const Stars = memo((props) => {
     </group>
   );
 });
-
-
+// eslint-disable-next-line
 const StarsCanvas = memo(({ rotateCanvas }) => {
   const controlsRef = useRef();
   const [angles, setAngles] = useState({ azimuthal: 0, polar: 0 });
@@ -103,7 +112,7 @@ const StarsCanvas = memo(({ rotateCanvas }) => {
             maxDistance={9} // Ajuste selon tes besoins
           />
 
-        <Stars />
+          <Stars />
           <Earth controlsRef={controlsRef} setAngles={setAngles} />
         </Suspense>
 

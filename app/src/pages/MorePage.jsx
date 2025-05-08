@@ -1,6 +1,6 @@
-import React, { useContext, useEffect } from "react";
+import { useContext, useEffect } from "react";
 
-import { ToggleContext } from "../components/Context/ToggleContext";
+import { ToggleContext } from "../components/Context/ToggleContextDefinition";
 
 import SectionWrapper from "../hoc/SectionWrapper";
 
@@ -12,8 +12,6 @@ import { textVariant } from "../utils/motion";
 //import useScrollNavigation from "../components/Navigation/Scroll/Scroll";
 
 const MorePage = () => {
-  
-
   const { isEnabled } = useContext(ToggleContext);
 
   //const location = useLocation();
@@ -49,17 +47,7 @@ const MorePage = () => {
           <span className="command">${"ls ~/more/ | less"}</span>
         </pre>
       </div>
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          marginTop: "7rem", // cela déplace le texte vers le bas
-          height: "30vh", // cela prend la moitié de la hauteur de la fenêtre
-          fontWeight: "bold",
-          fontSize: "7rem", // ajustez cette taille selon ce qui semble bon pour vous
-          textShadow: "30px 30px 40px black", // ceci ajoute une ombre noire prononcée
-        }}
-      >
+      <div className="flex justify-center mt-28 h-[30vh] font-bold xl:text-[100px] md:text-8xl sm:text-6xl text-4xl text-center text-shadow-lg">
         Coming Soon!!
       </div>
     </div>

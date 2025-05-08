@@ -1,8 +1,8 @@
-import React, { useContext, useState, useEffect } from "react";
+import { useContext, useState, useEffect } from "react";
 
 import { useLocation } from "react-router-dom";
 
-import { ToggleContext } from "../components/Context/ToggleContext";
+import { ToggleContext } from "../components/Context/ToggleContextDefinition";
 import { SectionWrapper } from "../hoc";
 
 import Form from "../components/Contact/Form/Form";

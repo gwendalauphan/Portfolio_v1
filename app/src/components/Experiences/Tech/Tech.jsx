@@ -1,9 +1,9 @@
 import MarqueeCards from "./Marquee";
 import { technologies, tools } from "../../../constants";
 import { useInView } from "react-intersection-observer";
-
-import React, { useState, useEffect, useRef } from "react";
-import { useScroll } from "../../Context/ScrollContext";
+import { motion } from "framer-motion";
+import { useState, useEffect, useRef } from "react";
+import { useScroll } from "../../../hooks/useScroll";
 
 // Card.jsx
 
@@ -43,7 +43,7 @@ const Card = ({ onHoverChange, icon, name, description, link }) => {
         isHovered: false,
       });
     }
-  }, [isHovered]);
+  }, [isHovered]); // Added 'onHoverChange' to the dependency array
 
   return (
     <div
@@ -56,54 +56,41 @@ const Card = ({ onHoverChange, icon, name, description, link }) => {
     </div>
   );
 };
-
 const Tech = ({ onCardHoverChange }) => {
   const { hasScrolled } = useScroll();
-  const { ref, inView } = useInView({
-    triggerOnce: true,
-    threshold: 0.1,
-  });
+  const { ref, inView } = useInView({ triggerOnce: true, threshold: 0.1 });
 
   return (
-    <div
-      ref={ref} // Attacher la référence ici
+    <section
+      ref={ref}
       className="w-full flex justify-center mt-10 sm:mt-16 lg:mt-20 mx-auto px-4 sm:px-6 lg:px-10 xl:px-20 max-w-[90%]"
-      style={{ maxWidth: "90%" }}
     >
-      {inView && hasScrolled && (
-        <div className="w-full flex flex-col ">
-          <div className="w-full flex flex-col pb-4">
-            <MarqueeCards direction="left">
-              {technologies.map((technology) => (
-                <Card
-                  key={technology.name}
-                  onHoverChange={onCardHoverChange}
-                  icon={technology.icon}
-                  name={technology.name}
-                  description={technology.description}
-                  link={technology.link}
-                />
-              ))}
-            </MarqueeCards>
-          </div>
-
-          <div className="w-full flex flex-col pb-4">
-            <MarqueeCards direction="right">
-              {tools.map((tool) => (
-                <Card
-                  key={tool.name}
-                  onHoverChange={onCardHoverChange}
-                  icon={tool.icon}
-                  name={tool.name}
-                  description={tool.description}
-                  link={tool.link}
-                />
-              ))}
-            </MarqueeCards>
-          </div>
+      {/* le DOM existe toujours ; on anime seulement quand visible */}
+      <motion.div
+        initial={{ opacity: 0, y: 60 }}
+        animate={inView && hasScrolled ? { opacity: 1, y: 0 } : {}}
+        transition={{ duration: 0.7, ease: "easeOut" }}
+        className="w-full flex flex-col"
+      >
+        {/* Ligne technologies */}
+        <div className="w-full flex flex-col pb-4">
+          <MarqueeCards direction="left">
+            {technologies.map((t) => (
+              <Card key={t.name} onHoverChange={onCardHoverChange} {...t} />
+            ))}
+          </MarqueeCards>
         </div>
-      )}
-    </div>
+
+        {/* Ligne outils */}
+        <div className="w-full flex flex-col pb-4">
+          <MarqueeCards direction="right">
+            {tools.map((t) => (
+              <Card key={t.name} onHoverChange={onCardHoverChange} {...t} />
+            ))}
+          </MarqueeCards>
+        </div>
+      </motion.div>
+    </section>
   );
 };
 

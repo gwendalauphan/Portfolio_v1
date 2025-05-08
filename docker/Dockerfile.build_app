@@ -11,7 +11,7 @@ ENV BUILD_PATH=${WORKDIR_PATH}/${BUILD_DIR}
 WORKDIR ${WORKDIR_PATH}
 
 COPY ${LOCAL_WEBAPP_DIR}/package*.json ./
-RUN npm install && npm cache clean --force
+RUN npm ci && npm cache clean --force
 
 COPY ${LOCAL_WEBAPP_DIR}/ ./
 RUN npm run build

@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import { useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
 import HomeSection from "../components/Intro/Home/Home";
 
@@ -7,7 +7,7 @@ import "../index.css";
 
 import { motion } from "framer-motion";
 
-import { ToggleContext } from "../components/Context/ToggleContext";
+import { ToggleContext } from "../components/Context/ToggleContextDefinition";
 
 //import { useLocation } from "react-router-dom";
 //import useScrollNavigation from "../components/Navigation/Scroll/Scroll";
@@ -31,8 +31,6 @@ const pageTransition = {
 };
 
 const HomePage = () => {
-  
-
   const { isEnabled } = useContext(ToggleContext);
 
   useEffect(() => {
@@ -45,7 +43,9 @@ const HomePage = () => {
 
   return (
     <>
-      <div className={`page-container mt-10 xs:mt-14 ${!isEnabled ? "" : "masque"}`}>
+      <div
+        className={`page-container mt-10 xs:mt-14 ${!isEnabled ? "" : "masque"}`}
+      >
         <motion.div
           initial="initial"
           animate="in"
@@ -59,7 +59,6 @@ const HomePage = () => {
             <div className="flex flex-col justify-center items-center mt-5">
               <div className="w-3 sm:w-4 md:w-5 h-3 sm:h-4 md:h-5 rounded-full bg-[#915EFF]" />
               <div className="w-1 h-20 sm:h-40 md:h-60 lg:h-80 violet-gradient" />
-
             </div>
 
             {/* Text content */}
@@ -67,14 +66,14 @@ const HomePage = () => {
               <h1
                 className={`${styles.heroHeadText} text-white Home-Title-text-shadow text-3xl sm:text-4xl md:text-5xl lg:text-6xl`}
               >
-                Hi, I'm <span className="text-[#915EFF]">Gwendal Auphan</span>
+                Hi, I&#39;m{" "}
+                <span className="text-[#915EFF]">Gwendal Auphan</span>
               </h1>
               <h2
                 className={`${styles.heroSubHeadText} text-white Home-Title-text-shadow mt-2 text-lg sm:text-xl md:text-2xl`}
               >
-                Passionate about{" "}
-                <span className="text-[#35CFA9]">coding</span> and{" "}
-                <span className="text-[#35CFA9]">adventure</span>
+                Passionate about <span className="text-[#35CFA9]">coding</span>{" "}
+                and <span className="text-[#35CFA9]">adventure</span>
               </h2>
             </div>
           </div>
@@ -87,10 +86,12 @@ const HomePage = () => {
           variants={pageVariantsSection}
           transition={pageTransition}
         >
-          <div className="
+          <div
+            className="
             mt-[-50px] sm:mt-[-150px] md:mt-[-200px] lg:mt-[-250px]
             overflow-hidden
-          ">
+          "
+          >
             <HomeSection />
           </div>
         </motion.div>

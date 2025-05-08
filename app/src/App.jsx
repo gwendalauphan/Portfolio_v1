@@ -1,21 +1,22 @@
-import React, { useEffect, useState, lazy, Suspense } from "react";
+import { useEffect, useState, lazy, Suspense } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import * as Sentry from "@sentry/react";
 
-import { getGPUTier } from 'detect-gpu';
+import { getGPUTier } from "detect-gpu";
 import { AnimatePresence } from "framer-motion";
-import { ProgressProvider } from "./components/Context/ProgressContext";
+import { ProgressProvider } from "./components/Context/ProgressProvider";
 import { ToggleProvider } from "./components/Context/ToggleContext";
 import { ScrollProvider } from "./components/Context/ScrollContext";
 
 const StarsCanvas = lazy(() =>
-  import("./components/canvas").then((module) => ({ default: module.StarsCanvas }))
+  import("./components/canvas").then((module) => ({
+    default: module.StarsCanvas,
+  })),
 );
-
 
 import Navbar from "./components/Navigation/Navbar/Navbar";
 import ToggleSwitch from "./components/Switch/Switch";
 import Indication from "./components/Switch/Indication";
-import ProgressBar from "./components/Navigation/Lateralbar/Lateralbar";
 import Sidebar from "./components/Contact/Social/Sidebar";
 
 const HomePage = lazy(() => import("./pages/HomePage"));
@@ -27,9 +28,22 @@ const MorePage = lazy(() => import("./pages/MorePage"));
 
 function NoMatch() {
   return (
-    <div style={{ padding: 20 }}>
-      <h2>404: Page Not Found</h2>
-      <p>Oops! La page que vous cherchez n'existe pas.</p>
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+        alignItems: "center",
+        paddingTop: "10rem",
+        textAlign: "center",
+      }}
+    >
+      <h2 style={{ fontSize: "3rem", marginBottom: "1rem" }}>
+        404: Page Not Found
+      </h2>
+      <p style={{ fontSize: "1.5rem" }}>
+        Oops! La page que vous cherchez n&apos;existe pas.
+      </p>
     </div>
   );
 }
@@ -63,8 +77,6 @@ function App() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, [scrolled]);
 
-
-  const [gpuDetected, setGpuDetected] = useState(false);
   const [rotateCanvas, setRotateCanvas] = useState(false);
 
   const benchmarkProcessor = () => {
@@ -73,13 +85,15 @@ function App() {
     var amount = 150000000;
     var startTime = d.getTime();
 
-    for (var i = amount; i > 0; i--) {}
+    for (var i = amount; i > 0; i--) {
+      // Loop intentionally left empty
+    }
 
     var newD = new Date();
     var endTime = newD.getTime();
     var timeTaken = (endTime - startTime) / 1000; // Convertir en secondes
-    var spd = ((_speedconstant*amount)/timeTaken);
-    console.log("Benchmark Time:", timeTaken + "s", "Estimated Speed:", spd + "GHZ");
+    var spd = (_speedconstant * amount) / timeTaken;
+    // console.log("Benchmark Time:", timeTaken + "s", "Estimated Speed:", spd + "GHZ");
 
     return spd; // Retourne la vitesse estimée
   };
@@ -89,31 +103,24 @@ function App() {
       try {
         const gpuData = await getGPUTier();
         const cpuSpeed = benchmarkProcessor();
-        //afficher les informations de débogage
-        console.log("GPU Data:", gpuData);
-        console.log("CPU Speed:", cpuSpeed);
-        console.log("CPU Cores:", navigator.hardwareConcurrency);
-        const shouldRotateCanvas = (
+        const shouldRotateCanvas =
           gpuData &&
           gpuData.tier >= 2 &&
           !gpuData.isMobile &&
           navigator.hardwareConcurrency > 4 &&
-          cpuSpeed > 3 // Ajustez ce seuil selon vos besoins
-        );
+          cpuSpeed > 3; // Ajustez ce seuil selon vos besoins
 
-        setGpuDetected(gpuData !== null);
         setRotateCanvas(shouldRotateCanvas);
       } catch (error) {
-        console.error("Erreur lors de la récupération des capacités de l'appareil:", error);
+        Sentry.captureException(error); // Envoyer l'erreur à Sentry
+
+        //console.error("Erreur lors de la récupération des capacités de l'appareil:", error,);
         // Vous pouvez également définir une valeur par défaut pour RotateCanvas en cas d'erreur
       }
     }
 
     fetchDeviceCapabilities();
   }, []); // Ce tableau vide assure que l'effet ne s'exécute qu'une seule fois
-
-
-
 
   return (
     <ToggleProvider value={{ isEnabled, setIsEnabled }}>
@@ -135,12 +142,11 @@ function App() {
                     isEnabled={isEnabled}
                     onToggleChange={handleToggleChange}
                   />
-
                 </div>
               </div>
               {showIndication && (
-                    <Indication onClose={() => setShowIndication(false)} />
-                  )}
+                <Indication onClose={() => setShowIndication(false)} />
+              )}
 
               {/* <ProgressBar /> */}
               <Sidebar />
@@ -158,13 +164,15 @@ function App() {
                   </Routes>
                 </Suspense>
               </AnimatePresence>
-              
+
               <div className="fixed top-0 left-0 w-full h-full z-[-1] bg-primary">
                 <Suspense fallback={<div>Loading...</div>}>
-                  <StarsCanvas key="background-stars" rotateCanvas={rotateCanvas} />
+                  <StarsCanvas
+                    key="background-stars"
+                    rotateCanvas={rotateCanvas}
+                  />
                 </Suspense>
               </div>
-              
             </div>
           </Router>
         </ScrollProvider>

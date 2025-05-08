@@ -1,12 +1,12 @@
-import React, { useContext, useEffect } from "react";
+import { useContext, useEffect } from "react";
 
 import { useLocation } from "react-router-dom";
 
-import { ToggleContext } from "../components/Context/ToggleContext";
+import { ToggleContext } from "../components/Context/ToggleContextDefinition";
 
 import Projects from "../components/Works/Projects/Projects";
 
-import { useScroll } from "../components/Context/ScrollContext";
+import { useScroll } from "../hooks/useScroll";
 
 //import useScrollNavigation from "../components/Navigation/Scroll/Scroll";
 

@@ -10,10 +10,15 @@
         echo "Erreur : une ou plusieurs variables d'environnement sont vides."
         exit 1
       fi
+      if [[ -z "$VARS_ENV" || "$VARS_ENV" == "" ]]; then
+        VARS_ENV="{}"
+      fi
+      echo "VARS_ENV : $VARS_ENV"
       curl -X POST --fail \
       -F token=$CI_JOB_TOKEN \
       -F ref=main \
       -F "variables[REGISTRY_IMAGE]=$REGISTRY_IMAGE" \
       -F "variables[PROJECT_NAME]=$PROJECT_NAME" \
       -F "variables[ENV_DEPLOYMENT]=$ENV_DEPLOYMENT" \
+      -F "variables[VARS_ENV]=$VARS_ENV" \
       https://gitlab.com/api/v4/projects/$VARIABLES_MANAGMENT_PROJECT_ID/trigger/pipeline

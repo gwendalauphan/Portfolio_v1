@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { motion } from "framer-motion";
 import emailjs from "@emailjs/browser";
 
@@ -39,7 +39,7 @@ const Form = () => {
           to_email: "gwendalauphan@gmail.com",
           message: form.message,
         },
-        import.meta.env.VITE_APP_EMAILJS_PUBLIC_KEY
+        import.meta.env.VITE_APP_EMAILJS_PUBLIC_KEY,
       )
       .then(
         () => {
@@ -52,12 +52,11 @@ const Form = () => {
             message: "",
           });
         },
-        (error) => {
+        () => {
           setLoading(false);
-          console.error(error);
-
+          //console.error(_error);
           alert("Ahh, something went wrong. Please try again.");
-        }
+        },
       );
   };
 

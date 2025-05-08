@@ -10,6 +10,7 @@ variables:
   NODE_VERSION: "18"
   SHARED_ENV_FILE: deploy_inputs.env
   VARIABLES_MANAGMENT_PROJECT_ID: "68617213"
+  DEPLOYMENT_APP_ENV_FILE: "docker/deployment.env"
 
 include:
   - local: .ci/common.yml
@@ -159,6 +160,32 @@ build:
         echo "REGISTRY_IMAGE=${TARGET_IMAGE}" > $SHARED_ENV_FILE
         echo "PROJECT_NAME=${PORTFOLIO_V1_REPO_NAME}" >> $SHARED_ENV_FILE
         echo "ENV_DEPLOYMENT=${ENV_DEPLOYMENT}" >> $SHARED_ENV_FILE
+
+        # Function to process the environment file and export VARS_ENV
+        export_env_vars() {
+          local filename=$1
+          VARS_ENV=$(
+            jq -nR '
+              reduce inputs as $line (
+                {};
+                . + (
+                  if $line | test("^[^#].*=") then
+                    {($line | split("=")[0]): ($line | split("=")[1])}
+                  else
+                    {}
+                  end
+                )
+              )
+            ' < "$filename"
+          )
+          echo "VARS_ENV=${VARS_ENV}"
+        }
+
+        export_env_vars "$DEPLOYMENT_APP_ENV_FILE"
+
+        echo "VARS_ENV after processing: $VARS_ENV"
+
+        echo "VARS_ENV=${VARS_ENV}" >> $SHARED_ENV_FILE
         cat $SHARED_ENV_FILE
 
       elif [[ "$CI_COMMIT_BRANCH" == "main" ]]; then
@@ -262,6 +289,33 @@ push-tag:
     - echo "REGISTRY_IMAGE=${TARGET_IMAGE}" > $SHARED_ENV_FILE
     - echo "PROJECT_NAME=${PORTFOLIO_V1_REPO_NAME}" >> $SHARED_ENV_FILE
     - echo "ENV_DEPLOYMENT=${ENV_DEPLOYMENT}" >> $SHARED_ENV_FILE
+
+    - |
+      # Function to process the environment file and export VARS_ENV
+      export_env_vars() {
+        local filename=$1
+        VARS_ENV=$(
+          jq -nR '
+            reduce inputs as $line (
+              {};
+              . + (
+                if $line | test("^[^#].*=") then
+                  {($line | split("=")[0]): ($line | split("=")[1])}
+                else
+                  {}
+                end
+              )
+            )
+          ' < "$filename"
+        )
+        echo "VARS_ENV=${VARS_ENV}"
+      }
+
+      export_env_vars "$DEPLOYMENT_APP_ENV_FILE"
+
+      echo "VARS_ENV after processing: $VARS_ENV"
+
+    - echo "VARS_ENV=${VARS_ENV}" >> $SHARED_ENV_FILE
     - cat $SHARED_ENV_FILE
   artifacts:
     paths:

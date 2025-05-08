@@ -1,15 +1,15 @@
-import React, { useContext, useEffect } from "react";
+import { useContext, useEffect } from "react";
 
 import { useLocation } from "react-router-dom";
 
 import SectionWrapper from "../hoc/SectionWrapper";
 
-import { ToggleContext } from "../components/Context/ToggleContext";
+import { ToggleContext } from "../components/Context/ToggleContextDefinition";
 
 import Experience from "../components/Experiences/Missions/Missions";
 import Experience_mobile from "../components/Experiences/Missions/Missions_mobile";
 
-import { useScroll } from "../components/Context/ScrollContext";
+import { useScroll } from "../hooks/useScroll";
 
 import useIsMobile from "../hooks/useIsMobile";
 
@@ -46,11 +46,7 @@ const WorkPage = () => {
 
   return (
     <div className={`page-container ${!isEnabled ? "" : "masque"}`}>
-      {isMobile ? (
-        <Experience_mobile />
-      ) : (
-        <Experience />
-      )}
+      {isMobile ? <Experience_mobile /> : <Experience />}
     </div>
   );
 };

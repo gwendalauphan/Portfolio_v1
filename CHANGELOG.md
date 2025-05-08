@@ -11,6 +11,26 @@ Le format est basé sur [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 - 🐛 Corrections
 - 📝 Documentation
 
+## [unreleased]
+🎉 Prochaine version
+
+## [v0.1.0] - 2025-08-05
+🎉 Améliorations majeures et corrections
+
+### ✨ Ajouts
+- Ajout du schéma d'architecture
+- Ajout des refs
+- Ajout de depcheck, eslint et prettier et fix des erreurs
+- Ajout de vars_env dans les inputs de la CI/CD
+
+### ⚙️ Changements
+- Amélioration du readme
+
+### 🐛 Corrections
+- Fix de la page Coming Soon
+- Fix de la page About
+
+
 ## [v0.0.9] - 2025-05-05
 🎉 Good fixes
 
@@ -57,6 +77,8 @@ Le format est basé sur [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 - Remplacement de librairies pour les icons
 
 [unreleased]: https://gitlab.com/web6464113/portfolio_v1/-/commits/main
+[v0.1.0]: https://gitlab.com/web6464113/portfolio_v1/-/commits/v0.1.0
+[v0.0.9]: https://gitlab.com/web6464113/portfolio_v1/-/commits/v0.0.9
 [v0.0.8]: https://gitlab.com/web6464113/portfolio_v1/-/commits/v0.0.8
 [v0.0.2]: https://gitlab.com/web6464113/portfolio_v1/-/commits/v0.0.2
 

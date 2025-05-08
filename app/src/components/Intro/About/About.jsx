@@ -1,4 +1,3 @@
-import React from "react";
 import { motion } from "framer-motion";
 
 import Tilt from "react-parallax-tilt";
@@ -14,7 +13,7 @@ import ImageSlider from "./ImageSlider";
 
 import { useInView } from "react-intersection-observer";
 
-import { useScroll } from "../../Context/ScrollContext";
+import { useScroll } from "../../../hooks/useScroll";
 
 const ServiceCard = ({ index, title, description, icon }) => {
   const { ref, inView } = useInView({
@@ -39,11 +38,6 @@ const ServiceCard = ({ index, title, description, icon }) => {
           className="w-full green-pink-gradient p-[1px] rounded-[20px] shadow-card"
         >
           <div
-            options={{
-              max: 45,
-              scale: 1,
-              speed: 450,
-            }}
             className="rounded-[20px] py-4  min-h-[280px] flex justify-evenly items-center flex-col"
             style={{ backgroundColor: "rgba(0, 0, 0, 0.95)" }} //{/* Adjust RGBA values as needed */}
           >
@@ -97,7 +91,7 @@ const About = () => {
               variants={fadeIn("", "", 0.1, 1)}
               className="Home-sectionSubText"
             >
-              Currently finalizing my master's in{" "}
+              Currently finalizing my master&apos;s in{" "}
               <span className="keyword-purple">Math-Info</span> with a focus on{" "}
               <span className="keyword-blue">AI</span>, I navigate between the
               realms of academia and my apprenticeship at the{" "}
@@ -132,7 +126,6 @@ const About = () => {
             <ImageSlider images={memoji.image} />
           </div>
         </div>
-
       </div>
 
       <div className="separator-bar"></div>
@@ -158,4 +151,3 @@ const About = () => {
 };
 
 export default SectionWrapper(About, "about");
-

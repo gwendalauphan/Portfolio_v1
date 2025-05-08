@@ -1,4 +1,4 @@
-import React, { Suspense, useRef, useState, useEffect } from "react";
+import { Suspense, useRef, useState, useEffect } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { OrbitControls, Preload, useGLTF } from "@react-three/drei";
 import { EffectComposer, Bloom } from "@react-three/postprocessing";
@@ -41,7 +41,7 @@ const Cosmonaute = ({
     setInitialMousePos({ x: event.clientX, y: event.clientY });
     setIsRotating(true);
   };
-
+  /* eslint-disable */
   return (
     <>
       <spotLight
@@ -82,6 +82,7 @@ const Cosmonaute = ({
       </mesh>
     </>
   );
+  /* eslint-enable */
 };
 
 const CosmonauteCanvas = ({
@@ -109,10 +110,10 @@ const CosmonauteCanvas = ({
         cursor: isMobile
           ? "default"
           : isHovered
-          ? isRotating
-            ? "grabbing"
-            : "grab"
-          : "",
+            ? isRotating
+              ? "grabbing"
+              : "grab"
+            : "",
         touchAction: isMobile ? "none" : "auto", // pour éviter les gestures mobiles
         pointerEvents: isMobile ? "none" : "auto", // empêche toute interaction
       }}
@@ -141,6 +142,5 @@ const CosmonauteCanvas = ({
     </Canvas>
   );
 };
-
 
 export default CosmonauteCanvas;

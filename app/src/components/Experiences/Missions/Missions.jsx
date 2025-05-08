@@ -1,4 +1,3 @@
-import React from "react";
 import {
   VerticalTimeline,
   VerticalTimelineElement,
@@ -12,7 +11,7 @@ import { styles } from "../../../styles";
 
 import { experiences } from "../../../constants";
 
-import { useScroll } from "../../Context/ScrollContext";
+import { useScroll } from "../../../hooks/useScroll";
 
 const ExperienceCard = ({ experience }) => {
   return (
@@ -34,26 +33,25 @@ const ExperienceCard = ({ experience }) => {
         </div>
       }
     >
-    <div>
-      <h3 className="text-white text-lg sm:text-xl lg:text-2xl font-bold">
-        {experience.title}
-      </h3>
-      <p className="text-secondary text-xs sm:text-sm font-semibold m-0">
-        {experience.company_name}
-      </p>
-    </div>
+      <div>
+        <h3 className="text-white text-lg sm:text-xl lg:text-2xl font-bold">
+          {experience.title}
+        </h3>
+        <p className="text-secondary text-xs sm:text-sm font-semibold m-0">
+          {experience.company_name}
+        </p>
+      </div>
 
-    <ul className="mt-5 list-disc ml-5 space-y-2">
-      {experience.points.map((point, index) => (
-        <li
-          key={`experience-point-${index}`}
-          className="text-white text-xs sm:text-sm tracking-wide pl-1"
-        >
-          {point}
-        </li>
-      ))}
-    </ul>
-
+      <ul className="mt-5 list-disc ml-5 space-y-2">
+        {experience.points.map((point, index) => (
+          <li
+            key={`experience-point-${index}`}
+            className="text-white text-xs sm:text-sm tracking-wide pl-1"
+          >
+            {point}
+          </li>
+        ))}
+      </ul>
     </VerticalTimelineElement>
   );
 };
