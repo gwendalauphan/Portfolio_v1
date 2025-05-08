@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 
 import { motion, useAnimation } from "framer-motion";
@@ -8,7 +8,7 @@ import { menu, close } from "../../../assets";
 import LogoSVG from "../../../assets/boussole.svg";
 import { navLinks } from "../../../constants";
 
-import { useScroll } from "../../Context/ScrollContext";
+import { useScroll } from "../../../hooks/useScroll";
 
 function Navbar() {
   const controls = useAnimation();
@@ -60,9 +60,7 @@ function Navbar() {
         />
       </div>
 
-
       <nav className={`navbar  flex items-center`}>
-        
         <ul className="navbar__menu flex space-x-4 sm:space-x-6 lg:space-x-8 list-none hidden min-[850px]:flex flex-row ">
           {navLinks.map((nav) => (
             <li
@@ -88,7 +86,6 @@ function Navbar() {
         </ul>
 
         <div className="min-[850px]:hidden flex flex-1 justify-end items-center">
-
           <img
             src={toggle ? close : menu}
             alt="menu"

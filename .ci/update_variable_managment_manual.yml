@@ -10,6 +10,8 @@ trigger-variable-managment-from-manual:
       value: $[[ inputs.PROJECT_NAME ]]
     ENV_DEPLOYMENT:
       value: $[[ inputs.ENV_DEPLOYMENT ]]
+    VARS_ENV:
+      value: $[[ inputs.VARS_ENV ]]
   rules:
     - when: manual
   extends: .update-variable-managment-template

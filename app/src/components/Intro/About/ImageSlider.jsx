@@ -19,7 +19,7 @@ const ImageSlider = ({ images }) => {
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => setIsInViewport(entry.isIntersecting),
-      { threshold: 0 }
+      { threshold: 0 },
     );
 
     if (imageRef.current) {

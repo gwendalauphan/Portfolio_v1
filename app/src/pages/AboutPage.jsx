@@ -1,13 +1,13 @@
-import React, { useContext, useEffect, useState, useRef } from "react";
+import { useContext, useEffect, useState, useRef } from "react";
 
 import { useLocation } from "react-router-dom";
 
 import About from "../components/Intro/About/About";
 import Tech from "../components/Experiences/Tech/Tech";
 
-import { ToggleContext } from "../components/Context/ToggleContext";
+import { ToggleContext } from "../components/Context/ToggleContextDefinition";
 
-import { useScroll } from "../components/Context/ScrollContext";
+import { useScroll } from "../hooks/useScroll";
 
 //import useScrollNavigation from "../components/Navigation/Scroll/Scroll";
 

@@ -79,7 +79,6 @@ import FiniteStateMachine from "./projects/FiniteStateMachine.webp";
 //For project videos (Project Page)
 import CaverneAuxJeuxmp4 from "./projects/CaverneAuxJeux.mp4";
 
-
 export {
   logo,
   github,
@@ -158,6 +157,5 @@ export {
   FiniteStateMachine,
 
   //For project videos (Project Page)
-  CaverneAuxJeuxmp4
+  CaverneAuxJeuxmp4,
 };
-

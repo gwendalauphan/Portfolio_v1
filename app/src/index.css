@@ -13,7 +13,6 @@
   color-scheme: dark;
 }
 
-
 .hash-span {
   margin-top: -100px;
   padding-bottom: 100px;
@@ -115,8 +114,6 @@
   -webkit-text-fill-color: transparent;
 }
 
-
-
 .navbar-container {
   position: sticky;
   top: 0;
@@ -125,22 +122,25 @@
 }
 
 .shadow-custom {
-  box-shadow: 0 4px 8px rgba(145,94,255, 0.6);
+  box-shadow: 0 4px 8px rgba(145, 94, 255, 0.6);
 }
 
 .border-color-custom {
-  border: 5px solid rgba(53,207,169, 0.9);
+  border: 5px solid rgba(53, 207, 169, 0.9);
 }
 
 .color-custom {
-  background-color: rgba(53,207,169, 0.8); /* Vous pouvez remplacer ceci par la couleur de votre choix */
+  background-color: rgba(
+    53,
+    207,
+    169,
+    0.8
+  ); /* Vous pouvez remplacer ceci par la couleur de votre choix */
 }
-
 
 .masque {
   display: none;
 }
-
 
 .progressBarContainer {
   position: fixed;
@@ -155,18 +155,18 @@
 }
 
 .unfilledBar {
-  content: '';
+  content: "";
   display: block;
   position: absolute;
   right: 0;
   width: 10px;
-  background: linear-gradient(rgba(159, 116, 252, 0.5),transparent);
+  background: linear-gradient(rgba(159, 116, 252, 0.5), transparent);
   pointer-events: none; /* Pour éviter d'interférer avec les clics */
 }
 
 .colorBar {
   width: 100%;
-  background-color: rgba(145,94,255, 0.95);
+  background-color: rgba(145, 94, 255, 0.95);
   border-radius: 4px;
   box-shadow: 0 2px 4px rgba(145, 94, 255, 0.4);
 }
@@ -178,9 +178,11 @@
   width: 14px;
   height: 14px;
   border-radius: 50%;
-  background-color: #915EFF;
+  background-color: #915eff;
   cursor: pointer;
-  transition: background-color 0.3s ease, opacity 0.3s ease;
+  transition:
+    background-color 0.3s ease,
+    opacity 0.3s ease;
   box-shadow: inset 0 0 4px rgba(0, 0, 0, 0.6);
   border: 2px solid rgba(0, 255, 157, 0.8);
   z-index: 1;
@@ -199,7 +201,6 @@
   z-index: -1;
 }
 
-
 .progressBar-bigButton {
   position: absolute;
   bottom: 0; /* Vous ajusterez cette valeur dans votre composant React */
@@ -208,7 +209,7 @@
   width: 18px;
   height: 18px;
   border-radius: 50%;
-  background-color: #915EFF;
+  background-color: #915eff;
   box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.6);
   border: 2px solid rgba(0, 255, 157, 0.8);
   cursor: pointer;
@@ -216,7 +217,7 @@
 }
 
 .progressBar-bigButton::before {
-  content: '';
+  content: "";
   position: absolute;
   top: -5px;
   left: -5px;
@@ -234,15 +235,15 @@
   padding: 15px 15px;
   background-color: rgba(0, 0, 0, 0.8); /* noir avec 80% d'opacité */
   border-radius: 15px;
-  border: 3px solid rgba(130,84,229, 0.2); /* Bordure subtile */
-  box-shadow: 0 4px 8px rgba(130,84,229, 0.1); /* Effet fondu clair */
+  border: 3px solid rgba(130, 84, 229, 0.2); /* Bordure subtile */
+  box-shadow: 0 4px 8px rgba(130, 84, 229, 0.1); /* Effet fondu clair */
 }
 
 @layer components {
   .Home-contentSection {
     @apply my-5 mx-2.5;
   }
-  
+
   .Home-sectionHeadText {
     @apply text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-bold text-white mb-2;
   }
@@ -250,7 +251,7 @@
   .Home-sectionSubText {
     @apply text-xs xs:text-base sm:text-lg lg:text-xl xl:text-2xl font-medium leading-relaxed text-justify text-white mb-5;
   }
-  
+
   .code-snippet {
     @apply bg-white/10 p-2.5 rounded-lg text-base text-[#35cfa9] mb-5;
   }
@@ -262,10 +263,9 @@
 }
 
 .keyword-purple {
-  color: #915EFF;
+  color: #915eff;
   font-weight: 700; /* Bold pour l'accentuation */
 }
-
 
 .bash-function {
   margin-left: 10px; /* Ajustement pour l'indentation */
@@ -274,20 +274,20 @@
 .bash-function-header,
 .bash-function-footer {
   font-size: 18px;
-  color: #915EFF;
+  color: #915eff;
 }
 
 .hash-symbol {
   font-size: 36px;
-  color: #915EFF;
+  color: #915eff;
 }
 
 .prompt {
-  color: #915EFF;
+  color: #915eff;
 }
 
 .command {
-  color: #FFFFFF;
+  color: #ffffff;
 }
 
 .func-keyword {
@@ -305,7 +305,6 @@
   color: #e6cc3a;
 }
 
-
 .Home-Title-text-shadow {
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
 }
@@ -317,7 +316,6 @@
 .image_wrapper {
   margin: 0px 20px;
 }
-
 
 .blob {
   animation: morph 3.6s linear infinite;
@@ -348,8 +346,6 @@
   }
 }
 
-
-
 @keyframes colorWave {
   0% {
     background-position: 0% 50%;
@@ -379,8 +375,8 @@
   animation: colorWave 8s infinite;
 }
 
-
-.your-div-class::before, .your-div-class::after {
+.your-div-class::before,
+.your-div-class::after {
   content: "";
   position: absolute;
   top: 0;
@@ -396,33 +392,32 @@
 }
 
 .your-div-class::after {
-  box-shadow: -2px -2px 4px #915EFF;
+  box-shadow: -2px -2px 4px #915eff;
 }
-
 
 .your-div-class {
   filter: drop-shadow(0px 0px 0 #43ffd005) drop-shadow(-0px -0px 0 #915eff05);
 }
 
 .inner-div {
-  filter: drop-shadow(2px 2px 0 #43ffd0) drop-shadow(-2px -2px 0 #915EFF);
+  filter: drop-shadow(2px 2px 0 #43ffd0) drop-shadow(-2px -2px 0 #915eff);
 }
 
-
 .shadow-card-project {
-  box-shadow: 6px 6px 12px rgba(0, 0, 0, 0.3),
-              -6px -6px 12px rgba(0, 0, 0, 0.3),
-              6px -6px 12px rgba(0, 0, 0, 0.3),
-              -6px 6px 12px rgba(0, 0, 0, 0.3);
+  box-shadow:
+    6px 6px 12px rgba(0, 0, 0, 0.3),
+    -6px -6px 12px rgba(0, 0, 0, 0.3),
+    6px -6px 12px rgba(0, 0, 0, 0.3),
+    -6px 6px 12px rgba(0, 0, 0, 0.3);
 }
 
 .text-shadow-card-project {
-  text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.8),
-               -2px -2px 3px rgba(0, 0, 0, 0.8),
-               2px -2px 3px rgba(0, 0, 0, 0.8),
-               -2px 2px 3px rgba(0, 0, 0, 0.8);
+  text-shadow:
+    2px 2px 3px rgba(0, 0, 0, 0.8),
+    -2px -2px 3px rgba(0, 0, 0, 0.8),
+    2px -2px 3px rgba(0, 0, 0, 0.8),
+    -2px 2px 3px rgba(0, 0, 0, 0.8);
 }
-
 
 .no-select {
   -webkit-touch-callout: none;
@@ -446,17 +441,16 @@
 }
 
 .indication-container {
-  transform: translateY(-50%);/* ajustement pour un centrage parfait */
+  transform: translateY(-50%); /* ajustement pour un centrage parfait */
   background-color: rgba(0, 0, 0, 0.8);
   min-width: 100px;
   border-radius: 5px;
   z-index: 1000;
-  margin-left: 10px;/* espace entre l'indication et le bouton bascule */
+  margin-left: 10px; /* espace entre l'indication et le bouton bascule */
   animation: bounce 2s infinite;
 }
 
 @keyframes bounce {
-
   0%,
   20%,
   50%,
@@ -496,7 +490,8 @@
 @keyframes mulShdSpin {
   0%,
   100% {
-    box-shadow: 0em -2.6em 0em 0em #ffffff,
+    box-shadow:
+      0em -2.6em 0em 0em #ffffff,
       1.8em -1.8em 0 0em rgba(255, 255, 255, 0.2),
       2.5em 0em 0 0em rgba(255, 255, 255, 0.2),
       1.75em 1.75em 0 0em rgba(255, 255, 255, 0.2),
@@ -506,8 +501,10 @@
       -1.8em -1.8em 0 0em rgba(255, 255, 255, 0.7);
   }
   12.5% {
-    box-shadow: 0em -2.6em 0em 0em rgba(255, 255, 255, 0.7),
-      1.8em -1.8em 0 0em #ffffff, 2.5em 0em 0 0em rgba(255, 255, 255, 0.2),
+    box-shadow:
+      0em -2.6em 0em 0em rgba(255, 255, 255, 0.7),
+      1.8em -1.8em 0 0em #ffffff,
+      2.5em 0em 0 0em rgba(255, 255, 255, 0.2),
       1.75em 1.75em 0 0em rgba(255, 255, 255, 0.2),
       0em 2.5em 0 0em rgba(255, 255, 255, 0.2),
       -1.8em 1.8em 0 0em rgba(255, 255, 255, 0.2),
@@ -515,8 +512,10 @@
       -1.8em -1.8em 0 0em rgba(255, 255, 255, 0.5);
   }
   25% {
-    box-shadow: 0em -2.6em 0em 0em rgba(255, 255, 255, 0.5),
-      1.8em -1.8em 0 0em rgba(255, 255, 255, 0.7), 2.5em 0em 0 0em #ffffff,
+    box-shadow:
+      0em -2.6em 0em 0em rgba(255, 255, 255, 0.5),
+      1.8em -1.8em 0 0em rgba(255, 255, 255, 0.7),
+      2.5em 0em 0 0em #ffffff,
       1.75em 1.75em 0 0em rgba(255, 255, 255, 0.2),
       0em 2.5em 0 0em rgba(255, 255, 255, 0.2),
       -1.8em 1.8em 0 0em rgba(255, 255, 255, 0.2),
@@ -524,48 +523,58 @@
       -1.8em -1.8em 0 0em rgba(255, 255, 255, 0.2);
   }
   37.5% {
-    box-shadow: 0em -2.6em 0em 0em rgba(255, 255, 255, 0.2),
+    box-shadow:
+      0em -2.6em 0em 0em rgba(255, 255, 255, 0.2),
       1.8em -1.8em 0 0em rgba(255, 255, 255, 0.5),
-      2.5em 0em 0 0em rgba(255, 255, 255, 0.7), 1.75em 1.75em 0 0em #ffffff,
+      2.5em 0em 0 0em rgba(255, 255, 255, 0.7),
+      1.75em 1.75em 0 0em #ffffff,
       0em 2.5em 0 0em rgba(255, 255, 255, 0.2),
       -1.8em 1.8em 0 0em rgba(255, 255, 255, 0.2),
       -2.6em 0em 0 0em rgba(255, 255, 255, 0.2),
       -1.8em -1.8em 0 0em rgba(255, 255, 255, 0.2);
   }
   50% {
-    box-shadow: 0em -2.6em 0em 0em rgba(255, 255, 255, 0.2),
+    box-shadow:
+      0em -2.6em 0em 0em rgba(255, 255, 255, 0.2),
       1.8em -1.8em 0 0em rgba(255, 255, 255, 0.2),
       2.5em 0em 0 0em rgba(255, 255, 255, 0.5),
-      1.75em 1.75em 0 0em rgba(255, 255, 255, 0.7), 0em 2.5em 0 0em #ffffff,
+      1.75em 1.75em 0 0em rgba(255, 255, 255, 0.7),
+      0em 2.5em 0 0em #ffffff,
       -1.8em 1.8em 0 0em rgba(255, 255, 255, 0.2),
       -2.6em 0em 0 0em rgba(255, 255, 255, 0.2),
       -1.8em -1.8em 0 0em rgba(255, 255, 255, 0.2);
   }
   62.5% {
-    box-shadow: 0em -2.6em 0em 0em rgba(255, 255, 255, 0.2),
+    box-shadow:
+      0em -2.6em 0em 0em rgba(255, 255, 255, 0.2),
       1.8em -1.8em 0 0em rgba(255, 255, 255, 0.2),
       2.5em 0em 0 0em rgba(255, 255, 255, 0.2),
       1.75em 1.75em 0 0em rgba(255, 255, 255, 0.5),
-      0em 2.5em 0 0em rgba(255, 255, 255, 0.7), -1.8em 1.8em 0 0em #ffffff,
+      0em 2.5em 0 0em rgba(255, 255, 255, 0.7),
+      -1.8em 1.8em 0 0em #ffffff,
       -2.6em 0em 0 0em rgba(255, 255, 255, 0.2),
       -1.8em -1.8em 0 0em rgba(255, 255, 255, 0.2);
   }
   75% {
-    box-shadow: 0em -2.6em 0em 0em rgba(255, 255, 255, 0.2),
+    box-shadow:
+      0em -2.6em 0em 0em rgba(255, 255, 255, 0.2),
       1.8em -1.8em 0 0em rgba(255, 255, 255, 0.2),
       2.5em 0em 0 0em rgba(255, 255, 255, 0.2),
       1.75em 1.75em 0 0em rgba(255, 255, 255, 0.2),
       0em 2.5em 0 0em rgba(255, 255, 255, 0.5),
-      -1.8em 1.8em 0 0em rgba(255, 255, 255, 0.7), -2.6em 0em 0 0em #ffffff,
+      -1.8em 1.8em 0 0em rgba(255, 255, 255, 0.7),
+      -2.6em 0em 0 0em #ffffff,
       -1.8em -1.8em 0 0em rgba(255, 255, 255, 0.2);
   }
   87.5% {
-    box-shadow: 0em -2.6em 0em 0em rgba(255, 255, 255, 0.2),
+    box-shadow:
+      0em -2.6em 0em 0em rgba(255, 255, 255, 0.2),
       1.8em -1.8em 0 0em rgba(255, 255, 255, 0.2),
       2.5em 0em 0 0em rgba(255, 255, 255, 0.2),
       1.75em 1.75em 0 0em rgba(255, 255, 255, 0.2),
       0em 2.5em 0 0em rgba(255, 255, 255, 0.2),
       -1.8em 1.8em 0 0em rgba(255, 255, 255, 0.5),
-      -2.6em 0em 0 0em rgba(255, 255, 255, 0.7), -1.8em -1.8em 0 0em #ffffff;
+      -2.6em 0em 0 0em rgba(255, 255, 255, 0.7),
+      -1.8em -1.8em 0 0em #ffffff;
   }
 }

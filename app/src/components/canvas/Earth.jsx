@@ -1,7 +1,6 @@
-import React, { memo, useCallback } from "react";
+import { memo, useCallback } from "react";
 import { useFrame } from "@react-three/fiber";
 import { useGLTF } from "@react-three/drei";
-
 
 // #Rewrite the component Earth memo and useCallback to avoid unnecessary re-renders, and use preload for the earth texture.
 const Earth = memo(({ controlsRef, setAngles, invalidate }) => {
@@ -24,6 +23,7 @@ const Earth = memo(({ controlsRef, setAngles, invalidate }) => {
   useFrame(updateAngles);
 
   return (
+    /* eslint-disable */
     <>
       <mesh>
         <spotLight
@@ -35,7 +35,7 @@ const Earth = memo(({ controlsRef, setAngles, invalidate }) => {
           shadow-mapSize={1024}
         />
         <hemisphereLight intensity={3} />
-        
+
         <primitive
           object={earth.scene}
           scale={2}
@@ -44,10 +44,10 @@ const Earth = memo(({ controlsRef, setAngles, invalidate }) => {
         />
       </mesh>
     </>
+    /* eslint-enable */
   );
 });
 
 useGLTF.preload("./earth/scene-optimized.gltf");
-
+Earth.displayName = "Earth";
 export default Earth;
-

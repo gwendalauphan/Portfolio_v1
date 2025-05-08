@@ -22,7 +22,9 @@ const ContactHeader = () => {
           }}
         >
           <span className="prompt inline sm:hidden ">g@port:~$</span>
-          <span className="prompt hidden sm:inline ">gwendal@portfolio:~$</span>{" "}
+          <span className="prompt hidden sm:inline ">
+            gwendal@portfolio:~$
+          </span>{" "}
           <span className="command">${"ping -c 1 localhost"}</span>
         </pre>
       </div>

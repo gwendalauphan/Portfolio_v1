@@ -1,5 +1,3 @@
-import React from "react";
-
 import SectionWrapper from "../../../hoc/SectionWrapper";
 
 const HomeSection = () => {
@@ -37,8 +35,8 @@ const HomeSection = () => {
             className="Home-sectionSubText"
             style={{ marginLeft: "15px", marginBottom: 0 }}
           >
-            You've landed in a space-themed universe, enjoy your voyage as you
-            explore my world of code and creativity.
+            You&apos;ve landed in a space-themed universe, enjoy your voyage as
+            you explore my world of code and creativity.
           </p>
           <p className="bash-function-footer" style={{ marginBottom: "0px" }}>
             <span className="bracket-close">{`}`}</span>
@@ -47,14 +45,15 @@ const HomeSection = () => {
         </div>
         <h2 className="Home-sectionHeadText">
           <span className="hash-symbol">#</span> echo{" "}
-          <span className="bracket-close">"</span>
+          <span className="bracket-close">&quot;</span>
           <span className="keyword-blue">Happy</span>{" "}
           <span className="keyword-purple">Exploring !</span>
-          <span className="bracket-close">"</span>
+          <span className="bracket-close">&quot;</span>
         </h2>
       </div>
     </div>
   );
 };
 
-export default SectionWrapper(HomeSection, "HomeSection");
+const WrappedHome = SectionWrapper(HomeSection, "HomeSection");
+export default WrappedHome;

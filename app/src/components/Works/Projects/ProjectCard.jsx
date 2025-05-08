@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect } from "react";
 import { motion } from "framer-motion";
 import Tilt from "react-parallax-tilt";
 import { useInView } from "react-intersection-observer";
@@ -40,9 +40,6 @@ const ProjectCard = ({
     triggerOnce: true, // L'animation se déclenchera une seule fois
     threshold: 0.1, // L'animation se déclenche lorsque 10% de l'élément est visible
   });
-
-  //const [displayedCardsCount, setDisplayedCardsCount] = useState(0);
-  const cardCountedRef = useRef(false);
 
   useEffect(() => {
     if (inView) {
@@ -167,9 +164,9 @@ const ProjectCard = ({
             transition={{ duration: 0.1 }}
           >
             <div className="mt-5">
-            <p className="mt-2 text-secondary text-xs xs:text-sm sm:text-base leading-relaxed">
-              {shortDescription}
-            </p>
+              <p className="mt-2 text-secondary text-xs xs:text-sm sm:text-base leading-relaxed">
+                {shortDescription}
+              </p>
             </div>
 
             <div className="mt-3 flex flex-wrap gap-2 text-[10px] sm:text-[12px]">

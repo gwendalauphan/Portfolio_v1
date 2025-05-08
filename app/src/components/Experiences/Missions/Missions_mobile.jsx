@@ -1,5 +1,3 @@
-import React from "react";
-
 import "react-vertical-timeline-component/style.min.css";
 
 import { textVariant } from "../../../utils/motion";
@@ -7,7 +5,7 @@ import { styles } from "../../../styles";
 
 import { experiences } from "../../../constants";
 
-import { useScroll } from "../../Context/ScrollContext";
+import { useScroll } from "../../../hooks/useScroll";
 
 import { useInView } from "react-intersection-observer";
 import { motion } from "framer-motion";
@@ -56,9 +54,6 @@ const ExperienceCard = ({ experience, index }) => {
   );
 };
 
-
-
-
 const Experience = () => {
   const { hasScrolled } = useScroll();
   return (
@@ -91,11 +86,14 @@ const Experience = () => {
           </pre>
         </div>
 
-
-          {hasScrolled &&
-            experiences.map((exp, index) => (
-              <ExperienceCard key={`exp-${index}`} experience={exp} index={index} />
-            ))}
+        {hasScrolled &&
+          experiences.map((exp, index) => (
+            <ExperienceCard
+              key={`exp-${index}`}
+              experience={exp}
+              index={index}
+            />
+          ))}
       </div>
     </>
   );

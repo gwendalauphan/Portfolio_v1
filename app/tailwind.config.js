@@ -1,9 +1,7 @@
 /** @type {import('tailwindcss').Config} */
+
 module.exports = {
-  content: [
-    "./index.html",
-    "./src/**/*.{js,ts,jsx,tsx}",
-  ],
+  content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   mode: "jit",
   theme: {
     extend: {
@@ -14,7 +12,7 @@ module.exports = {
         "black-100": "#100d25",
         "black-200": "#090325",
         "white-100": "#f3f3f3",
-        'custom-green': '#35CFA9',
+        "custom-green": "#35CFA9",
       },
       boxShadow: {
         card: "0px 35px 120px -15px #211e35",
@@ -23,10 +21,9 @@ module.exports = {
         xs: "450px",
       },
       maxWidth: {
-        '8xl': '100rem',
-        '9xl': '106rem', // Et ainsi de suite...
-      }
-      
+        "8xl": "100rem",
+        "9xl": "106rem", // Et ainsi de suite...
+      },
     },
   },
   plugins: [],
