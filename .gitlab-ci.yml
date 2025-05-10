@@ -89,8 +89,10 @@ build:
   
   services:
     - docker:dind
-  <<: *before_docker_login
+
   before_script:
+    - export COMPOSE_BAKE=true
+    - echo "$CI_REGISTRY_PASSWORD" | docker login $CI_REGISTRY -u $CI_REGISTRY_USER --password-stdin
     - apk add --no-cache bash curl jq
     - echo "📦 Installation de hcp"
     - curl -sSL -o hcp.zip https://releases.hashicorp.com/hcp/0.9.1/hcp_0.9.1_linux_amd64.zip
