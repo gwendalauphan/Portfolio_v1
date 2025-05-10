@@ -25,6 +25,7 @@ dist-ssr
 *.sw?
 
 # secrets
-.env
-*.env / .env.local / .env.*.local
+app/.env
+tooling.env
+
 
