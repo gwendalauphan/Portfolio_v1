@@ -44,10 +44,11 @@ Finally, I set up a CI/CD pipeline to test, build, and deploy Docker images to G
 - [Reminder](#reminder)
   - [to finish:](#to-finish)
   - [to check:](#to-check)
+- [Repo](#repo)
 
 ## Architecture
 
-Voici le schéma de l'architecture générale:
+Here is the diagram of the general architecture:
 ![archi_deployment](docs/images/archi_deployment.png)
 
 ---
@@ -234,5 +235,8 @@ npm install --save-dev eslint-plugin-unused-imports
 - https://docs.docker.com/build/bake/reference/
 - Dockle
 - Hadolint
+
+# Repo
+base: https://gitlab.com/web6464113/portfolio_v1
 
 
