@@ -44,7 +44,8 @@ test:
   stage: test
   image: node:${NODE_VERSION}
   needs:
-    - job: conditional_run_npm_test
+    - job: detect_changes
+      artifacts: true
   only:
     - merge_requests
     - branches
@@ -54,25 +55,19 @@ test:
     paths:
       - app/node_modules/
   script:
-    - cd app
-    - node -v
-    - npm ci
-    #- npm run lint
-    #- npm run test
-    - npm run build
+    - |
+      if [ ! -f run_npm_test ]; then
+        echo "Aucun changement pertinent détecté dans l'application, pas de tests npm à exécuter"
+        exit 0
+      fi
 
-test-skipped:
-  stage: test
-  image: alpine:latest
-  when: on_failure
-  only:
-    - merge_requests
-    - branches
-    - tags
-  script:
-    - echo "No test to run, skipping"
-  rules:
-
+      echo "Activation des tests npm"
+      cd app
+      node -v
+      npm ci
+      # npm run lint
+      # npm run test
+      npm run build
 
 .before_docker_login: &before_docker_login
   before_script:
@@ -84,9 +79,7 @@ build:
   image: docker:latest
   needs:
     - job: test
-      optional: true
-    - job: conditional_run_docker_test
-  
+
   services:
     - docker:dind
 
@@ -101,11 +94,12 @@ build:
     - chmod +x /usr/local/bin/hcp
 
   script:
-    # if tag and branch == main
-    # check if image already exists
-    # if not, build and push
-    # if yes, skip build and push
-    - touch $SHARED_ENV_FILE
+    - |
+      touch $SHARED_ENV_FILE
+      if [ ! -f run_docker_test ]; then
+        echo "Aucun changement pertinent détecté dans l'application ou docker, pas de tests docker à exécuter"
+        exit 0
+      fi
     - |
       if [[ "$CI_COMMIT_TAG" ]]; then
         #check if image already exists
