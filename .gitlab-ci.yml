@@ -90,6 +90,14 @@ build:
   services:
     - docker:dind
   <<: *before_docker_login
+  before_script:
+    - apk add --no-cache bash curl jq
+    - echo "📦 Installation de hcp"
+    - curl -sSL -o hcp.zip https://releases.hashicorp.com/hcp/0.9.1/hcp_0.9.1_linux_amd64.zip
+    - unzip hcp.zip -d /usr/local/bin
+    - rm hcp.zip
+    - chmod +x /usr/local/bin/hcp
+
   script:
     # if tag and branch == main
     # check if image already exists
@@ -123,6 +131,9 @@ build:
           echo "✅ Health check passed: $EXPECTED found"
         fi
       }
+
+    - bash tooling/get_secrets.sh
+
     - echo "Build image"
     - docker compose -f docker/docker-compose.yml build --pull
     - echo "Run containers for standalone"

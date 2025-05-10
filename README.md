@@ -25,6 +25,7 @@ Finally, I set up a CI/CD pipeline to test, build, and deploy Docker images to G
   - [Description](#description)
   - [Table of contents](#table-of-contents)
   - [Architecture](#architecture)
+- [Prerequisites](#prerequisites)
 - [How to contribute](#how-to-contribute)
 - [How to access to the app](#how-to-access-to-the-app)
   - [Check Health](#check-health)
@@ -50,6 +51,14 @@ Voici le schéma de l'architecture générale:
 ![archi_deployment](docs/images/archi_deployment.png)
 
 ---
+
+# Prerequisites
+**Get secrets**
+```bash
+export $(grep -v '^#' tooling.env | xargs)
+./tooling/get_secrets.sh
+```
+and then enjoy !
 
 # How to contribute
 

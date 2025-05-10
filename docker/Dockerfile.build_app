@@ -2,9 +2,9 @@
 ARG NODE_VERSION=18
 FROM node:${NODE_VERSION} AS build
 
-ARG WORKDIR_PATH="/app/portfolio_v1"
-ARG LOCAL_WEBAPP_DIR="app"
-ARG BUILD_DIR="dist"
+ARG WORKDIR_PATH
+ARG LOCAL_WEBAPP_DIR
+ARG BUILD_DIR
 
 ENV BUILD_PATH=${WORKDIR_PATH}/${BUILD_DIR}
 
@@ -14,8 +14,13 @@ COPY ${LOCAL_WEBAPP_DIR}/package*.json ./
 RUN npm ci && npm cache clean --force
 
 COPY ${LOCAL_WEBAPP_DIR}/ ./
-RUN npm run build
 
+#check if .env file exists, exit if not
+RUN [ -f .env ] || { echo ".env file not found! Exiting."; exit 1; }
+
+RUN export $(grep -v '^#' .env | xargs) && npm run build
+
+RUN rm .env
 
 # --------- Final Slim Image ---------
 FROM alpine:latest
@@ -25,9 +30,9 @@ RUN apk add --no-cache bash
 
 # Set workdir and copy the built dist folder
 
-ARG WORKDIR_PATH="/app/portfolio_v1"
-ARG LOCAL_WEBAPP_DIR="app"
-ARG BUILD_DIR="dist"
+ARG WORKDIR_PATH
+ARG LOCAL_WEBAPP_DIR
+ARG BUILD_DIR
 ENV BUILD_PATH=${WORKDIR_PATH}/${BUILD_DIR}
 
-COPY --from=build /app/portfolio_v1/dist /app/portfolio_v1/dist
+COPY --from=build $BUILD_PATH $BUILD_PATH
