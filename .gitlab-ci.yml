@@ -79,6 +79,8 @@ build:
   image: docker:latest
   needs:
     - job: test
+    - job: detect_changes
+      artifacts: true
 
   services:
     - docker:dind

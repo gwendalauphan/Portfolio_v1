@@ -13,8 +13,15 @@ Le format est basé sur [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 
 ## [unreleased]
 🎉 Prochaine version
+
+## [v0.1.1] - 2025-10-05
+🎉 Améliorations de la CI
+
+### ✨ Ajouts
 - Mise en place des secrets dans le vault
 - Ajout du script de chargement des secrets
+
+### ⚙️ Changements
 - Amélioration de la pipeline pour éviter le rouge
 
 ## [v0.1.0] - 2025-08-05
