@@ -38,7 +38,7 @@ detect_changes:
       git_diff_output=$(git diff --name-only $GIT_DIFF_BASE)
       echo "$git_diff_output" > changed_files.txt
 
-      if echo "$git_diff_output" | grep -qE '^(app/|docker/|standalone/)'; then
+      if echo "$git_diff_output" | grep -qE '^(app/)'; then
         echo "✅ Changements détectés dans les dossiers surveillés"
         touch run_npm_test
       else
