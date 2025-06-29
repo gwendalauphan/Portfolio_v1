@@ -43,6 +43,7 @@ debug:
 test:
   stage: test
   image: node:${NODE_VERSION}
+  allow_failure: false
   needs:
     - job: detect_changes
       artifacts: true
@@ -79,6 +80,7 @@ build:
   image: docker:latest
   needs:
     - job: test
+      optional: false
     - job: detect_changes
       artifacts: true
 
@@ -233,13 +235,13 @@ build:
 
   rules:
     - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
-      when: always
+      when: on_success
     - if: '$CI_PIPELINE_SOURCE == "push" && $CI_COMMIT_MESSAGE =~ /(\[build:image\])/'
-      when: always
+      when: on_success
     - if: '$CI_PIPELINE_SOURCE == "push" && $CI_COMMIT_BRANCH == "main"'
-      when: always
+      when: on_success
     - if: '$CI_COMMIT_TAG'
-      when: always
+      when: on_success
     - when: never
   artifacts:
     paths:
@@ -251,10 +253,11 @@ push-tag:
   stage: deploy
   image: docker:latest
   needs:
-    - build
+    - job: build
+      optional: false
   rules:
     - if: '$CI_COMMIT_TAG'
-      when: always
+      when: on_success
     - when: never
   services:
     - docker:dind
@@ -284,14 +287,23 @@ push-tag:
       COMMIT_SHA_MAIN=${CI_COMMIT_SHORT_SHA}
       echo "COMMIT_SHA_MAIN: ${COMMIT_SHA_MAIN}"
 
+      BUILD_IMAGE="${PORTFOLIO_V1_GROUP_REGISTRY}/${PORTFOLIO_V1_REPO_NAME}/dev/${PORTFOLIO_V1_IMAGE_NAME}:${PORTFOLIO_V1_TAG}"
       IMAGE_TAG_MAIN="${PORTFOLIO_V1_GROUP_REGISTRY}/${PORTFOLIO_V1_REPO_NAME}/${ENV_DEPLOYMENT}/${PORTFOLIO_V1_IMAGE_NAME}:${COMMIT_SHA_MAIN}"
       TARGET_IMAGE="${PORTFOLIO_V1_GROUP_REGISTRY}/${PORTFOLIO_V1_REPO_NAME}/${ENV_DEPLOYMENT}/${PORTFOLIO_V1_IMAGE_NAME}:${PORTFOLIO_V1_TAG}"
       TARGET_IMAGE_LATEST="${PORTFOLIO_V1_GROUP_REGISTRY}/${PORTFOLIO_V1_REPO_NAME}/${ENV_DEPLOYMENT}/${PORTFOLIO_V1_IMAGE_NAME}:latest"
 
-      docker pull "${IMAGE_TAG_MAIN}"
-      docker tag "${IMAGE_TAG_MAIN}" "${TARGET_IMAGE}"
-      docker tag "${IMAGE_TAG_MAIN}" "${TARGET_IMAGE_LATEST}"
-     
+
+      # Try to pull the image, if not found, build and push it
+      if docker pull "${IMAGE_TAG_MAIN}"; then
+        docker tag "${IMAGE_TAG_MAIN}" "${TARGET_IMAGE}"
+        docker tag "${IMAGE_TAG_MAIN}" "${TARGET_IMAGE_LATEST}"
+      else
+        echo "Image ${IMAGE_TAG_MAIN} not found, building and pushing it."
+        export COMPOSE_BAKE=true
+        docker compose -f docker/docker-compose.yml build --pull
+        docker tag "${BUILD_IMAGE}" "${TARGET_IMAGE}"
+        docker tag "${BUILD_IMAGE}" "${TARGET_IMAGE_LATEST}"
+      fi
       
       docker push "${TARGET_IMAGE}"
       docker push "${TARGET_IMAGE_LATEST}"
@@ -342,6 +354,7 @@ update-variable-managment-from-tag:
   needs:
     - job: push-tag
       artifacts: true
+      optional: false
   rules:
     - if: '$CI_COMMIT_TAG'
       when: on_success
@@ -355,6 +368,7 @@ update-variable-managment-from-build:
   needs:
     - job: build
       artifacts: true
+      optional: false
   rules:
     # Déclenchement sur branche different de main avec [build:image]
     - if: '$CI_COMMIT_BRANCH != "main" && $CI_COMMIT_MESSAGE =~ /(\[build:image\])/'
