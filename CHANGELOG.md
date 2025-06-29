@@ -20,6 +20,7 @@ Le format est basé sur [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 ### 🐛 Corrections
 - Petites améliorations du système de détection de changements dans la CI/CD
 - Modification des inputs de la CI/CD pour `update_variable_managment`
+- Ajout de fiabilité dans la CI/CD pour éviter les erreurs de déploiement
 
 
 ## [v0.1.1] - 2025-10-05
