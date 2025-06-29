@@ -1,6 +1,6 @@
 # Portfolio V1
 ***Gwendal Auphan***
-
+### 👉 [🇫🇷 Version française](README_fr.md)
 ![Portfolio About page](docs/images/portfolio_v1_about_page.png)
 
 ## Description
@@ -22,6 +22,7 @@ Finally, I set up a CI/CD pipeline to test, build, and deploy Docker images to G
 
 ## Table of contents
 - [Portfolio V1](#portfolio-v1)
+    - [👉 🇫🇷 Version française](#--version-française)
   - [Description](#description)
   - [Table of contents](#table-of-contents)
   - [Architecture](#architecture)

@@ -14,8 +14,12 @@ Le format est basé sur [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 ## [unreleased]
 🎉 Prochaine version
 
+## [v0.1.2] - 2025-29-06
+🎉 Améliorations de la CI/CD et version FR du readme
+
 ### ✨ Ajouts
 - Ajout de la valeur "active" dans les inputs de la CI/CD pour permettre ou non le déploiement de l'application
+- Ajout de la version FR du readme
 
 ### 🐛 Corrections
 - Petites améliorations du système de détection de changements dans la CI/CD
@@ -96,6 +100,7 @@ Le format est basé sur [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 - Remplacement de librairies pour les icons
 
 [unreleased]: https://gitlab.com/web6464113/portfolio_v1/-/commits/main
+[v0.1.2]: https://gitlab.com/web6464113/portfolio_v1/-/commits/v0.1.2
 [v0.1.1]: https://gitlab.com/web6464113/portfolio_v1/-/commits/v0.1.1
 [v0.1.0]: https://gitlab.com/web6464113/portfolio_v1/-/commits/v0.1.0
 [v0.0.9]: https://gitlab.com/web6464113/portfolio_v1/-/commits/v0.0.9
