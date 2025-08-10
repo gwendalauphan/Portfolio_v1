@@ -238,6 +238,8 @@ npm install --save-dev eslint-plugin-unused-imports
 - Hadolint
 
 # Repo
-base: https://gitlab.com/web6464113/portfolio_v1
+Base: https://gitlab.com/web6464113/portfolio_v1
+
+Mirror: https://github.com/gwendalauphan/Portfolio_v1
 
 
